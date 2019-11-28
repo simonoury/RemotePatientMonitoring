@@ -8,6 +8,7 @@ public class BlankBoard {
         JFrame frame = new JFrame(gc);
         frame.setSize(1500, 1000);
         frame.setVisible(true);
+        frame.setJMenuBar(new Menu());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
