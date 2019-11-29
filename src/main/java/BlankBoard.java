@@ -9,4 +9,7 @@ public class BlankBoard extends JPanel {
 
     }
 
+    public JPanel getMainpanel() {
+        return mainpanel;
+    }
 }
