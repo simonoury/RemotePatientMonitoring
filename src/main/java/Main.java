@@ -1,3 +1,5 @@
+import Alarm.AlarmPanel;
+
 import javax.swing.*;
 
 public class Main {
