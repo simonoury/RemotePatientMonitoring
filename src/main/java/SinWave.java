@@ -1,7 +1,8 @@
 import java.awt.*;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 class SinWave extends JPanel{
+
     double f(double x) {
         return Math.sin(x);
     }
@@ -15,12 +16,14 @@ class SinWave extends JPanel{
         super.paintComponent(g);
 
         g.drawLine(10, 100, 380, 100);
-        g.drawLine(200, 0, 200, 100);
+        g.drawLine(10, 0, 10, 100);
 
         g.drawLine(380, 100, 370, 90);
         g.drawLine(380, 100, 370, 110);
-        g.drawLine(200, 0, 190, 10);
-        g.drawLine(200, 0, 210, 10);
+        g.drawLine(10, 0, 0, 10);
+        g.drawLine(10, 0, 20, 10);
+
+        g.drawString("T", 390, 115);
 
         //g.drawString("X", 360, 80);
         //g.drawString("Y", 220, 40);
@@ -28,12 +31,12 @@ class SinWave extends JPanel{
         Polygon p = new Polygon();
         Polygon p2 = new Polygon();
 
-        for (int x = -170; x <= 170; x++) {
+        for (int x = -190; x <= 180; x++) {
             p.addPoint(x + 200, 50 - (int) (50 * f((x/100.0)*2*Math.PI)));
 
         }
 
-        for (int x = -170; x <= 170; x++) {
+        for (int x = -190; x <= 180; x++) {
             p2.addPoint(x + 200, 50 - (int) (50 * gCos((x / 50.0) * 2 * Math.PI)));
         }
 
