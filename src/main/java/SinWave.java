@@ -22,8 +22,8 @@ class SinWave extends JPanel{
         g.drawLine(200, 0, 190, 10);
         g.drawLine(200, 0, 210, 10);
 
-        g.drawString("X", 360, 80);
-        g.drawString("Y", 220, 40);
+        //g.drawString("X", 360, 80);
+        //g.drawString("Y", 220, 40);
 
         Polygon p = new Polygon();
         Polygon p2 = new Polygon();
