@@ -1,12 +1,19 @@
 import java.awt.*;
 import javax.swing.JPanel;
 
+
 public class PlotData extends JPanel {
 
-    protected void paintComponent (Graphics g){
-        int[] x = new int[36];
-        int[] y = new int[36];
+    private TimeSlider t_slider;
 
+    public PlotData(){
+        t_slider = new TimeSlider();
+        System.out.println("Slider value in PlotData: "+t_slider.getSliderVal());
+    }
+
+    protected void paintComponent (Graphics g){
+        int[] x = new int[t_slider.getSliderVal()];
+        int[] y = new int[36];
         int x_fill = 10;
         int y_fill = 100;
 

@@ -9,10 +9,12 @@ public class TimeSlider extends JPanel {
         control = new JPanel();
         control.setLayout(new GridLayout(2,1));
         JLabel label = new JLabel("Time:");
-        slider = new JSlider(1,100);
+        slider = new JSlider(1,36);
         control.add(label);
         control.add(slider);
         add(control);
     }
-    public int getSliderVal() {return(slider.getValue());}
+    public int getSliderVal() {
+        return(slider.getValue());
+    }
 }
