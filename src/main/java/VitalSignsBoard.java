@@ -26,6 +26,10 @@ public class VitalSignsBoard extends JPanel {
 
     // data for sine wave
     double phase = 0;
+    double[][] data_ECG = getECGData(phase);
+    double[][] data_HR = getHRData(phase);
+    double[][] data_temp = getTempData();
+    double[][] data_BR =  getBPData();
     double[][] data = getSineData(phase);
 
     // METHODS
@@ -34,10 +38,10 @@ public class VitalSignsBoard extends JPanel {
     VitalSignsBoard() {
 
         // create charts
-        ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data[0], data[1]);
-        hrChart = QuickChart.getChart("Heart Rate", "Time /s", "Rate /BPM", "sine", data[0], data[1]);
-        tempChart = QuickChart.getChart("Surface Body Temperature", "Time /s", "Temperature /C", "sine", data[0], data[1]);
-        bpChart = QuickChart.getChart("Blood Pressure", "Time /s", "Pressure /mmHg", "sine", data[0], data[1]);
+        ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
+        hrChart = QuickChart.getChart("Heart Rate", "Time /s", "Rate /BPM", "sine", data_HR[0], data_HR[1]);
+        tempChart = QuickChart.getChart("Surface Body Temperature", "Time /s", "Temperature /C", "sine", data_temp[0], data_temp[1]);
+        bpChart = QuickChart.getChart("Systolic Blood Pressure", "Time /s", "Pressure /mmHg", "sine", data_BR[0], data_BR[1]);
         rrChart = QuickChart.getChart("Respiratory Rate", "Time /s", "Rate /BrPM", "sine", data[0], data[1]);
 
 
@@ -66,14 +70,58 @@ public class VitalSignsBoard extends JPanel {
     }
 
     // get sine data method
-    protected static double[][] getSineData(double phase) {
 
+    protected static double[][] getSineData(double phase) {
         double[] xData = new double[100];
         double[] yData = new double[100];
         for (int i = 0; i < xData.length; i++) {
             double radians = phase + (2 * Math.PI / xData.length * i);
             xData[i] = radians;
             yData[i] = Math.sin(radians);
+        }
+        return new double[][] { xData, yData };
+    }
+
+    protected static double[][] getTempData() {
+        double[] xData = new double[100];
+        double[] yData = new double[100];
+        for (int i = 0; i < xData.length; i++) {
+            double time = i;
+            xData[i] = time;
+            yData[i] = 37.3;
+        }
+        return new double[][] { xData, yData };
+    }
+
+    protected static double[][] getBPData() {
+        double[] xData = new double[100];
+        double[] yData = new double[100];
+        for (int i = 0; i < xData.length; i++) {
+            double time = i;
+            xData[i] = time;
+            yData[i] = 120;
+        }
+        return new double[][] { xData, yData };
+    }
+
+    protected static double[][] getECGData(double phase) {
+        double[] xData = new double[100];
+        double[] yData = new double[100];
+        for (int i = 0; i < xData.length; i++) {
+            double radians = phase + (4 * Math.PI / xData.length * i);
+            xData[i] = radians;
+            yData[i] = Math.sin(radians);
+        }
+        return new double[][] { xData, yData };
+    }
+
+    protected static double[][] getHRData(double phase) {
+        double[] xData = new double[100];
+        double[] yData = new double[100];
+        for (int i = 0; i < xData.length; i++) {
+            double radians = phase + (10 * Math.PI / xData.length * i);
+            xData[i] = radians;
+            yData[i] = Math.sin(radians)*Math.sin(radians);
         }
         return new double[][] { xData, yData };
     }
