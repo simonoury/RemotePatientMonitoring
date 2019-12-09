@@ -5,9 +5,8 @@ public class Main {
         BlankBoard board=new BlankBoard();
         JFrame frame = new JFrame("Remote Patient Monitoring");
         frame.setSize(1500, 1000);
-        frame.add(board);
+        frame.add(board.getMainpanel());
         frame.setVisible(true);
-        frame.setJMenuBar(new Menu());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
