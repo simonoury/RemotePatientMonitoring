@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 public class Main {
+
     public static void main (String[] args){
         BlankBoard board=new BlankBoard();
         JFrame frame = new JFrame("Remote Patient Monitoring");
