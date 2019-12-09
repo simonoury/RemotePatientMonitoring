@@ -7,13 +7,15 @@ public class MenuBoard extends JPanel {
     private JPanel header;
     private JLabel title;
     private TabsMenu tabs;
+    private JPanel empty;
 
     public MenuBoard(){
-        grid=new GridLayout(5,1);
+        grid=new GridLayout(10,2);
         tabs=new TabsMenu();
         header=new JPanel();
+        empty=new JPanel();
+
         //header.setLayout(grid);
-        header.setBorder( new MatteBorder(2, 2, 2, 2, Color.BLACK) );
         //header.setBackground(Color.gray);
 
 
@@ -21,12 +23,13 @@ public class MenuBoard extends JPanel {
         title.setText("Hello!");
 
 
-        header.add(title, BorderLayout.WEST);
+        header.add(title);
+        header.add(empty);
         header.add(tabs.getTabsPanel());
+
 
         //header.add(tabs.getTabbedPane());
     }
-
 
     public JPanel getHeader() {
         return header;

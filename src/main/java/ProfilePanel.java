@@ -48,6 +48,8 @@ public class ProfilePanel extends JPanel {
         profile.add(resprate);
         profile.add(bloodpress);
 
+        profile.setPreferredSize(new Dimension(1400, 700));
+
     }
 
     public JPanel getProfile() {
