@@ -69,9 +69,11 @@ public class ProfilePanel extends JPanel {
         heartrate.add(new JLabel("<html> <h4> Heart Rate:  </h4>"));
         heartrate.add(new JLabel(String.valueOf(normalvalues[1])+" bpm", SwingConstants.LEFT));
 
+
         bodytemp.add(new JLabel("<html> <h4> Body Temperature:  </h4>", SwingConstants.LEFT));
         bodytemp.add(new JLabel(normalvalues[1]+ " °C"));
-        bodytemp.add(tempPanel, 0, 0);
+        bodytemp.add(tempPanel, 2, 2);
+
 
         resprate.add(new JLabel("<html> <h4>Respiratory Rate: </h4>"));
         resprate.add(new JLabel((normalvalues[2])+ " breaths/min"));
