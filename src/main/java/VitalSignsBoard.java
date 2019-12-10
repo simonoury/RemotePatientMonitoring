@@ -21,7 +21,8 @@ public class VitalSignsBoard extends JPanel {
     XYChart ecgChart;
     XYChart hrChart;
     XYChart tempChart;
-    XYChart bpChart;
+    XYChart bpsChart;
+    XYChart bpdChart;
     XYChart rrChart;
 
     // data for sine wave
@@ -29,7 +30,8 @@ public class VitalSignsBoard extends JPanel {
     double[][] data_ECG = getECGData(phase);
     double[][] data_HR = getHRData(phase);
     double[][] data_temp = getTempData();
-    double[][] data_BR =  getBPData();
+    double[][] data_BPS =  getBPSData();
+    double[][] data_BPD =  getBPDData();
     double[][] data = getSineData(phase);
 
     // METHODS
@@ -41,7 +43,8 @@ public class VitalSignsBoard extends JPanel {
         ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
         hrChart = QuickChart.getChart("Heart Rate", "Time /s", "Rate /BPM", "sine", data_HR[0], data_HR[1]);
         tempChart = QuickChart.getChart("Surface Body Temperature", "Time /s", "Temperature /C", "sine", data_temp[0], data_temp[1]);
-        bpChart = QuickChart.getChart("Systolic Blood Pressure", "Time /s", "Pressure /mmHg", "sine", data_BR[0], data_BR[1]);
+        bpsChart = QuickChart.getChart("Systolic Blood Pressure", "Time /s", "Pressure /mmHg", "sine", data_BPS[0], data_BPS[1]);
+        //bpdChart = QuickChart.getChart("Systolic Blood Pressure", "Time /s", "Pressure /mmHg", "sine", data_BPD[0], data_BPD[1]);
         rrChart = QuickChart.getChart("Respiratory Rate", "Time /s", "Rate /BrPM", "sine", data[0], data[1]);
 
 
@@ -50,7 +53,7 @@ public class VitalSignsBoard extends JPanel {
         ecgPanel = new XChartPanel(ecgChart);
         hrPanel = new XChartPanel(hrChart);
         tempPanel = new XChartPanel(tempChart);
-        bpPanel = new XChartPanel(bpChart);
+        bpPanel = new XChartPanel(bpsChart);
         rrPanel = new XChartPanel(rrChart);
 
         // add chart panels to main panel
@@ -62,12 +65,13 @@ public class VitalSignsBoard extends JPanel {
         this.mainPanel.add(rrPanel,4,0);
         mainPanel.validate();
 
+
     }
 
     // get main panel method
-    //public JPanel getMainPanel() {
-      //  return mainPanel;
-    //}
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
 
     // get sine data method
 
@@ -93,7 +97,7 @@ public class VitalSignsBoard extends JPanel {
         return new double[][] { xData, yData };
     }
 
-    protected static double[][] getBPData() {
+    protected static double[][] getBPSData() {
         double[] xData = new double[100];
         double[] yData = new double[100];
         for (int i = 0; i < xData.length; i++) {
@@ -101,7 +105,18 @@ public class VitalSignsBoard extends JPanel {
             xData[i] = time;
             yData[i] = 120;
         }
-        return new double[][] { xData, yData };
+        return new double[][] { xData, yData};
+    }
+
+    protected static double[][] getBPDData() {
+        double[] xData = new double[100];
+        double[] yData = new double[100];
+        for (int i = 0; i < xData.length; i++) {
+            double time = i;
+            xData[i] = time;
+            yData[i] = 80;
+        }
+        return new double[][] { xData, yData};
     }
 
     protected static double[][] getECGData(double phase) {
@@ -119,9 +134,9 @@ public class VitalSignsBoard extends JPanel {
         double[] xData = new double[100];
         double[] yData = new double[100];
         for (int i = 0; i < xData.length; i++) {
-            double radians = phase + (10 * Math.PI / xData.length * i);
+            double radians = phase + (2 * Math.PI / xData.length * i);
             xData[i] = radians;
-            yData[i] = Math.sin(radians)*Math.sin(radians);
+            yData[i] = Math.sin(6*radians);
         }
         return new double[][] { xData, yData };
     }

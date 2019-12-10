@@ -10,7 +10,7 @@ public class MenuBoard extends JPanel {
     private JPanel empty;
 
     public MenuBoard(){
-        grid=new GridLayout(2,1);
+        grid=new GridLayout(1,1);
         tabs=new TabsMenu();
         header=new JPanel();
         empty=new JPanel();

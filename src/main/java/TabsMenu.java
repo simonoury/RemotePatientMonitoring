@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class TabsMenu extends JTabbedPane {
     private JTabbedPane tabbedPane;
-    private JPanel patient,patient2;
+    private JPanel patient, patient_sub ,patient2;
     private JPanel tabsPanel;
     private DropDownMenu dropdown;
     private ProfilePanel profilePanel;
@@ -11,13 +11,20 @@ public class TabsMenu extends JTabbedPane {
 
     public TabsMenu(){
         patient=new JPanel();
+        patient_sub = new JPanel();
         patient2=new JPanel();
         tabsPanel=new JPanel();
         dropdown=new DropDownMenu();
         profilePanel=new ProfilePanel();
         profileGraph = new VitalSignsBoard();
-        patient.add(dropdown.getmenu());
-        patient.add(profilePanel.getProfile());
+
+        patient.setLayout(new GridLayout(1,2));
+
+        patient_sub.add(dropdown.getmenu());
+        patient_sub.add(profilePanel.getProfile());
+
+        patient.add(patient_sub);
+        patient.add(profileGraph.getMainPanel());
 
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Patient 1",null, patient,"Patient 1");
