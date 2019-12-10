@@ -20,9 +20,6 @@ public class BlankBoard extends JPanel {
         mainpanel.setLayout(grid);
         mainpanel.add(menuBoard.getHeader());
 
-        mainpanel.setLayout(new GridLayout(1, 1));
-
-        //mainpanel.add(board.getMainPanel());
     }
 
     public JPanel getMainpanel() {

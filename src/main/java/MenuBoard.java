@@ -10,7 +10,7 @@ public class MenuBoard extends JPanel {
     private JPanel empty;
 
     public MenuBoard(){
-        grid=new GridLayout(1,2);
+        grid=new GridLayout(2,1);
         tabs=new TabsMenu();
         header=new JPanel();
         empty=new JPanel();
@@ -29,6 +29,7 @@ public class MenuBoard extends JPanel {
 
 
         header.add(tabs.getTabbedPane());
+
     }
 
     public JPanel getHeader() {

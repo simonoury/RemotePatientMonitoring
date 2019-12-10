@@ -35,7 +35,7 @@ public class VitalSignsBoard extends JPanel {
     // METHODS
 
     // constructor method
-    VitalSignsBoard() {
+    public VitalSignsBoard() {
 
         // create charts
         ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
@@ -65,9 +65,9 @@ public class VitalSignsBoard extends JPanel {
     }
 
     // get main panel method
-    public JPanel getMainPanel() {
-        return mainPanel;
-    }
+    //public JPanel getMainPanel() {
+      //  return mainPanel;
+    //}
 
     // get sine data method
 
