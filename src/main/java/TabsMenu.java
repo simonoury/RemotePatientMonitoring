@@ -7,6 +7,7 @@ public class TabsMenu extends JTabbedPane {
     private JPanel tabsPanel;
     private DropDownMenu dropdown;
     private ProfilePanel profilePanel;
+    private VitalSignsBoard profileGraph;
 
     public TabsMenu(){
         patient=new JPanel();
@@ -14,6 +15,7 @@ public class TabsMenu extends JTabbedPane {
         tabsPanel=new JPanel();
         dropdown=new DropDownMenu();
         profilePanel=new ProfilePanel();
+        profileGraph = new VitalSignsBoard();
         patient.add(dropdown.getmenu());
         patient.add(profilePanel.getProfile());
 
@@ -22,9 +24,10 @@ public class TabsMenu extends JTabbedPane {
         tabbedPane.setSelectedIndex(0);
         tabbedPane.addTab("Patient 2",null, patient2,"Patient 2");
 
-        tabbedPane.setPreferredSize(new Dimension(1500, 900));
+        tabbedPane.setPreferredSize(new Dimension(1450, 900));
         tabbedPane.setVisible(true);
-        tabsPanel.add(tabbedPane,BorderLayout.WEST);
+
+        //tabsPanel.add(tabbedPane,BorderLayout.WEST);
 
     }
 

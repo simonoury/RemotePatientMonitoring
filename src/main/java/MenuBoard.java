@@ -10,25 +10,25 @@ public class MenuBoard extends JPanel {
     private JPanel empty;
 
     public MenuBoard(){
-        grid=new GridLayout(10,2);
+        grid=new GridLayout(1,2);
         tabs=new TabsMenu();
         header=new JPanel();
         empty=new JPanel();
 
-        //header.setLayout(grid);
+        header.setLayout(grid);
         //header.setBackground(Color.gray);
 
 
-        title=new JLabel();
-        title.setText("Hello!");
+        //title=new JLabel();
+        //title.setText("Hello!");
 
 
-        header.add(title);
-        header.add(empty);
-        header.add(tabs.getTabsPanel());
+       // header.add(title);
+        //header.add(empty);
+        //header.add(tabs.getTabsPanel());
 
 
-        //header.add(tabs.getTabbedPane());
+        header.add(tabs.getTabbedPane());
     }
 
     public JPanel getHeader() {
