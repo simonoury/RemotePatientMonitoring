@@ -144,4 +144,3 @@ public class VitalSignsBoard extends JPanel {
     }
 
 }
-© 2019 GitHub, Inc.

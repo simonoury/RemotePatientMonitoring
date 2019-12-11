@@ -1,8 +1,10 @@
 package Menu;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import LiveData.*;
 
 public class DropDownMenu extends JComboBox implements ActionListener {
     private JComboBox<String> options;
@@ -14,6 +16,9 @@ public class DropDownMenu extends JComboBox implements ActionListener {
     private JLabel label1,label2;
     private String selection;
 
+    private LiveMonitoringPage liveMonitoringPage;
+
+
     public DropDownMenu(){
         options=new JComboBox<String>();
         options.addItem("Live Monitoring");
@@ -21,6 +26,7 @@ public class DropDownMenu extends JComboBox implements ActionListener {
 
         livemonitor=new JPanel();
         records= new JPanel();
+        liveMonitoringPage=new LiveMonitoringPage();
 
         label1=new JLabel("Live Monitoring");
         label1.setVisible(true);
@@ -31,7 +37,8 @@ public class DropDownMenu extends JComboBox implements ActionListener {
         records.add(label2);
 
         selectedPanel=new JPanel();
-        selectedPanel.add(livemonitor);
+        selectedPanel.setPreferredSize(new Dimension(1450, 1400));
+        selectedPanel.add(liveMonitoringPage.getPage());
         options.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -43,7 +50,7 @@ public class DropDownMenu extends JComboBox implements ActionListener {
 
                     selectedPanel.removeAll();
                     selectedPanel.updateUI();
-                    selectedPanel.add(livemonitor);
+                    selectedPanel.add(liveMonitoringPage.getPage());
                     selection=selectedoption;
                     //System.out.println(selection);
                 }

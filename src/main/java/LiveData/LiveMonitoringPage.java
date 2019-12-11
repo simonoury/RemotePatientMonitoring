@@ -1,6 +1,7 @@
 package LiveData;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class LiveMonitoringPage  {
     private ProfilePanel profilePanel;
@@ -12,8 +13,9 @@ public class LiveMonitoringPage  {
         page=new JPanel();
         page_sub=new JPanel();
 
-        page_sub.add(profilePanel.getProfile());
-        page.add(page_sub);
+        page.setLayout(new GridLayout(1,2));
+        page.add(profilePanel.getProfile());
+        page.add(profileGraph.getMainPanel());
 
     }
 

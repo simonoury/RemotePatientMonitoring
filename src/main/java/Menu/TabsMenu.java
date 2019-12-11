@@ -36,8 +36,10 @@ public class TabsMenu extends JTabbedPane {
         tabbedPane.setSelectedIndex(0);
         tabbedPane.addTab("Patient 2",null, patient2,"Patient 2");
 
-        tabbedPane.setPreferredSize(new Dimension(1450, 900));
+        tabbedPane.setPreferredSize(new Dimension(1450, 1400));
         tabbedPane.setVisible(true);
+
+
 
 
     }

@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+
+import LiveData.LiveMonitoringPage;
 import Menu.*;
 
 public class BlankBoard extends JPanel {
@@ -9,8 +11,10 @@ public class BlankBoard extends JPanel {
     private MenuBoard menuBoard;
     private GridLayout grid;
 
+
     public BlankBoard(){
         mainpanel = new JPanel();
+
 
         //VitalSignsBoard board = new VitalSignsBoard();
 
