@@ -6,8 +6,8 @@ public class TabsMenu extends JTabbedPane {
     private JPanel patient, patient_sub ,patient2;
     private JPanel tabsPanel;
     private DropDownMenu dropdown;
-    private ProfilePanel profilePanel;
-    private VitalSignsBoard profileGraph;
+    private LiveMonitoringPage liveMonitoringPage;
+
 
     public TabsMenu(){
         patient=new JPanel();
@@ -15,16 +15,11 @@ public class TabsMenu extends JTabbedPane {
         patient2=new JPanel();
         tabsPanel=new JPanel();
         dropdown=new DropDownMenu();
-        profilePanel=new ProfilePanel();
-        profileGraph = new VitalSignsBoard();
+        liveMonitoringPage=new LiveMonitoringPage();
+
 
         patient.setLayout(new GridLayout(1,2));
-
-        patient_sub.add(dropdown.getmenu());
-        patient_sub.add(profilePanel.getProfile());
-
-        patient.add(patient_sub);
-        patient.add(profileGraph.getMainPanel());
+        patient.add(liveMonitoringPage.getPage());
 
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Patient 1",null, patient,"Patient 1");

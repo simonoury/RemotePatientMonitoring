@@ -16,17 +16,6 @@ public class MenuBoard extends JPanel {
         empty=new JPanel();
 
         header.setLayout(grid);
-        //header.setBackground(Color.gray);
-
-
-        //title=new JLabel();
-        //title.setText("Hello!");
-
-
-       // header.add(title);
-        //header.add(empty);
-        //header.add(tabs.getTabsPanel());
-
 
         header.add(tabs.getTabbedPane());
 
