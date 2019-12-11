@@ -1,3 +1,5 @@
+package LiveData;
+
 import com.sun.org.apache.xpath.internal.operations.Gt;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.XChartPanel;

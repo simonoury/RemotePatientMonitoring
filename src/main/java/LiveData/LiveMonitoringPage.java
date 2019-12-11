@@ -1,3 +1,5 @@
+package LiveData;
+
 import javax.swing.*;
 
 public class LiveMonitoringPage  {
