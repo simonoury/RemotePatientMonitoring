@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Graphics;
-import javax.swing.JComponent;
+import Menu.*;
 
 public class BlankBoard extends JPanel {
     private JPanel mainpanel;
@@ -18,7 +17,7 @@ public class BlankBoard extends JPanel {
         grid=new GridLayout(1,1);
         menuBoard=new MenuBoard();
         mainpanel.setLayout(grid);
-        mainpanel.add(menuBoard.getHeader());
+        mainpanel.add(menuBoard.getMenuBoard());
 
     }
 
