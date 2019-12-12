@@ -16,6 +16,6 @@ cache:
 deploy:
   provider: heroku
   api_key:
-    secure: 8198e500-34cd-4c18-b8ec-3d59d1113c19
-  app: RemotePatientMonitoring
+    secure: 125d4525-40d9-4206-ace2-ef63afad69a4
+  app: remotepatientmonitoring
   skip_cleanup: true
