@@ -11,3 +11,11 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: 8198e500-34cd-4c18-b8ec-3d59d1113c19
+  app: RemotePatientMonitoring
+  skip_cleanup: true
