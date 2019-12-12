@@ -30,6 +30,7 @@ public class TabsMenu extends JTabbedPane {
         patient2.add(dropdown2.getOptions());
         patient2.add(dropdown2.getSelectedPanel());
 
+
         //Tabs Menu
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Patient 1",null, patient1,"Patient 1");
@@ -38,6 +39,8 @@ public class TabsMenu extends JTabbedPane {
 
         tabbedPane.setPreferredSize(new Dimension(1450, 1400));
         tabbedPane.setVisible(true);
+
+        System.out.println(tabbedPane.getSize());
 
 
 

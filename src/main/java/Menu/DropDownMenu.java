@@ -37,7 +37,7 @@ public class DropDownMenu extends JComboBox implements ActionListener {
         records.add(label2);
 
         selectedPanel=new JPanel();
-        selectedPanel.setPreferredSize(new Dimension(1450, 1400));
+
         selectedPanel.add(liveMonitoringPage.getPage());
         options.addActionListener(new ActionListener() {
             @Override
@@ -64,6 +64,7 @@ public class DropDownMenu extends JComboBox implements ActionListener {
                 }
             }
         });
+        selectedPanel.setPreferredSize(new Dimension(1450, 1400));
     }
 
     public String getSelection() {
