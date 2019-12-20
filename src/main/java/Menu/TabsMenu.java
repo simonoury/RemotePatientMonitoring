@@ -1,5 +1,7 @@
 package Menu;
 
+import RegisterNewPatient.NewPatientPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,11 +10,13 @@ public class TabsMenu{
     private JTabbedPane tabbedPanel;
     private JPanel patient1,patient2;
     private DropDownMenu dropdown,dropdown2;
+    private NewPatientPanel newPatientPanel;
 
     public TabsMenu(){
         //Instantiation of Panels
         patient1=new JPanel();
         patient2=new JPanel();
+        newPatientPanel=new NewPatientPanel();
 
         //Instantiate the drop-down menu
         dropdown=new DropDownMenu();
@@ -34,6 +38,7 @@ public class TabsMenu{
         tabbedPanel.addTab("Patient 1",null, patient1,"Patient 1");
         tabbedPanel.setSelectedIndex(0);
         tabbedPanel.addTab("Patient 2",null, patient2,"Patient 2");
+        tabbedPanel.addTab("New Patient...", null,newPatientPanel,"New Patient");
 
         tabbedPanel.setPreferredSize(new Dimension(1450, 925));
         tabbedPanel.setVisible(true);
