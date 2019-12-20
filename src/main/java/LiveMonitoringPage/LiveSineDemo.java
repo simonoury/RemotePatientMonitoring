@@ -1,4 +1,4 @@
-package LiveData;
+package LiveMonitoringPage;
 
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;

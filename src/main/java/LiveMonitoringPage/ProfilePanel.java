@@ -1,34 +1,31 @@
-package LiveData;
-
-import com.sun.org.apache.xpath.internal.operations.Gt;
-import org.knowm.xchart.QuickChart;
-import org.knowm.xchart.XChartPanel;
-import org.knowm.xchart.XYChart;
+package LiveMonitoringPage;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
 
 public class ProfilePanel extends JPanel {
-    private JPanel profile;
+    //Declaration of Panels
+    private JPanel patientProfile;
     private JPanel info, heartrate,bodytemp,bloodpress,resprate;
-    private JPanel empty;
-    private GridLayout grid;
-    private JLabel title,name,id,hr,bt,rr,bp ;
+
+    //Sample values to be replaced with database values
     private int normalvalues[]={60,37,14,110,70};
 
     public ProfilePanel(){
-        profile=new JPanel();
+        //Instantiation of panels
+        patientProfile =new JPanel();
         info = new JPanel();
-        empty = new JPanel();
-        grid=new GridLayout(10,1,1,1);
-        profile.setLayout(grid);
-        profile.setBorder( new MatteBorder(2, 2, 2, 2, Color.BLACK) );
 
-        JLabel title=new JLabel("<html><h1> Patient Profile </h1>");
+        //Layout of PatientProfile
+        patientProfile.setLayout(new GridLayout(10,1));
+        patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
+
+
         JLabel name= new JLabel("<html> <h2>Martin Holloway </h2>");
         JLabel id=new JLabel("Patient id: 0001 ");
 
+        //Vital Signs Panels and Layouts
         heartrate=new JPanel();
         heartrate.setLayout(new GridLayout(1,2));
         bodytemp=new JPanel();
@@ -38,7 +35,7 @@ public class ProfilePanel extends JPanel {
         bloodpress=new JPanel();
         bloodpress.setLayout(new GridLayout(1,2));
 
-
+        //Add values to info + 5 Vital Signs Panel *to be replaced with database fetched values*
         info.setLayout(new GridLayout(2, 1));
         info.add(name);
         info.add(id);
@@ -56,19 +53,19 @@ public class ProfilePanel extends JPanel {
         bloodpress.add(new JLabel("<html> <h4>Blood Pressure:   </h4>"));
         bloodpress.add(new JLabel((normalvalues[3])+" mmHg (systolic pressure)  "+normalvalues[4]+ " mmHg (diastolic pressure)"));
 
-        profile.add(title);
-        profile.add(info);
-        profile.add(heartrate);
-        profile.add(bodytemp);
-        profile.add(resprate);
-        profile.add(bloodpress);
+        //Add all information to patientProfile Panel
+        patientProfile.add(info);
+        patientProfile.add(heartrate);
+        patientProfile.add(bodytemp);
+        patientProfile.add(resprate);
+        patientProfile.add(bloodpress);
 
-        profile.setPreferredSize(new Dimension(700, 720));
+
 
     }
 
-    public JPanel getProfile() {
-        return profile;
+    public JPanel getPatientProfile() {
+        return patientProfile;
     }
 
 }

@@ -1,13 +1,13 @@
-package LiveData;
+package LiveMonitoringPage;
 
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
-import org.knowm.xchart.internal.chartpart.Chart;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class VitalSignsBoard extends JPanel {
+public class VitalSignsPanel extends JPanel {
 
     // FIELDS
 
@@ -39,7 +39,7 @@ public class VitalSignsBoard extends JPanel {
     // METHODS
 
     // constructor method
-    public VitalSignsBoard() {
+    public VitalSignsPanel() {
 
         // create charts
         ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);

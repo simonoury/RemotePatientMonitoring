@@ -1,44 +1,34 @@
 package Menu;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import LiveData.*;
+import LiveMonitoringPage.*;
 
 public class DropDownMenu extends JComboBox implements ActionListener {
+    //Declaration of drop-down menu
     private JComboBox<String> options;
 
-    private JPanel selectedPanel;
-    private JPanel livemonitor; //replace with panel with profile +
-    private JPanel records; //replace with panel RECORDS
+    //Declaration of Panel, Labels & string
+    private JPanel selectedPanel; //panel stores the correct page
 
-    private JLabel label1,label2;
-    private String selection;
-
-    private LiveMonitoringPage liveMonitoringPage;
-
+    //Declaration of classes corresponding to pages
+    private LiveMonitoringPageView liveMonitoringPageView;
 
     public DropDownMenu(){
+        //Instantiation of variables
         options=new JComboBox<String>();
+        liveMonitoringPageView =new LiveMonitoringPageView();
+        selectedPanel=new JPanel();
+
+        //Naming options of drop-down menu
         options.addItem("Live Monitoring");
         options.addItem("Records");
 
-        livemonitor=new JPanel();
-        records= new JPanel();
-        liveMonitoringPage=new LiveMonitoringPage();
+        //Setting default panel to Live-Monitoring Page
+        selectedPanel.add(liveMonitoringPageView.getPage());
 
-        label1=new JLabel("Live Monitoring");
-        label1.setVisible(true);
-        livemonitor.add(label1);
-
-        label2=new JLabel("Records");
-        label2.setVisible(true);
-        records.add(label2);
-
-        selectedPanel=new JPanel();
-
-        selectedPanel.add(liveMonitoringPage.getPage());
+        //Action Listener to select options in menu
         options.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -46,40 +36,33 @@ public class DropDownMenu extends JComboBox implements ActionListener {
                 String selectedoption = (String) combo.getSelectedItem();
 
                 if (selectedoption.equals("Live Monitoring")) {
-                    System.out.println("Live Monitoring");
-
+                    //Refresh page
                     selectedPanel.removeAll();
                     selectedPanel.updateUI();
-                    selectedPanel.add(liveMonitoringPage.getPage());
-                    selection=selectedoption;
-                    //System.out.println(selection);
+
+                    //add page on panel
+                    selectedPanel.add(liveMonitoringPageView.getPage());
                 }
                 else if (selectedoption.equals("Records")) {
+                    //Refresh page
                     selectedPanel.removeAll();
                     selectedPanel.updateUI();
-                    selectedPanel.add(records);
-                    System.out.println("Records");
-                    selection=selectedoption;
+                    //add page on panel
+                    selectedPanel.add(new JLabel("Records")); // to change with Records Page
 
                 }
             }
         });
-        selectedPanel.setPreferredSize(new Dimension(1450, 1400));
-    }
 
-    public String getSelection() {
-        return selection;
     }
 
     public JComboBox<String> getOptions() {
+
         return options;
     }
 
     public JPanel getSelectedPanel() {
+
         return selectedPanel;
     }
 }
-
-
-
-
