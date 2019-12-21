@@ -60,11 +60,11 @@ public class VitalSignsPanel extends JPanel {
 
         // add chart panels to main panel
         mainPanel.setLayout(new GridLayout(5, 2));
-        this.mainPanel.add(ecgPanel, 0,0);
-        this.mainPanel.add(hrPanel,1,0);
-        this.mainPanel.add(tempPanel, 2, 0);
-        this.mainPanel.add(bpPanel, 3, 0);
-        this.mainPanel.add(rrPanel,4,0);
+        this.mainPanel.add(ecgPanel);
+        this.mainPanel.add(hrPanel);
+        this.mainPanel.add(tempPanel);
+        this.mainPanel.add(bpPanel);
+        this.mainPanel.add(rrPanel);
         mainPanel.validate();
 
 
