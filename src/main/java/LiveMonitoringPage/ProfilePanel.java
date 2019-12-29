@@ -3,8 +3,9 @@ package LiveMonitoringPage;
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
+import java.sql.*;
 
-public class ProfilePanel extends JPanel {
+public class ProfilePanel extends JPanel  {
     //Declaration of Panels
     private JPanel patientProfile;
     private JPanel info, heartrate,bodytemp,bloodpress,resprate;
@@ -12,7 +13,32 @@ public class ProfilePanel extends JPanel {
     //Sample values to be replaced with database values
     private int normalvalues[]={60,37,14,110,70};
 
-    public ProfilePanel(){
+    private ResultSet res;
+    private String requete;
+    String familyname;
+
+    public ProfilePanel() {
+        try {
+            // Registers the driver
+            Class.forName("org.postgresql.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://hjcqaohuagengm:6ca336e996e214db564e5871a756e3cf5567db550d0e033f903225c7da2ee5f7@ec2-46-137-113-157.eu-west-1.compute.amazonaws.com:5432/d9reln7n11dkvn?sslmode=require");
+            requete = "SELECT * FROM patients";
+            Statement stmt = conn.createStatement();
+            res = stmt.executeQuery(requete);
+
+            while (res.next()){
+                familyname=res.getString("familyname");
+                System.out.println(familyname);
+
+            }
+            stmt.close();
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            //System.err.println(e.toString());
+
+        }
+
         //Instantiation of panels
         patientProfile =new JPanel();
         info = new JPanel();
@@ -22,7 +48,7 @@ public class ProfilePanel extends JPanel {
         patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
 
 
-        JLabel name= new JLabel("<html> <h2>Martin Holloway </h2>");
+        JLabel name= new JLabel(familyname);
         JLabel id=new JLabel("Patient id: 0001 ");
 
         //Vital Signs Panels and Layouts
@@ -63,6 +89,7 @@ public class ProfilePanel extends JPanel {
 
 
     }
+
 
     public JPanel getPatientProfile() {
         return patientProfile;
