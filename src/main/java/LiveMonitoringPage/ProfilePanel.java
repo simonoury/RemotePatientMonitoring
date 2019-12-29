@@ -1,41 +1,45 @@
 package LiveMonitoringPage;
 
+import Database.DBConnect;
+
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class ProfilePanel extends JPanel  {
     //Declaration of Panels
     private JPanel patientProfile;
     private JPanel info, heartrate,bodytemp,bloodpress,resprate;
+    DBConnect database;
 
     //Sample values to be replaced with database values
     private int normalvalues[]={60,37,14,110,70};
 
     private ResultSet res;
-    private String requete;
+    private String request;
     String familyname;
+    private Connection conn;
 
     public ProfilePanel() {
+        database=new DBConnect();
         try {
-            // Registers the driver
-            Class.forName("org.postgresql.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:postgresql://hjcqaohuagengm:6ca336e996e214db564e5871a756e3cf5567db550d0e033f903225c7da2ee5f7@ec2-46-137-113-157.eu-west-1.compute.amazonaws.com:5432/d9reln7n11dkvn?sslmode=require");
-            requete = "SELECT * FROM patients";
-            Statement stmt = conn.createStatement();
-            res = stmt.executeQuery(requete);
+            //Requests & Execution (SQL)
+            request = "SELECT familyname FROM patients";
+            Statement stmt = database.getconnection().createStatement();
+            res = stmt.executeQuery(request);
 
+            //reads through column
             while (res.next()){
                 familyname=res.getString("familyname");
-                System.out.println(familyname);
-
             }
             stmt.close();
 
         } catch (Exception e) {
             System.err.println("Got an exception! ");
-            //System.err.println(e.toString());
+            System.err.println(e.toString());
 
         }
 
