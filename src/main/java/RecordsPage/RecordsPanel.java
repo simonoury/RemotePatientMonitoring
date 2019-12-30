@@ -16,7 +16,7 @@ public class RecordsPanel extends JPanel {
     private int timevalues[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     private int heartratevalues[] = {69, 74, 56, 84, 95, 115, 78, 68, 70, 71};
     private int bloodpressurevalues [] = {118, 119, 118, 119, 120, 121, 120, 119, 118, 118};
-    private int bodytemperaturevalues [] = {37, 37, 37, 37, 38, 37, 37, 37, 37, 37};
+    private double bodytemperaturevalues [] = {37.1, 37.2, 37.2, 37.3, 38.5, 38.0, 37.9, 37.6, 37.3, 37.1};
     private int respiratoryratevalues [] = {14, 15, 14, 16, 18, 17, 16, 15, 14, 14};
 
     public RecordsPanel (){
@@ -44,7 +44,6 @@ public class RecordsPanel extends JPanel {
         info.add(id);
         info.add(age);
         info.setSize(new Dimension(160, 50));
-        //info.setBorder(new MatteBorder(0, 2, 2, 2, Color.BLACK) );
 
         recordedvalues.setLayout((new GridLayout(1, 5)));
 
@@ -52,68 +51,63 @@ public class RecordsPanel extends JPanel {
         time.setLayout(new GridLayout(11, 1));
         time.setPreferredSize(new Dimension(50, 150));
         time.add(new JLabel("<html> <h4> Time:  </h4>"));
-        for (int i =0; i < timevalues.length; i++ ){
-            time.add(new JLabel(String.valueOf(timevalues[i])));
-        }
+        for (int i =0; i < timevalues.length; i++ ){ time.add(new JLabel(String.valueOf(timevalues[i]))); }
         recordedvalues.add(time);
 
         heartrate.setLayout(new GridLayout(11, 1));
         heartrate.add(new JLabel("<html> <h4> HR:  </h4>"));
-        for (int i =0; i < heartratevalues.length; i++ ){
-            heartrate.add(new JLabel(String.valueOf(heartratevalues[i])));
-        }
+        for (int i =0; i < heartratevalues.length; i++ ){ heartrate.add(new JLabel(String.valueOf(heartratevalues[i]))); }
         recordedvalues.add(heartrate);
 
         bloodpressure.setLayout(new GridLayout(11, 1));
         bloodpressure.add(new JLabel("<html> <h4> BP:  </h4>"));
-        for (int i =0; i < bloodpressurevalues.length; i++ ){
-            bloodpressure.add(new JLabel(String.valueOf(bloodpressurevalues[i])));
-        }
+        for (int i =0; i < bloodpressurevalues.length; i++ ){ bloodpressure.add(new JLabel(String.valueOf(bloodpressurevalues[i]))); }
         recordedvalues.add(bloodpressure);
 
         bodytemperature.setLayout(new GridLayout(11, 1));
         bodytemperature.add(new JLabel("<html> <h4> BT:  </h4>"));
-        for (int i =0; i < bodytemperaturevalues.length; i++ ){
-            bodytemperature.add(new JLabel(String.valueOf(bodytemperaturevalues[i])));
-        }
+        for (int i =0; i < bodytemperaturevalues.length; i++ ){ bodytemperature.add(new JLabel(String.valueOf(bodytemperaturevalues[i]))); }
         recordedvalues.add(bodytemperature);
 
         respiratoryrate.setLayout(new GridLayout(11, 1));
         respiratoryrate.add(new JLabel("<html> <h4> RR:  </h4>"));
-        for (int i =0; i < respiratoryratevalues.length; i++ ){
-            respiratoryrate.add(new JLabel(String.valueOf(respiratoryratevalues[i])));
-        }
+        for (int i =0; i < respiratoryratevalues.length; i++ ){ respiratoryrate.add(new JLabel(String.valueOf(respiratoryratevalues[i]))); }
         recordedvalues.add(respiratoryrate);
 
+        //calculate and fill in average values
         averagevalues.setLayout(new GridLayout(5, 1));
         averagevalues.add(new JLabel("<html> <h4> Average Values:  </h4>"));
 
-        int avgheartrate;
+        double avgheartrate;
         avgheartrate = IntStream.of(heartratevalues).sum()/heartratevalues.length;
         heartrateaverage.add(new JLabel("Heart Rate average value:"));
         heartrateaverage.add(new JLabel(String.valueOf(avgheartrate)));
         averagevalues.add(heartrateaverage);
 
-        int avgbloodpressure;
+        double avgbloodpressure;
         avgbloodpressure = IntStream.of(bloodpressurevalues).sum()/bloodpressurevalues.length;
         bloodpressureaverage.add(new JLabel("Blood Pressure average value:"));
         bloodpressureaverage.add(new JLabel(String.valueOf(avgbloodpressure)));
         averagevalues.add(bloodpressureaverage);
 
-        int avgbodytemperature;
-        avgbodytemperature = IntStream.of(bodytemperaturevalues).sum()/bodytemperaturevalues.length;
+        double avgbodytemperature;
+        double sum = 0; //as IntStream.of().sum() does not work for double values
+        for (int i = 0; i < bodytemperaturevalues.length; i++){
+            double val = bodytemperaturevalues[i];
+            sum = sum + val;}
+        avgbodytemperature = sum/bodytemperaturevalues.length;
         bodytemperatureaverage.add(new JLabel("Body Temperature average value:"));
         bodytemperatureaverage.add(new JLabel(String.valueOf(avgbodytemperature)));
         averagevalues.add(bodytemperatureaverage);
 
-        int avgrespiratoryrate;
+        double avgrespiratoryrate;
         avgrespiratoryrate = IntStream.of(respiratoryratevalues).sum()/respiratoryratevalues.length;
         respiratoryrateaverage.add(new JLabel("Respiratory Rate average value:"));
         respiratoryrateaverage.add(new JLabel(String.valueOf(avgrespiratoryrate)));
         averagevalues.add(respiratoryrateaverage);
 
-        //recordedvalues.setPreferredSize(new Dimension(150, 50));
 
+        //set dimensions of jpanels
         info.setPreferredSize(new Dimension(500, 75));
         info.setVisible(true);
         recordedvalues.setPreferredSize(new Dimension(525, 400));
@@ -121,15 +115,15 @@ public class RecordsPanel extends JPanel {
         recordedvalues.setBorder(new MatteBorder(2, 0, 2, 0, Color.BLACK) );
         averagevalues.setPreferredSize(new Dimension(540, 150));
         averagevalues.setVisible(true);
-        averagevalues.setBorder(new MatteBorder(0, 0, 0, 0, Color.BLACK) );
 
         patientProfile.setPreferredSize(new Dimension(550, 645));
         patientProfile.setVisible(true);
 
+        //add JPanels to main Panel patientProgfile
         patientProfile.add(info);
         patientProfile.add(recordedvalues);
         patientProfile.add(averagevalues);
-        //patientProfile.setPreferredSize(new Dimension(300, 500));
+
         patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
 
     }
