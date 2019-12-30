@@ -15,7 +15,7 @@ public class RecordsPanel extends JPanel {
     private JPanel heartrateaverage, bloodpressureaverage, bodytemperatureaverage, respiratoryrateaverage;
     private int timevalues[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     private int heartratevalues[] = {69, 74, 56, 84, 95, 115, 78, 68, 70, 71};
-    private int bloodpressurevalues [] = {118, 119, 118, 119, 120, 121, 120, 119, 118, 118};
+    private int bloodpressurevalues [] = {118, 119, 118, 119, 120, 121, 120, 119, 119, 118};
     private double bodytemperaturevalues [] = {37.1, 37.2, 37.2, 37.3, 38.5, 38.0, 37.9, 37.6, 37.3, 37.1};
     private int respiratoryratevalues [] = {14, 15, 14, 16, 18, 17, 16, 15, 14, 14};
 
@@ -89,19 +89,27 @@ public class RecordsPanel extends JPanel {
         averagevalues.add(new JLabel("<html> <h4> Average Values:  </h4>"));
 
         double avgheartrate;
-        avgheartrate = IntStream.of(heartratevalues).sum()/heartratevalues.length;
+        double sum = 0;
+        for (double val : heartratevalues){
+            sum = sum + val;
+        }
+        avgheartrate = sum/heartratevalues.length;
         heartrateaverage.add(new JLabel("Heart Rate average value:"));
         heartrateaverage.add(new JLabel(String.valueOf(avgheartrate)));
         averagevalues.add(heartrateaverage);
 
         double avgbloodpressure;
-        avgbloodpressure = IntStream.of(bloodpressurevalues).sum()/bloodpressurevalues.length;
+        sum = 0;
+        for (double val : bloodpressurevalues){
+            sum = sum + val;
+        }
+        avgbloodpressure = sum/bloodpressurevalues.length;
         bloodpressureaverage.add(new JLabel("Blood Pressure average value:"));
         bloodpressureaverage.add(new JLabel(String.valueOf(avgbloodpressure)));
         averagevalues.add(bloodpressureaverage);
 
         double avgbodytemperature;
-        double sum = 0; //as IntStream.of().sum() does not work for double values
+        sum = 0; //as IntStream.of().sum() does not work for double values
         for (double val : bodytemperaturevalues) {
             sum = sum + val;
         }
@@ -111,7 +119,11 @@ public class RecordsPanel extends JPanel {
         averagevalues.add(bodytemperatureaverage);
 
         double avgrespiratoryrate;
-        avgrespiratoryrate = IntStream.of(respiratoryratevalues).sum()/respiratoryratevalues.length;
+        sum = 0;
+        for (double val : respiratoryratevalues){
+            sum = sum + val;
+        }
+        avgrespiratoryrate = sum/respiratoryratevalues.length;
         respiratoryrateaverage.add(new JLabel("Respiratory Rate average value:"));
         respiratoryrateaverage.add(new JLabel(String.valueOf(avgrespiratoryrate)));
         averagevalues.add(respiratoryrateaverage);
