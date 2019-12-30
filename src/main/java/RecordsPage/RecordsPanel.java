@@ -47,7 +47,7 @@ public class RecordsPanel extends JPanel {
 
         recordedvalues.setLayout((new GridLayout(1, 5)));
 
-        //fill in table with values from array
+        //fill in table with values from array -------------------------------------------------------------------------
         time.setLayout(new GridLayout(11, 1));
         time.setPreferredSize(new Dimension(50, 150));
         time.add(new JLabel("<html> <h4> Time:  </h4>"));
@@ -84,7 +84,8 @@ public class RecordsPanel extends JPanel {
         }
         recordedvalues.add(respiratoryrate);
 
-        //calculate and fill in average values
+
+        //calculate and fill in average values -------------------------------------------------------------------------
         averagevalues.setLayout(new GridLayout(5, 1));
         averagevalues.add(new JLabel("<html> <h4> Average Values:  </h4>"));
 
