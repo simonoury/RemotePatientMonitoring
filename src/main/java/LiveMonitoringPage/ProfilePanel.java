@@ -91,6 +91,9 @@ public class ProfilePanel extends JPanel  {
         patientProfile.add(bloodpress);
 
 
+        patientProfile.setPreferredSize(new Dimension(300,640));
+
+
 
     }
 
