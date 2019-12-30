@@ -1,18 +1,48 @@
 package LiveMonitoringPage;
 
+import Database.DBConnect;
+
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
-public class ProfilePanel extends JPanel {
+public class ProfilePanel extends JPanel  {
     //Declaration of Panels
     private JPanel patientProfile;
     private JPanel info, heartrate,bodytemp,bloodpress,resprate;
+    DBConnect database;
 
     //Sample values to be replaced with database values
     private int normalvalues[]={60,37,14,110,70};
 
-    public ProfilePanel(){
+    private ResultSet res;
+    private String request;
+    String familyname;
+    private Connection conn;
+
+    public ProfilePanel() {
+        database=new DBConnect();
+        try {
+            //Requests & Execution (SQL)
+            request = "SELECT familyname FROM patients";
+            Statement stmt = database.getconnection().createStatement();
+            res = stmt.executeQuery(request);
+
+            //reads through column
+            while (res.next()){
+                familyname=res.getString("familyname");
+            }
+            stmt.close();
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.toString());
+
+        }
+
         //Instantiation of panels
         patientProfile =new JPanel();
         info = new JPanel();
@@ -22,7 +52,7 @@ public class ProfilePanel extends JPanel {
         patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
 
 
-        JLabel name= new JLabel("<html> <h2>Martin Holloway </h2>");
+        JLabel name= new JLabel(familyname);
         JLabel id=new JLabel("Patient id: 0001 ");
 
         //Vital Signs Panels and Layouts
@@ -63,6 +93,7 @@ public class ProfilePanel extends JPanel {
 
 
     }
+
 
     public JPanel getPatientProfile() {
         return patientProfile;
