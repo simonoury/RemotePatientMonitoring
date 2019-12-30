@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import LiveMonitoringPage.*;
+import RecordsPage.RecordsPageView;
 
 public class DropDownMenu extends JComboBox implements ActionListener {
     //Declaration of drop-down menu
@@ -14,11 +15,13 @@ public class DropDownMenu extends JComboBox implements ActionListener {
 
     //Declaration of classes corresponding to pages
     private LiveMonitoringPageView liveMonitoringPageView;
+    private RecordsPageView recordsPageView;
 
     public DropDownMenu(){
         //Instantiation of variables
         options=new JComboBox<String>();
         liveMonitoringPageView =new LiveMonitoringPageView();
+        recordsPageView = new RecordsPageView();
         selectedPanel=new JPanel();
 
         //Naming options of drop-down menu
@@ -48,7 +51,7 @@ public class DropDownMenu extends JComboBox implements ActionListener {
                     selectedPanel.removeAll();
                     selectedPanel.updateUI();
                     //add page on panel
-                    selectedPanel.add(new JLabel("Records")); // to change with Records Page
+                    selectedPanel.add(recordsPageView.getRecordspage());
 
                 }
             }
