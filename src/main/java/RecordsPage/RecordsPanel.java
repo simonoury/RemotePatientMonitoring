@@ -51,27 +51,37 @@ public class RecordsPanel extends JPanel {
         time.setLayout(new GridLayout(11, 1));
         time.setPreferredSize(new Dimension(50, 150));
         time.add(new JLabel("<html> <h4> Time:  </h4>"));
-        for (int i =0; i < timevalues.length; i++ ){ time.add(new JLabel(String.valueOf(timevalues[i]))); }
+        for (int timevalue : timevalues) {
+            time.add(new JLabel(String.valueOf(timevalue)+" h"));
+        }
         recordedvalues.add(time);
 
         heartrate.setLayout(new GridLayout(11, 1));
         heartrate.add(new JLabel("<html> <h4> HR:  </h4>"));
-        for (int i =0; i < heartratevalues.length; i++ ){ heartrate.add(new JLabel(String.valueOf(heartratevalues[i]))); }
+        for (int heartratevalue : heartratevalues) {
+            heartrate.add(new JLabel(String.valueOf(heartratevalue)));
+        }
         recordedvalues.add(heartrate);
 
         bloodpressure.setLayout(new GridLayout(11, 1));
         bloodpressure.add(new JLabel("<html> <h4> BP:  </h4>"));
-        for (int i =0; i < bloodpressurevalues.length; i++ ){ bloodpressure.add(new JLabel(String.valueOf(bloodpressurevalues[i]))); }
+        for (int bloodpressurevalue : bloodpressurevalues) {
+            bloodpressure.add(new JLabel(String.valueOf(bloodpressurevalue)));
+        }
         recordedvalues.add(bloodpressure);
 
         bodytemperature.setLayout(new GridLayout(11, 1));
         bodytemperature.add(new JLabel("<html> <h4> BT:  </h4>"));
-        for (int i =0; i < bodytemperaturevalues.length; i++ ){ bodytemperature.add(new JLabel(String.valueOf(bodytemperaturevalues[i]))); }
+        for (double bodytemperaturevalue : bodytemperaturevalues) {
+            bodytemperature.add(new JLabel(String.valueOf(bodytemperaturevalue)));
+        }
         recordedvalues.add(bodytemperature);
 
         respiratoryrate.setLayout(new GridLayout(11, 1));
         respiratoryrate.add(new JLabel("<html> <h4> RR:  </h4>"));
-        for (int i =0; i < respiratoryratevalues.length; i++ ){ respiratoryrate.add(new JLabel(String.valueOf(respiratoryratevalues[i]))); }
+        for (int respiratoryratevalue : respiratoryratevalues) {
+            respiratoryrate.add(new JLabel(String.valueOf(respiratoryratevalue)));
+        }
         recordedvalues.add(respiratoryrate);
 
         //calculate and fill in average values
@@ -92,9 +102,9 @@ public class RecordsPanel extends JPanel {
 
         double avgbodytemperature;
         double sum = 0; //as IntStream.of().sum() does not work for double values
-        for (int i = 0; i < bodytemperaturevalues.length; i++){
-            double val = bodytemperaturevalues[i];
-            sum = sum + val;}
+        for (double val : bodytemperaturevalues) {
+            sum = sum + val;
+        }
         avgbodytemperature = sum/bodytemperaturevalues.length;
         bodytemperatureaverage.add(new JLabel("Body Temperature average value:"));
         bodytemperatureaverage.add(new JLabel(String.valueOf(avgbodytemperature)));
