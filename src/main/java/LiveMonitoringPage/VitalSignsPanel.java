@@ -18,6 +18,8 @@ public class VitalSignsPanel extends JPanel {
     JPanel tempPanel;
     JPanel bpPanel;
     JPanel rrPanel;
+    JPanel titles;
+    JPanel chartPanel;
 
     // charts
     XYChart ecgChart;
@@ -57,16 +59,31 @@ public class VitalSignsPanel extends JPanel {
         tempPanel = new XChartPanel(tempChart);
         bpPanel = new XChartPanel(bpsChart);
         rrPanel = new XChartPanel(rrChart);
+        titles=new JPanel();
+        chartPanel=new JPanel();
+
+        titles.setLayout(new GridLayout(5,1));
+        titles.add(new JLabel("<html> <h2>ECG </h2> <html>"));
+        titles.add(new JLabel("<html> <h2>Heart Rate: </h2> <html>"));
+        titles.add(new JLabel("<html> <h2>Body Temperature: </h2> <html>"));
+        titles.add(new JLabel("<html> <h2>Blood Pressure: </h2> <html>"));
+        titles.add(new JLabel("<html> <h2>Respiratory Rate: </h2> <html>"));
+        titles.setPreferredSize(new Dimension (150,640));
 
         // add chart panels to main panel
-        mainPanel.setLayout(new GridLayout(5, 2));
-        this.mainPanel.add(ecgPanel);
-        this.mainPanel.add(hrPanel);
-        this.mainPanel.add(tempPanel);
-        this.mainPanel.add(bpPanel);
-        this.mainPanel.add(rrPanel);
+
+        chartPanel.setLayout(new GridLayout(5, 2));
+        chartPanel.add(ecgPanel);
+        chartPanel.add(hrPanel);
+        chartPanel.add(tempPanel);
+        chartPanel.add(bpPanel);
+        chartPanel.add(rrPanel);
+        chartPanel.setPreferredSize(new Dimension (750,640));
+
+        // mainPanel.setLayout(new GridLayout(1,2));
+        mainPanel.add(titles);
+        mainPanel.add(chartPanel);
         mainPanel.validate();
-        mainPanel.setPreferredSize(new Dimension (900,640));
 
 
     }
