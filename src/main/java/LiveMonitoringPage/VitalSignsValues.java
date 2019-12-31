@@ -1,5 +1,7 @@
 package LiveMonitoringPage;
 
+import Alarm.Alarm;
+
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
@@ -13,6 +15,7 @@ public class VitalSignsValues {
     private int bloodpressurevalues [] = {118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118};
     private JPanel ecg,heartrate,bloodpressure,bodytemperature,respiratoryrate,valuesPanel;
     private JLabel heartrateLabel,bloodpressureLabel,bodytemperatureLabel,respiratoryrateLabel;
+    private Alarm alarmContainer;
 
     public VitalSignsValues(){
         ecg=new JPanel();
@@ -25,6 +28,9 @@ public class VitalSignsValues {
         bloodpressureLabel=new JLabel();
         bodytemperatureLabel=new JLabel();
         respiratoryrateLabel=new JLabel();
+        alarmContainer=new Alarm(3,44,5,43,heartratevalues);
+
+
         valuesPanel.setLayout(new GridLayout(5,1));
 
         ActionListener taskPerformer = new ActionListener() {
@@ -50,7 +56,7 @@ public class VitalSignsValues {
                 bloodpressure.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
                 heartrate.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
 
-                valuesPanel.add(ecg);
+                valuesPanel.add(alarmContainer.getAlarm());
                 valuesPanel.add(heartrate);
                 valuesPanel.add(bodytemperature);
                 valuesPanel.add(bloodpressure);
