@@ -44,7 +44,7 @@ public class Alarm {
         for (int element : values) {
             alarm.setText(String.valueOf(element));
             alarm.setHorizontalAlignment(0);
-            alarmcontainer.add(alarm);
+            //alarmcontainer.add(alarm);
 
             if (element > danger_bound_high || element < danger_bound_low) {
                 timer.start();
@@ -64,6 +64,8 @@ public class Alarm {
         return alarmcontainer;
     }
     public JPanel addText(String text){
+        alarmcontainer.removeAll();
+        alarmcontainer.updateUI();
         alarmcontainer.add(new JLabel(text));
         return alarmcontainer;
     }
