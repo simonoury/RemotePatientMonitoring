@@ -29,7 +29,7 @@ public class Alarm {
         alarm = new JLabel();
         alarmcontainer = new JPanel();
 
-        timer=new Timer(1000, new ActionListener() {
+        timer=new Timer(1, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(count%2==0)
@@ -41,15 +41,15 @@ public class Alarm {
             }
         });
 
-        for (int element : values) {
-            alarm.setText(String.valueOf(element));
-            alarm.setHorizontalAlignment(0);
-            //alarmcontainer.add(alarm);
 
-            if (element > danger_bound_high || element < danger_bound_low) {
-                timer.start();
+    }
+
+    public JPanel getAlarm(int value){
+
+            if (value > danger_bound_high || value < danger_bound_low) {
+                alarmcontainer.setBackground(Color.red);
             }
-            if ((element > warning_bound_high && element < danger_bound_high) || (element < warning_bound_low && element > danger_bound_low)) {
+            if ((value > warning_bound_high && value < danger_bound_high) || (value < warning_bound_low && value > danger_bound_low)) {
 
                 alarmcontainer.setBackground(Color.yellow);
             } else {
@@ -57,14 +57,14 @@ public class Alarm {
                 alarmcontainer.setBackground(Color.green);
             }
             alarm.setVisible(true);
+            alarmcontainer.setOpaque(true);
 
-        }
-    }
-    public JPanel getAlarm(){
+        //}
+
+        alarmcontainer.updateUI();
         return alarmcontainer;
     }
     public JPanel addText(String text){
-        alarmcontainer.removeAll();
         alarmcontainer.updateUI();
         alarmcontainer.add(new JLabel(text));
         return alarmcontainer;

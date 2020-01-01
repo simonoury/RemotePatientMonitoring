@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class VitalSignsValues {
-    private int heartratevalues[] = {69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70};
+    private int heartratevalues[] = {69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,120, 119, 119, 118,118, 119, 118, 119, 171,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70};
     private int bloodpressurevalues [] = {118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118};
     private Alarm heartrate,bloodpressure,bodytemperature,respiratoryrate;
     private JPanel ecg,valuesPanel;
@@ -24,28 +24,32 @@ public class VitalSignsValues {
         bodytemperature=new Alarm(3,44,5,100,heartratevalues);
         respiratoryrate=new Alarm(3,44,5,100,heartratevalues);
 
+
         valuesPanel.setLayout(new GridLayout(5,1));
 
         ActionListener taskPerformer = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                heartrate.getAlarm(heartratevalues[CurrentTime()]).removeAll();
+                bloodpressure.getAlarm(heartratevalues[CurrentTime()]).removeAll();
+                respiratoryrate.getAlarm(heartratevalues[CurrentTime()]).removeAll();
+                bodytemperature.getAlarm(heartratevalues[CurrentTime()]).removeAll();
+
+                heartrate.getAlarm(heartratevalues[CurrentTime()]).setOpaque(false);
+                respiratoryrate.getAlarm(heartratevalues[CurrentTime()]).setOpaque(false);
+                bloodpressure.getAlarm(heartratevalues[CurrentTime()]).setOpaque(false);
+                bodytemperature.getAlarm(heartratevalues[CurrentTime()]).setOpaque(false);
 
                 heartrate.addText("<html> <h2> "+toString().valueOf(heartratevalues[CurrentTime()])+"</h2> </html>");
                 bloodpressure.addText("<html> <h2>"+toString().valueOf(bloodpressurevalues[CurrentTime()])+"</h2> </html>");
                 respiratoryrate.addText("<html> <h2>"+toString().valueOf(heartratevalues[CurrentTime()])+"</h2> </html>");
                 bodytemperature.addText("<html> <h2>"+toString().valueOf(heartratevalues[CurrentTime()])+"</h2> </html>");
 
-
-                heartrate.getAlarm().setOpaque(true);
-                bloodpressure.getAlarm().setOpaque(true);
-                respiratoryrate.getAlarm().setOpaque(true);
-                bodytemperature.getAlarm().setOpaque(true);
-
-                valuesPanel.add(heartrate.getAlarm());
-                valuesPanel.add(heartrate.getAlarm());
-                valuesPanel.add(bodytemperature.getAlarm());
-                valuesPanel.add(bloodpressure.getAlarm());
-                valuesPanel.add(respiratoryrate.getAlarm());
+                valuesPanel.add(heartrate.getAlarm(heartratevalues[CurrentTime()]));
+                valuesPanel.add(heartrate.getAlarm(heartratevalues[CurrentTime()]));
+                valuesPanel.add(bodytemperature.getAlarm(heartratevalues[CurrentTime()]));
+                valuesPanel.add(bloodpressure.getAlarm(heartratevalues[CurrentTime()]));
+                valuesPanel.add(respiratoryrate.getAlarm(heartratevalues[CurrentTime()]));
                 valuesPanel.setPreferredSize(new Dimension(100,640));
                 valuesPanel.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
             }
