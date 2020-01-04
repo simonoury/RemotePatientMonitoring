@@ -31,7 +31,7 @@ public class VitalSignsPanel extends JPanel {
 
 
     int locator = 0;
-    Patient patient = new Patient(2);
+    Patient patient;
     // Model
 
 
@@ -51,25 +51,29 @@ public class VitalSignsPanel extends JPanel {
     XYChart bpdChart;
     XYChart rrChart;
 
-    // data for sine wave
-    double phase = 0;
-    double[][] data_ECG = getECGData(locator);
-    double[][] data_HR = getHRData(phase);
-    double[][] data_temp = getTempData();
-    double[][] data_BPS =  getBPSData();
-    double[][] data_BPD =  getBPDData();
-    double[][] data = getSineData(phase);
+    //minmax
+    double[] minmaxECG;
 
-    // min max info
-    double[] minmaxECG= patient.minmaxECG();
+
     // METHODS
 
     // constructor method
-    public VitalSignsPanel() {
+    public VitalSignsPanel(Patient p) {
 
-;
+        //create patient
+        patient = p;
 
+        // data for sine wave
+        double phase = 0;
+        double[][] data_ECG = getECGData(locator);
+        double[][] data_HR = getHRData(phase);
+        double[][] data_temp = getTempData();
+        double[][] data_BPS =  getBPSData();
+        double[][] data_BPD =  getBPDData();
+        double[][] data = getSineData(phase);
 
+        // min max info
+        double[] minmaxECG = patient.minmaxECG();
 
         // create charts
         ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
@@ -178,9 +182,13 @@ public class VitalSignsPanel extends JPanel {
     }
 
     public void updatePanel(){
+        System.out.println("updated " + patient.getGivenname());
         double[][] data_ECG = getECGData(++locator);
+        double[] minmaxECG = patient.minmaxECG();
         ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
         ecgPanel = new XChartPanel(ecgChart);
+        System.out.println("minmax"+ Arrays.toString(minmaxECG));
+
         ecgChart.addSeries("minmax", new double[]{data_ECG[0][0],data_ECG[0][1]}, minmaxECG);
         JPanel ecgPanel2 = new XChartPanel(ecgChart);
         mainPanel.removeAll();

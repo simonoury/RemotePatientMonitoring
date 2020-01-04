@@ -9,9 +9,9 @@ public class LiveMonitoringPageView {
     private ProfilePanel profilePanel;
     private VitalSignsPanel profileGraph;
     private JPanel page,page_sub;
-    public LiveMonitoringPageView()  {
-        profilePanel=new ProfilePanel();
-        profileGraph = new VitalSignsPanel();
+    public LiveMonitoringPageView(Patient patient)  {
+        profilePanel=new ProfilePanel(patient);
+        profileGraph = new VitalSignsPanel(patient);
         page=new JPanel();
         page_sub=new JPanel();
 

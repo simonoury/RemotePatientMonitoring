@@ -17,8 +17,8 @@ public class TabsMenu{
         patient2=new JPanel();
 
         //Instantiate the drop-down menu
-        dropdown=new DropDownMenu();
-        dropdown2=new DropDownMenu();
+        dropdown=new DropDownMenu(1);
+        dropdown2=new DropDownMenu(2);
 
         //Panel for patient 1
         patient1.setLayout(new FlowLayout());

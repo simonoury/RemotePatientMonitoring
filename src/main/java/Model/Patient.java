@@ -30,7 +30,7 @@ public class Patient {
         DBConnect database = new DBConnect();
         try {
             //Requests & Execution (SQL)
-            String request = "select ecg_xdata, ecg_ydata from graphofpatient inner join patients on(patients.id=graphofpatient.patientid)\n" +
+            String request = "select givenname, familyname, ecg_xdata, ecg_ydata from graphofpatient inner join patients on(patients.id=graphofpatient.patientid)\n" +
                     "                             inner join graphs on(graphs.id=graphofpatient.graphid)\n" +
                     "where patientid="+i+";"; //could have any SQL command
             Statement stmt = database.getconnection().createStatement(); //what executes command
@@ -39,13 +39,18 @@ public class Patient {
             while (res.next()) {
                 Array xdata_temp = res.getArray("ecg_xdata"); // put result of request in a string
                 Array ydata_temp = res.getArray("ecg_ydata"); // put result of request in a string
+                String givenname_temp = res.getString("givenname");
+                String familyanme_temp = res.getString("familyname");
                 for (String strTemp : (String[]) xdata_temp.getArray()) {
                     xdata_list.add(strTemp);
                 }
                 for (Double strTemp : (Double[]) ydata_temp.getArray()) {
                     ydata_list.add(strTemp);
                 }
-                System.out.println(xdata_list.size());
+                givenname = givenname_temp;
+                familyname = familyanme_temp;
+
+                System.out.println(givenname);
 
 
             }
@@ -62,10 +67,21 @@ public class Patient {
         ecg = new ECG(new double[][]{xdata, ydata});
     }
 
+    //Accessors
     public double[][] getsnippet(int locator)
     {
         //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
         return(new double[][]{subArray(ecg.get_xdata(), locator, locator+99), subArray(ecg.get_ydata(), locator, (locator++)+99)});
+    }
+
+    public String getGivenname()
+    {
+        return givenname;
+    }
+
+    public String getFamilyname()
+    {
+        return familyname;
     }
 
     public double[] minmaxECG(){

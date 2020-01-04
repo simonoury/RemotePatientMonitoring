@@ -11,6 +11,9 @@ public class DropDownMenu extends JComboBox implements ActionListener {
     //Declaration of drop-down menu
     private JComboBox<String> options;
 
+    //Patient
+    Patient patient;
+
     //Declaration of Panel, Labels & string
     private JPanel selectedPanel; //panel stores the correct page
 
@@ -18,11 +21,12 @@ public class DropDownMenu extends JComboBox implements ActionListener {
     private LiveMonitoringPageView liveMonitoringPageView;
     private RecordsPageView recordsPageView;
 
-    public DropDownMenu()  {
-        //Instantiation of variables
+    public DropDownMenu(int PatientID)  {
+        //Instantiation of variabless
         options=new JComboBox<String>();
-        liveMonitoringPageView =new LiveMonitoringPageView();
-        recordsPageView = new RecordsPageView();
+        patient = new Patient(PatientID);
+        liveMonitoringPageView =new LiveMonitoringPageView(patient);
+        recordsPageView = new RecordsPageView(patient);
         selectedPanel=new JPanel();
 
         //Naming options of drop-down menu
