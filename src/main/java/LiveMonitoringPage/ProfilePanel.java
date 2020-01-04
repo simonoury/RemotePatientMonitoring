@@ -23,11 +23,12 @@ public class ProfilePanel extends JPanel  {
     private ResultSet res;
     private String request;
     String familyname;
+    String surname;
     private Connection conn;
 
     public ProfilePanel(Patient p) {
         patient = p;
-        database=new DBConnect();
+        /*database=new DBConnect();
         try {
             //Requests & Execution (SQL)
             request = "SELECT familyname FROM patients";
@@ -46,6 +47,8 @@ public class ProfilePanel extends JPanel  {
 
         }
 
+        */
+
         //Instantiation of panels
         patientProfile =new JPanel();
         info = new JPanel();
@@ -54,8 +57,9 @@ public class ProfilePanel extends JPanel  {
         patientProfile.setLayout(new GridLayout(10,1));
         patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
 
-
-        JLabel name= new JLabel(familyname);
+        familyname = patient.getFamilyname();
+        surname = patient.getGivenname();
+        JLabel name= new JLabel(familyname + " " + surname);
         JLabel id=new JLabel("Patient id: 0001 ");
 
         //Vital Signs Panels and Layouts

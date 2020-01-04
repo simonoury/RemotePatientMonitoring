@@ -1,5 +1,7 @@
 package RecordsPage;
 
+import Model.Patient;
+
 import javax.swing.*;
 import java.awt.Dimension;
 import javax.swing.border.MatteBorder;
@@ -13,13 +15,14 @@ public class RecordsPanel extends JPanel {
     private JPanel info;
     private JPanel time, heartrate, bloodpressure, bodytemperature, respiratoryrate;
     private JPanel heartrateaverage, bloodpressureaverage, bodytemperatureaverage, respiratoryrateaverage;
+    Patient patient;
     private int timevalues[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     private int heartratevalues[] = {69, 74, 56, 84, 95, 115, 78, 68, 70, 71};
     private int bloodpressurevalues [] = {118, 119, 118, 119, 120, 121, 120, 119, 119, 118};
     private double bodytemperaturevalues [] = {37.1, 37.2, 37.2, 37.3, 38.5, 38.0, 37.9, 37.6, 37.3, 37.1};
     private int respiratoryratevalues [] = {14, 15, 14, 16, 18, 17, 16, 15, 14, 14};
 
-    public RecordsPanel (){
+    public RecordsPanel (Patient p){
         //instantiate JPanels
         patientProfile = new JPanel();
         recordedvalues = new JPanel();
@@ -34,10 +37,13 @@ public class RecordsPanel extends JPanel {
         bloodpressureaverage= new JPanel();
         bodytemperatureaverage= new JPanel();
         respiratoryrateaverage= new JPanel();
+        patient = p;
 
         //Fill info Jlabel
         info.setLayout(new GridLayout(3, 1));
-        JLabel name = new JLabel("<html> <h2>Martin Holloway </h2>");
+        String familyname = patient.getFamilyname();
+        String surname = patient.getGivenname();
+        JLabel name = new JLabel(familyname +" "+ surname );
         JLabel id = new JLabel("Patient id: 0001 ");
         JLabel age = new JLabel("Age: 27 years old");
         info.add(name);

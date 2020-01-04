@@ -10,7 +10,7 @@ public class RecordsPageView {
     private JPanel recordspage;
 
     public RecordsPageView(Patient patient){
-        recordsPanel = new RecordsPanel();
+        recordsPanel = new RecordsPanel(patient);
         recordspage = new JPanel();
 
         recordspage.setPreferredSize(new Dimension(1400, 650));

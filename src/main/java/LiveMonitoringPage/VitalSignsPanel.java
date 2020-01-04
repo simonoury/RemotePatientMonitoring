@@ -23,7 +23,7 @@ import java.io.InputStreamReader;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+//import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 public class VitalSignsPanel extends JPanel {
 
@@ -102,15 +102,6 @@ public class VitalSignsPanel extends JPanel {
         mainPanel.setPreferredSize(new Dimension (900,640));
         mainPanel.validate();
         mainPanel.setVisible(true);
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -208,17 +199,12 @@ public class VitalSignsPanel extends JPanel {
         //f.show();
 
 
-
-
-
     }
 
     public void Update()
     {
         updatePanel();
     }
-
-
 
 }
 
