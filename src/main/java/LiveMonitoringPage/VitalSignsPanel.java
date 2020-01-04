@@ -1,15 +1,39 @@
 package LiveMonitoringPage;
 
+import Model.Patient;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 
 import javax.swing.*;
 import java.awt.*;
+import array.*;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.swing.SwingWorker;
+
+//delete 3
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import org.knowm.xchart.QuickChart;
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XYChart;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 public class VitalSignsPanel extends JPanel {
 
     // FIELDS
+
+
+    int locator = 0;
+    Patient patient = new Patient(2);
+    // Model
+
 
     // panels
     JPanel mainPanel;
@@ -29,7 +53,7 @@ public class VitalSignsPanel extends JPanel {
 
     // data for sine wave
     double phase = 0;
-    double[][] data_ECG = getECGData(phase);
+    double[][] data_ECG = getECGData(locator);
     double[][] data_HR = getHRData(phase);
     double[][] data_temp = getTempData();
     double[][] data_BPS =  getBPSData();
@@ -40,6 +64,10 @@ public class VitalSignsPanel extends JPanel {
 
     // constructor method
     public VitalSignsPanel() {
+
+;
+
+
 
         // create charts
         ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
@@ -65,8 +93,17 @@ public class VitalSignsPanel extends JPanel {
         this.mainPanel.add(tempPanel);
         this.mainPanel.add(bpPanel);
         this.mainPanel.add(rrPanel);
-        mainPanel.validate();
         mainPanel.setPreferredSize(new Dimension (900,640));
+        mainPanel.validate();
+        mainPanel.setVisible(true);
+
+
+
+
+
+
+
+
 
 
     }
@@ -122,15 +159,9 @@ public class VitalSignsPanel extends JPanel {
         return new double[][] { xData, yData};
     }
 
-    protected static double[][] getECGData(double phase) {
-        double[] xData = new double[100];
-        double[] yData = new double[100];
-        for (int i = 0; i < xData.length; i++) {
-            double radians = phase + (4 * Math.PI / xData.length * i);
-            xData[i] = radians;
-            yData[i] = Math.sin(radians);
-        }
-        return new double[][] { xData, yData };
+    protected double[][] getECGData(int locator) {
+
+        return patient.getsnippet(locator);
     }
 
     protected static double[][] getHRData(double phase) {
@@ -144,4 +175,39 @@ public class VitalSignsPanel extends JPanel {
         return new double[][] { xData, yData };
     }
 
+    public void updatePanel(){
+        double[][] data_ECG = getECGData(++locator);
+        ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
+        ecgPanel = new XChartPanel(ecgChart);
+        JPanel ecgPanel2 = new XChartPanel(ecgChart);
+        mainPanel.removeAll();
+        mainPanel.add(ecgPanel);
+        mainPanel.add(hrPanel);
+        mainPanel.add(tempPanel);
+        mainPanel.add(bpPanel);
+        mainPanel.add(rrPanel);
+
+
+        //JPanel mainPanel_test = new JPanel();
+        //JFrame f = new JFrame();
+        //f = new JFrame("panel");
+        //f.add(ecgPanel);
+        //f.setSize(300, 300);
+
+        //f.show();
+
+
+
+
+
+    }
+
+    public void Update()
+    {
+        updatePanel();
+    }
+
+
+
 }
+

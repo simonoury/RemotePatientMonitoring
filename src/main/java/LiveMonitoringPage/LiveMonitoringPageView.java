@@ -1,5 +1,7 @@
 package LiveMonitoringPage;
 
+import Model.Patient;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,7 +9,7 @@ public class LiveMonitoringPageView {
     private ProfilePanel profilePanel;
     private VitalSignsPanel profileGraph;
     private JPanel page,page_sub;
-    public LiveMonitoringPageView(){
+    public LiveMonitoringPageView()  {
         profilePanel=new ProfilePanel();
         profileGraph = new VitalSignsPanel();
         page=new JPanel();
@@ -24,4 +26,10 @@ public class LiveMonitoringPageView {
     public JPanel getPage() {
         return page;
     }
+
+    public void Update()
+    {
+        profileGraph.Update();
+    }
+
 }

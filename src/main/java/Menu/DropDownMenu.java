@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import LiveMonitoringPage.*;
+import Model.Patient;
 import RecordsPage.RecordsPageView;
 
 public class DropDownMenu extends JComboBox implements ActionListener {
@@ -17,7 +18,7 @@ public class DropDownMenu extends JComboBox implements ActionListener {
     private LiveMonitoringPageView liveMonitoringPageView;
     private RecordsPageView recordsPageView;
 
-    public DropDownMenu(){
+    public DropDownMenu()  {
         //Instantiation of variables
         options=new JComboBox<String>();
         liveMonitoringPageView =new LiveMonitoringPageView();
@@ -68,4 +69,10 @@ public class DropDownMenu extends JComboBox implements ActionListener {
 
         return selectedPanel;
     }
+
+    public void Update()
+    {
+        liveMonitoringPageView.Update();
+    }
+
 }
