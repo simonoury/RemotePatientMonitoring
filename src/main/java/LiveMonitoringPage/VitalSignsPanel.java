@@ -181,7 +181,7 @@ public class VitalSignsPanel extends JPanel {
         double[][] data_ECG = getECGData(++locator);
         ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
         ecgPanel = new XChartPanel(ecgChart);
-        ecgChart.addSeries("minmax", minmaxECG, new double[]{data_ECG[0][0],data_ECG[0][0]});
+        ecgChart.addSeries("minmax", new double[]{data_ECG[0][0],data_ECG[0][1]}, minmaxECG);
         JPanel ecgPanel2 = new XChartPanel(ecgChart);
         mainPanel.removeAll();
         mainPanel.add(ecgPanel);
