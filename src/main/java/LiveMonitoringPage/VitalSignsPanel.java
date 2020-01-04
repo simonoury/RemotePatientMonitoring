@@ -60,6 +60,8 @@ public class VitalSignsPanel extends JPanel {
     double[][] data_BPD =  getBPDData();
     double[][] data = getSineData(phase);
 
+    // min max info
+    double[] minmaxECG= patient.minmaxECG();
     // METHODS
 
     // constructor method
@@ -179,6 +181,7 @@ public class VitalSignsPanel extends JPanel {
         double[][] data_ECG = getECGData(++locator);
         ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
         ecgPanel = new XChartPanel(ecgChart);
+        ecgChart.addSeries("minmax", minmaxECG, new double[]{data_ECG[0][0],data_ECG[0][0]});
         JPanel ecgPanel2 = new XChartPanel(ecgChart);
         mainPanel.removeAll();
         mainPanel.add(ecgPanel);

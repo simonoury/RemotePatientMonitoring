@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 
 import static array.dou_ListtoArray.dou_ListtoArray;
 import static array.str_ListtoArray.str_ListtoArray;
@@ -64,5 +66,21 @@ public class Patient {
     {
         //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
         return(new double[][]{subArray(ecg.get_xdata(), locator, locator+99), subArray(ecg.get_ydata(), locator, (locator++)+99)});
+    }
+
+    public double[] minmaxECG(){
+        double min=0;
+        double max=0;
+        for (double douTemp : ecg.get_ydata()) {
+            if (douTemp<min)
+            {
+                min = douTemp;
+            }
+            else if (douTemp>max)
+            {
+                max = douTemp;
+            }
+        }
+        return new double[]{min, max};
     }
 }
