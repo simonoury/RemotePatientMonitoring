@@ -19,33 +19,48 @@ public class Patient {
     private String givenname;
     private String familyname;
     private ECG ecg;
+    private Heartbeat heartbeat;
     private int locator=0;
 
     public Patient(int i)
     {
-        ArrayList<String> xdata_list = new ArrayList<String>();
-        ArrayList<Double> ydata_list = new ArrayList<Double>();
+        ArrayList<String> ECGxdata_list = new ArrayList<String>();
+        ArrayList<Double> ECGydata_list = new ArrayList<Double>();
+        ArrayList<String> Heartbeatxdata_list = new ArrayList<String>();
+        ArrayList<Double> Heartbeatydata_list = new ArrayList<Double>();
 
 
         DBConnect database = new DBConnect();
         try {
             //Requests & Execution (SQL)
-            String request = "select givenname, familyname, ecg_xdata, ecg_ydata from graphofpatient inner join patients on(patients.id=graphofpatient.patientid)\n" +
+            String request = "select * from graphofpatient inner join patients on(patients.id=graphofpatient.patientid)\n" +
                     "                             inner join graphs on(graphs.id=graphofpatient.graphid)\n" +
-                    "where patientid="+i+";"; //could have any SQL command
+                      "                             inner join heartbeatgraphs on(heartbeatgraphs.id=graphofpatient.graphid)\n "+
+                                                 "where patientid="+i+";"; //could have any SQL command
             Statement stmt = database.getconnection().createStatement(); //what executes command
             ResultSet res = stmt.executeQuery(request);  //what executes command
             //reads through column of table
             while (res.next()) {
-                Array xdata_temp = res.getArray("ecg_xdata"); // put result of request in a string
-                Array ydata_temp = res.getArray("ecg_ydata"); // put result of request in a string
+                Array ECGxdata_temp = res.getArray("ecg_xdata"); // put result of request in a string
+                Array ECGydata_temp = res.getArray("ecg_ydata"); // put result of request in a string
+                Array Heartbeatxdata_temp = res.getArray("heartbeat_xdata"); // put result of request in a string
+                Array Heartbeatydata_temp = res.getArray("heartbeat_ydata"); // put result of request in a string
                 String givenname_temp = res.getString("givenname");
-                String familyanme_temp = res.getString("familyname");
-                for (String strTemp : (String[]) xdata_temp.getArray()) {
-                    xdata_list.add(strTemp);
+                String familyanme_temp = res.getString("familyname");                    System.out.println("test");
+                System.out.println("test");
+
+
+                for (String strTemp : (String[]) ECGxdata_temp.getArray()) {
+                    ECGxdata_list.add(strTemp);
                 }
-                for (Double strTemp : (Double[]) ydata_temp.getArray()) {
-                    ydata_list.add(strTemp);
+                for (Double douTemp : (Double[]) ECGydata_temp.getArray()) {
+                    ECGydata_list.add(douTemp);
+                }
+                for (String strTemp : (String[]) Heartbeatxdata_temp.getArray()) {
+                    Heartbeatxdata_list.add(strTemp);
+                }
+                for (Double douTemp : (Double[]) Heartbeatydata_temp.getArray()) {
+                    Heartbeatydata_list.add(douTemp);
                 }
                 givenname = givenname_temp;
                 familyname = familyanme_temp;
@@ -60,19 +75,27 @@ public class Patient {
             System.err.println(e.toString());
         }
 
-        double[] xdata = str_ListtoArray(xdata_list);
-        double[] ydata = dou_ListtoArray(ydata_list);
-        int start = 0;
-
+        double[] xdata = str_ListtoArray(ECGxdata_list);
+        double[] ydata = dou_ListtoArray(ECGydata_list);
         ecg = new ECG(new double[][]{xdata, ydata});
+
+        xdata = str_ListtoArray(Heartbeatxdata_list);
+        ydata = dou_ListtoArray(Heartbeatydata_list);
+        heartbeat = new Heartbeat(new double[][]{xdata, ydata});
     }
 
     //Accessors
-    public double[][] getsnippet(int locator)
+    public double[][] ECGgetsnippet(int locator)
     {
         //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
         return(new double[][]{subArray(ecg.get_xdata(), locator, locator+99), subArray(ecg.get_ydata(), locator, (locator++)+99)});
     }
+    public double[][] Heartbeatgetsnippet(int locator)
+    {
+        //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
+        return(new double[][]{subArray(heartbeat.get_xdata(), locator, locator+99), subArray(heartbeat.get_ydata(), locator, (locator++)+99)});
+    }
+
 
     public String getGivenname()
     {

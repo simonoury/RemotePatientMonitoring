@@ -7,23 +7,11 @@ import org.knowm.xchart.XYChart;
 
 import javax.swing.*;
 import java.awt.*;
-import array.*;
 
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.swing.SwingWorker;
 
 //delete 3
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
-import org.knowm.xchart.QuickChart;
-import org.knowm.xchart.SwingWrapper;
-import org.knowm.xchart.XYChart;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 public class VitalSignsPanel extends JPanel {
 
@@ -167,18 +155,11 @@ public class VitalSignsPanel extends JPanel {
 
     protected double[][] getECGData(int locator) {
 
-        return patient.getsnippet(locator);
+        return patient.ECGgetsnippet(locator);
     }
 
-    protected static double[][] getHRData(double phase) {
-        double[] xData = new double[100];
-        double[] yData = new double[100];
-        for (int i = 0; i < xData.length; i++) {
-            double radians = phase + (2 * Math.PI / xData.length * i);
-            xData[i] = radians;
-            yData[i] = Math.sin(6*radians);
-        }
-        return new double[][] { xData, yData };
+    protected double[][] getHRData(double phase) {
+        return patient.Heartbeatgetsnippet(locator);
     }
 
     public void updatePanel(){
@@ -187,10 +168,13 @@ public class VitalSignsPanel extends JPanel {
         double[] minmaxECG = patient.minmaxECG();
         ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
         ecgPanel = new XChartPanel(ecgChart);
-        System.out.println("minmax"+ Arrays.toString(minmaxECG));
-
         ecgChart.addSeries("minmax", new double[]{data_ECG[0][0],data_ECG[0][1]}, minmaxECG);
         JPanel ecgPanel2 = new XChartPanel(ecgChart);
+        double[][] data_Heartbeat = getHRData(locator);
+        hrChart = QuickChart.getChart("Heart Rate", "Time /s", "Rate /BPM", "sine", data_Heartbeat[0], data_Heartbeat[1]);
+        hrPanel = new XChartPanel(hrChart);
+        JPanel hrPanel2 = new XChartPanel(hrChart);
+
         mainPanel.removeAll();
         mainPanel.add(ecgPanel);
         mainPanel.add(hrPanel);
