@@ -26,7 +26,7 @@ public class Patient {
     {
         ArrayList<String> ECGxdata_list = new ArrayList<String>();
         ArrayList<Double> ECGydata_list = new ArrayList<Double>();
-        ArrayList<String> Heartbeatxdata_list = new ArrayList<String>();
+        ArrayList<Double> Heartbeatxdata_list = new ArrayList<Double>();
         ArrayList<Double> Heartbeatydata_list = new ArrayList<Double>();
 
 
@@ -56,8 +56,8 @@ public class Patient {
                 for (Double douTemp : (Double[]) ECGydata_temp.getArray()) {
                     ECGydata_list.add(douTemp);
                 }
-                for (String strTemp : (String[]) Heartbeatxdata_temp.getArray()) {
-                    Heartbeatxdata_list.add(strTemp);
+                for (Double douTemp : (Double[]) Heartbeatxdata_temp.getArray()) {
+                    Heartbeatxdata_list.add(douTemp);
                 }
                 for (Double douTemp : (Double[]) Heartbeatydata_temp.getArray()) {
                     Heartbeatydata_list.add(douTemp);
@@ -79,7 +79,7 @@ public class Patient {
         double[] ydata = dou_ListtoArray(ECGydata_list);
         ecg = new ECG(new double[][]{xdata, ydata});
 
-        xdata = str_ListtoArray(Heartbeatxdata_list);
+        xdata = dou_ListtoArray(Heartbeatxdata_list);
         ydata = dou_ListtoArray(Heartbeatydata_list);
         heartbeat = new Heartbeat(new double[][]{xdata, ydata});
     }
