@@ -55,10 +55,10 @@ public class VitalSignsPanel extends JPanel {
         double phase = 0;
         double[][] data_ECG = getECGData(locator);
         double[][] data_HR = getHRData(phase);
-        double[][] data_temp = getTempData();
-        double[][] data_BPS =  getBPSData();
-        double[][] data_BPD =  getBPDData();
-        double[][] data = getSineData(phase);
+        double[][] data_temp = getTempData(phase);
+        double[][] data_BPS =  getBPSData(phase);
+        //double[][] data_BPD =  getBPDData();
+        double[][] data = getRespiratoryData(phase);
 
         // min max info
         double[] minmaxECG = patient.minmaxECG();
@@ -90,16 +90,6 @@ public class VitalSignsPanel extends JPanel {
         mainPanel.setPreferredSize(new Dimension (900,640));
         mainPanel.validate();
         mainPanel.setVisible(true);
-
-
-
-
-
-
-
-
-
-
     }
 
     // get main panel method
@@ -109,52 +99,20 @@ public class VitalSignsPanel extends JPanel {
 
     // get sine data method
 
-    protected static double[][] getSineData(double phase) {
-        double[] xData = new double[100];
-        double[] yData = new double[100];
-        for (int i = 0; i < xData.length; i++) {
-            double radians = phase + (2 * Math.PI / xData.length * i);
-            xData[i] = radians;
-            yData[i] = Math.sin(radians);
-        }
-        return new double[][] { xData, yData };
+    protected  double[][] getRespiratoryData(double phase) {
+        return patient.Respiratoryrategetsnippet(locator);
     }
 
-    protected static double[][] getTempData() {
-        double[] xData = new double[100];
-        double[] yData = new double[100];
-        for (int i = 0; i < xData.length; i++) {
-            double time = i;
-            xData[i] = time;
-            yData[i] = 37.3;
-        }
-        return new double[][] { xData, yData };
+    protected  double[][] getTempData(double phase) {
+        return patient.Bodytemperaturegetsnippet(locator);
     }
 
-    protected static double[][] getBPSData() {
-        double[] xData = new double[100];
-        double[] yData = new double[100];
-        for (int i = 0; i < xData.length; i++) {
-            double time = i;
-            xData[i] = time;
-            yData[i] = 120;
-        }
-        return new double[][] { xData, yData};
+    protected double[][] getBPSData(double phase) {
+        return patient.Bloodpressuregetsnippet(locator);
     }
 
-    protected static double[][] getBPDData() {
-        double[] xData = new double[100];
-        double[] yData = new double[100];
-        for (int i = 0; i < xData.length; i++) {
-            double time = i;
-            xData[i] = time;
-            yData[i] = 80;
-        }
-        return new double[][] { xData, yData};
-    }
 
     protected double[][] getECGData(int locator) {
-
         return patient.ECGgetsnippet(locator);
     }
 
@@ -170,10 +128,31 @@ public class VitalSignsPanel extends JPanel {
         ecgPanel = new XChartPanel(ecgChart);
         ecgChart.addSeries("minmax", new double[]{data_ECG[0][0],data_ECG[0][1]}, minmaxECG);
         JPanel ecgPanel2 = new XChartPanel(ecgChart);
+
         double[][] data_Heartbeat = getHRData(locator);
+        double[] minmaxHR = patient.minmaxHR();
         hrChart = QuickChart.getChart("Heart Rate", "Time /s", "Rate /BPM", "sine", data_Heartbeat[0], data_Heartbeat[1]);
         hrPanel = new XChartPanel(hrChart);
+        hrChart.addSeries("minmax", new double[]{data_Heartbeat[0][0],data_Heartbeat[0][1]}, minmaxHR);
         JPanel hrPanel2 = new XChartPanel(hrChart);
+
+        double[][] data_Bloodpressure = getBPSData(locator);
+        double[] minmaxBP = patient.minmaxBP();
+        bpsChart = QuickChart.getChart("Blood Pressure", "Time/s", "Pressure /mmHg", "sine", data_Bloodpressure[0], data_Bloodpressure[1]);
+        bpsChart.addSeries("minmax", new double[]{data_Bloodpressure[0][0],data_Bloodpressure[0][1]}, minmaxBP);
+        bpPanel = new XChartPanel(bpsChart);
+
+        double[][] data_Bodytemperature = getTempData(locator);
+        double [] minmaxBT = patient.minmaxBT();
+        tempChart = QuickChart.getChart("Body Temperature", "Time/s", "Temperature Celsius", "sine", data_Bodytemperature[0], data_Bodytemperature[1]);
+        tempChart.addSeries("minmax", new double[]{data_Bodytemperature[0][0],data_Bodytemperature[0][1]}, minmaxBT);
+        tempPanel = new XChartPanel(tempChart);
+
+        double[][] data_RespiratoryRate = getRespiratoryData(locator);
+        double [] minmaxRR = patient.minmaxRR();
+        rrChart = QuickChart.getChart("Respiratory Rate", "Time/s", "Breaths /min", "sine", data_RespiratoryRate[0], data_RespiratoryRate[1]);
+        rrChart.addSeries("minmax", new double[]{data_RespiratoryRate[0][0],data_RespiratoryRate[0][1]}, minmaxRR);
+        rrPanel = new XChartPanel(rrChart);
 
         mainPanel.removeAll();
         mainPanel.add(ecgPanel);
