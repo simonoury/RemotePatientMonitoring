@@ -1,5 +1,7 @@
 package Menu;
 
+import Model.Patient;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -23,4 +25,10 @@ public class MenuPanel extends JPanel {
 
         return menuPanel;
     }
+
+    public void Update(){
+        tabs.Update();
+    }
+
+
 }

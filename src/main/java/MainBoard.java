@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import Menu.*;
+import Model.Patient;
 
 public class MainBoard extends JPanel {
     //Declare panels
@@ -28,5 +29,16 @@ public class MainBoard extends JPanel {
 
         return mainPanel;
     }
+
+    public void Update()
+    {
+        menuPanel.Update();
+    }
+
+
+
+
+
+
 }
 

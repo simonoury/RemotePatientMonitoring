@@ -1,5 +1,7 @@
 package Menu;
 
+import Model.Patient;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,14 +11,14 @@ public class TabsMenu{
     private JPanel patient1,patient2;
     private DropDownMenu dropdown,dropdown2;
 
-    public TabsMenu(){
+    public TabsMenu() {
         //Instantiation of Panels
         patient1=new JPanel();
         patient2=new JPanel();
 
         //Instantiate the drop-down menu
-        dropdown=new DropDownMenu();
-        dropdown2=new DropDownMenu();
+        dropdown=new DropDownMenu(10);
+        dropdown2=new DropDownMenu(2);
 
         //Panel for patient 1
         patient1.setLayout(new FlowLayout());
@@ -41,6 +43,11 @@ public class TabsMenu{
 
     public JTabbedPane getTabbedPanel() {
         return tabbedPanel;
+    }
+
+    public void Update()
+    {
+        dropdown.Update();
     }
 }
 

@@ -1,6 +1,7 @@
 package LiveMonitoringPage;
 
 import Database.DBConnect;
+import Model.Patient;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
@@ -14,6 +15,7 @@ public class ProfilePanel extends JPanel  {
     private JPanel patientProfile;
     private JPanel info, heartrate,bodytemp,bloodpress,resprate;
     DBConnect database;
+    private Patient patient;
 
     //Sample values to be replaced with database values
     private int normalvalues[]={60,37,14,110,70};
@@ -23,7 +25,8 @@ public class ProfilePanel extends JPanel  {
     String familyname;
     private Connection conn;
 
-    public ProfilePanel() {
+    public ProfilePanel(Patient p) {
+        patient = p;
         database=new DBConnect();
         try {
             //Requests & Execution (SQL)
