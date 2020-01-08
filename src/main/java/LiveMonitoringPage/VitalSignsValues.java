@@ -2,6 +2,7 @@ package LiveMonitoringPage;
 
 import Alarm.Alarm;
 import Database.DBConnect;
+import Model.Patient;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
@@ -18,6 +19,7 @@ import java.util.GregorianCalendar;
 
 
 public class VitalSignsValues {
+    Patient patient;
     private int heartratevalues[] = {69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,120, 119, 119, 118,118, 119, 118, 119, 171,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70};
     private int bloodpressurevalues [] = {118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118};
     private Alarm heartrate,bloodpressure,bodytemperature,respiratoryrate;
@@ -29,6 +31,8 @@ public class VitalSignsValues {
         valuesPanel=new JPanel();
 
         //Array of values to be replaced with database values
+
+        //you can simply load
         heartrate=new Alarm(3,69,50,95,heartratevalues);
         bloodpressure=new Alarm(3,50,5,120,heartratevalues);
         bodytemperature=new Alarm(3,44,5,100,heartratevalues);
@@ -85,5 +89,9 @@ public class VitalSignsValues {
 
     public JPanel getValuesPanel () {
         return valuesPanel;
+    }
+
+    public void Update() {
+
     }
 }
