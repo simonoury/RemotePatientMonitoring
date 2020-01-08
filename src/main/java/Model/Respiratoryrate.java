@@ -19,4 +19,8 @@ public class Respiratoryrate {
     {
         return ydata;
     }
+
+    public double[] get_value(int locator) {
+        return new double[] {xdata[locator], ydata[locator]};
+    }
 }

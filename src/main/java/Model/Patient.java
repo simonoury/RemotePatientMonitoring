@@ -23,7 +23,11 @@ public class Patient {
     private Bodytemperature bodytemperature;
     private Bloodpressure bloodpressure;
     private Respiratoryrate respiratoryrate;
-    private int locator=0;
+    private double[] ecg_current;
+    private double[] heartbeat_current;
+    private double[] bodytemperature_current;
+    private double[] bloodpressure_current;
+    private double[] respiratoryrate_current;
 
     public Patient(int i)
     {
@@ -151,26 +155,31 @@ public class Patient {
     public double[][] ECGgetsnippet(int locator)
     {
         //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
+        ecg_current = ecg.get_value(locator+99)
         return(new double[][]{subArray(ecg.get_xdata(), locator, locator+99), subArray(ecg.get_ydata(), locator, (locator++)+99)});
     }
     public double[][] Heartbeatgetsnippet(int locator)
     {
         //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
+        heartbeat_current = heartbeat.get_value(locator+99);
         return(new double[][]{subArray(heartbeat.get_xdata(), locator, locator+99), subArray(heartbeat.get_ydata(), locator, (locator++)+99)});
     }
 
     public double[][] Bodytemperaturegetsnippet (int locator)
     {
+        bodytemperature_current = bodytemperature.get_value(locator + 99);
         return(new double[][]{subArray(bodytemperature.get_xdata(), locator, locator+99), subArray(bodytemperature.get_ydata(), locator, (locator++)+99)});
     }
 
     public double[][] Bloodpressuregetsnippet (int locator)
     {
+        bloodpressure_current = bloodpressure.get_value(locator+99);
         return(new double[][]{subArray(bloodpressure.get_xdata(), locator, locator+99), subArray(bloodpressure.get_ydata(), locator, (locator++)+99)});
     }
 
     public double[][] Respiratoryrategetsnippet (int locator)
     {
+        respiratoryrate_current = respiratoryrate.get_value(locator+99);
         return(new double[][]{subArray(respiratoryrate.get_xdata(), locator, locator+99), subArray(respiratoryrate.get_ydata(), locator, (locator++)+99)});
     }
 
