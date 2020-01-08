@@ -155,7 +155,7 @@ public class Patient {
     public double[][] ECGgetsnippet(int locator)
     {
         //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
-        ecg_current = ecg.get_value(locator+99)
+        ecg_current = ecg.get_value(locator+99);
         return(new double[][]{subArray(ecg.get_xdata(), locator, locator+99), subArray(ecg.get_ydata(), locator, (locator++)+99)});
     }
     public double[][] Heartbeatgetsnippet(int locator)
@@ -275,4 +275,11 @@ public class Patient {
         }
         return new double[]{min, max};
     }
+
+    public double[] getEcg_current() {return ecg_current;};
+    public double[] getHeartbeat_current() {return heartbeat_current;};
+    public double[] getBodytemperature_current() {return bodytemperature_current;};
+    public double[] getBloodpressure_current() {return bloodpressure_current;};
+    public double[] getRespiratoryrate_current() {return respiratoryrate_current;};
+
 }
