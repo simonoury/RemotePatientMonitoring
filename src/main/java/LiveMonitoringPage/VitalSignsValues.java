@@ -1,35 +1,46 @@
 package LiveMonitoringPage;
 
 import Alarm.Alarm;
+import Database.DBConnect;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Array;
+import java.util.Arrays;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
 
 public class VitalSignsValues {
     private int heartratevalues[] = {69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,120, 119, 119, 118,118, 119, 118, 119, 171,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70, 71,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70,69, 74, 56, 84, 95, 115, 78, 68, 70, 71,95, 115, 78, 68, 70};
     private int bloodpressurevalues [] = {118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118,118, 119, 118, 119, 120, 121, 120, 119, 119, 118};
     private Alarm heartrate,bloodpressure,bodytemperature,respiratoryrate;
     private JPanel ecg,valuesPanel;
+    DBConnect database;
 
     public VitalSignsValues(){
         ecg=new JPanel();
         valuesPanel=new JPanel();
+
+        //Array of values to be replaced with database values
         heartrate=new Alarm(3,69,50,95,heartratevalues);
         bloodpressure=new Alarm(3,50,5,120,heartratevalues);
         bodytemperature=new Alarm(3,44,5,100,heartratevalues);
-        respiratoryrate=new Alarm(3,44,5,100,heartratevalues);
-
+        respiratoryrate=new Alarm(3,44,5,100,heartratevalues)
 
         valuesPanel.setLayout(new GridLayout(5,1));
 
         ActionListener taskPerformer = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+
+                //Index of array is current time:
                 heartrate.getAlarm(heartratevalues[CurrentTime()]).removeAll();
                 bloodpressure.getAlarm(heartratevalues[CurrentTime()]).removeAll();
                 respiratoryrate.getAlarm(heartratevalues[CurrentTime()]).removeAll();
@@ -45,7 +56,7 @@ public class VitalSignsValues {
                 respiratoryrate.addText("<html> <h2>"+toString().valueOf(heartratevalues[CurrentTime()])+"</h2> </html>");
                 bodytemperature.addText("<html> <h2>"+toString().valueOf(heartratevalues[CurrentTime()])+"</h2> </html>");
 
-                valuesPanel.add(heartrate.getAlarm(heartratevalues[CurrentTime()]));
+                valuesPanel.add(ecg);
                 valuesPanel.add(heartrate.getAlarm(heartratevalues[CurrentTime()]));
                 valuesPanel.add(bodytemperature.getAlarm(heartratevalues[CurrentTime()]));
                 valuesPanel.add(bloodpressure.getAlarm(heartratevalues[CurrentTime()]));
