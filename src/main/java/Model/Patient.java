@@ -15,9 +15,9 @@ import static array.str_ListtoArray.str_ListtoArray;
 import static array.subArray.subArray;
 
 public class Patient {
-    private int id;
     private String givenname;
     private String familyname;
+    private String id;
     private ECG ecg;
     private Heartbeat heartbeat;
     private Bodytemperature bodytemperature;
@@ -37,7 +37,6 @@ public class Patient {
         ArrayList<Double> Bloodpressureydata_list = new ArrayList<Double>();
         ArrayList<Double> Respiratoryratexdata_list = new ArrayList<Double>();
         ArrayList<Double> Respiratoryrateydata_list = new ArrayList<Double>();
-
 
         DBConnect database = new DBConnect();
         try {
@@ -64,8 +63,8 @@ public class Patient {
                 Array Respiratoryratexdata_temp = res.getArray("respiratoryratexdata");
                 Array Respiratoryrateydata_temp = res.getArray("respiratoryrateydata");
                 String givenname_temp = res.getString("givenname");
-                String familyanme_temp = res.getString("familyname");                    System.out.println("test");
-                System.out.println("test");
+                String familyanme_temp = res.getString("familyname");
+                String id_temp = res.getString("id");
 
 
                 for (String strTemp : (String[]) ECGxdata_temp.getArray()) {
@@ -100,6 +99,7 @@ public class Patient {
                 }
                 givenname = givenname_temp;
                 familyname = familyanme_temp;
+                id = id_temp;
 
                 System.out.println(givenname);
 
@@ -130,6 +130,21 @@ public class Patient {
         xdata = dou_ListtoArray(Respiratoryratexdata_list);
         ydata = dou_ListtoArray(Respiratoryrateydata_list);
         respiratoryrate = new Respiratoryrate(new double[][]{xdata, ydata});
+    }
+    public double[] getHRdata(){
+        return(heartbeat.get_ydata());
+    }
+    public double[] getBPdata(){
+        return(bloodpressure.get_ydata());
+    }
+    public double[] getBTdata(){
+        return(bodytemperature.get_ydata());
+    }
+    public double[] getRRdata(){
+        return(respiratoryrate.get_ydata());
+    }
+    public double[] getTimedata(){
+        return(heartbeat.get_xdata());
     }
 
     //Accessors
@@ -169,6 +184,8 @@ public class Patient {
     {
         return familyname;
     }
+
+    public String getId() {return  id;};
 
     public double[] minmaxECG(){
         double min=0;
