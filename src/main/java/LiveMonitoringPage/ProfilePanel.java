@@ -23,28 +23,15 @@ public class ProfilePanel extends JPanel  {
     private ResultSet res;
     private String request;
     String familyname;
+    String surname;
     private Connection conn;
 
     public ProfilePanel(Patient p) {
         patient = p;
         database=new DBConnect();
-        try {
-            //Requests & Execution (SQL)
-            request = "SELECT familyname FROM patients";
-            Statement stmt = database.getconnection().createStatement();
-            res = stmt.executeQuery(request);
 
-            //reads through column
-            while (res.next()){
-                familyname=res.getString("familyname");
-            }
-            stmt.close();
-
-        } catch (Exception e) {
-            System.err.println("Got an exception! ");
-            System.err.println(e.toString());
-
-        }
+        familyname = patient.getFamilyname();
+        surname = patient.getGivenname();
 
         //Instantiation of panels
         patientProfile =new JPanel();
@@ -55,8 +42,8 @@ public class ProfilePanel extends JPanel  {
         patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
 
 
-        JLabel name= new JLabel(familyname);
-        JLabel id=new JLabel("Patient id: 0001 ");
+        JLabel name= new JLabel(familyname + " " + surname);
+        JLabel id=new JLabel("Patient id: " + patient.getId());
 
         //Vital Signs Panels and Layouts
         heartrate=new JPanel();

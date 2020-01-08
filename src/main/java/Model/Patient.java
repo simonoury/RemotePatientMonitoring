@@ -15,9 +15,9 @@ import static array.str_ListtoArray.str_ListtoArray;
 import static array.subArray.subArray;
 
 public class Patient {
-    private int id;
     private String givenname;
     private String familyname;
+    private String id;
     private ECG ecg;
     private Heartbeat heartbeat;
     private Bodytemperature bodytemperature;
@@ -64,8 +64,8 @@ public class Patient {
                 Array Respiratoryratexdata_temp = res.getArray("respiratoryratexdata");
                 Array Respiratoryrateydata_temp = res.getArray("respiratoryrateydata");
                 String givenname_temp = res.getString("givenname");
-                String familyanme_temp = res.getString("familyname");                    System.out.println("test");
-                System.out.println("test");
+                String familyanme_temp = res.getString("familyname");
+                String id_temp = res.getString("id");
 
 
                 for (String strTemp : (String[]) ECGxdata_temp.getArray()) {
@@ -100,6 +100,7 @@ public class Patient {
                 }
                 givenname = givenname_temp;
                 familyname = familyanme_temp;
+                id = id_temp;
 
                 System.out.println(givenname);
 
@@ -169,6 +170,8 @@ public class Patient {
     {
         return familyname;
     }
+
+    public String getId() {return  id;};
 
     public double[] minmaxECG(){
         double min=0;
