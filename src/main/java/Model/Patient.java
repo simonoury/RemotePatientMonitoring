@@ -38,7 +38,6 @@ public class Patient {
         ArrayList<Double> Respiratoryratexdata_list = new ArrayList<Double>();
         ArrayList<Double> Respiratoryrateydata_list = new ArrayList<Double>();
 
-
         DBConnect database = new DBConnect();
         try {
             //Requests & Execution (SQL)
@@ -131,6 +130,21 @@ public class Patient {
         xdata = dou_ListtoArray(Respiratoryratexdata_list);
         ydata = dou_ListtoArray(Respiratoryrateydata_list);
         respiratoryrate = new Respiratoryrate(new double[][]{xdata, ydata});
+    }
+    public double[] getHRdata(){
+        return(heartbeat.get_ydata());
+    }
+    public double[] getBPdata(){
+        return(bloodpressure.get_ydata());
+    }
+    public double[] getBTdata(){
+        return(bodytemperature.get_ydata());
+    }
+    public double[] getRRdata(){
+        return(respiratoryrate.get_ydata());
+    }
+    public double[] getTimedata(){
+        return(heartbeat.get_xdata());
     }
 
     //Accessors
