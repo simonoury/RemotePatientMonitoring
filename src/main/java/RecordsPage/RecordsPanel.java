@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.stream.IntStream;
 
 public class RecordsPanel extends JPanel {
+    //seeversion
     private JPanel patientProfile;
     private JPanel recordedvalues;
     private JPanel averagevalues;
