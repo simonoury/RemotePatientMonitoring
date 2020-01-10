@@ -20,6 +20,7 @@ public class DropDownMenu extends JComboBox implements ActionListener {
     //Declaration of classes corresponding to pages
     private LiveMonitoringPageView liveMonitoringPageView;
     private RecordsPageView recordsPageView;
+    private VitalSignsValues signs;
 
     public DropDownMenu(int PatientID)  {
         //Instantiation of variabless

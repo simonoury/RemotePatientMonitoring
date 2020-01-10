@@ -30,6 +30,7 @@ public class VitalSignsPanel extends JPanel {
     JPanel tempPanel;
     JPanel bpPanel;
     JPanel rrPanel;
+    VitalSignsValues alarm;
 
     // charts
     XYChart ecgChart;
@@ -50,6 +51,8 @@ public class VitalSignsPanel extends JPanel {
 
         //create patient
         patient = p;
+        Update();
+        alarm=new VitalSignsValues(p);
 
         // data for sine wave
         double phase = 0;
@@ -87,7 +90,8 @@ public class VitalSignsPanel extends JPanel {
         this.mainPanel.add(tempPanel);
         this.mainPanel.add(bpPanel);
         this.mainPanel.add(rrPanel);
-        mainPanel.setPreferredSize(new Dimension (900,640));
+        this.mainPanel.add(alarm.getValuesPanel());
+        mainPanel.setPreferredSize(new Dimension (600,640));
         mainPanel.validate();
         mainPanel.setVisible(true);
     }
@@ -121,7 +125,7 @@ public class VitalSignsPanel extends JPanel {
     }
 
     public void updatePanel(){
-        System.out.println("updated " + patient.getGivenname());
+        //System.out.println("updated " + patient.getGivenname());
         double[][] data_ECG = getECGData(++locator);
         double[] minmaxECG = patient.minmaxECG();
         ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
