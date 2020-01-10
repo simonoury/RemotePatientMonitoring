@@ -13,7 +13,8 @@ public class RecordsPageView {
         recordsPanel = new RecordsPanel(patient);
         recordspage = new JPanel();
 
-        recordspage.setPreferredSize(new Dimension(1400, 650));
+        recordspage.setPreferredSize(new Dimension(1400, 750));
+        recordspage.setBackground(Color.black);
         recordspage.add(recordsPanel.getPatientProfileRecords());
     }
     public JPanel getRecordspage(){return recordspage;}
