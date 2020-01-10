@@ -16,6 +16,10 @@ public class TabsMenu{
         patient1=new JPanel();
         patient2=new JPanel();
 
+        //backgrounds
+        patient1.setBackground(Color.black);
+        patient2.setBackground(Color.black);
+
         //Instantiate the drop-down menu
         dropdown=new DropDownMenu(10);
         dropdown2=new DropDownMenu(2);

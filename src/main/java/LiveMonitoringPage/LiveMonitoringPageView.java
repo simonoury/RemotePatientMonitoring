@@ -16,7 +16,7 @@ public class LiveMonitoringPageView {
         page_sub=new JPanel();
 
         page.setPreferredSize(new Dimension(1400,650));
-        //page.setLayout(new GridLayout(1,2));
+        page.setBackground(Color.black);
         page.add(profilePanel.getPatientProfile());
         page.add(profileGraph.getMainPanel());
 
