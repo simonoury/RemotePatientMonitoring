@@ -32,7 +32,7 @@ public class VitalSignsValues {
         heartrate=new Alarm(3,69,50,95,heartratevalues);
         bloodpressure=new Alarm(3,50,5,120,heartratevalues);
         bodytemperature=new Alarm(3,44,5,100,heartratevalues);
-        respiratoryrate=new Alarm(3,44,5,100,heartratevalues)
+        respiratoryrate=new Alarm(3,44,5,100,heartratevalues);
 
         valuesPanel.setLayout(new GridLayout(5,1));
 
