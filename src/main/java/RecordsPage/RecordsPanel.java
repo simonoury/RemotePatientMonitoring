@@ -49,15 +49,32 @@ public class RecordsPanel extends JPanel {
         double data_RR [] = getdata_RR();
         double data_time [] = getdata_time();
 
+
+        //Colors
+        info.setBackground(Color.black);
+        recordedvalues.setBackground(Color.black);
+        averagevalues.setBackground(Color.black);
+        heartrate.setBackground(Color.black);
+        bloodpressure.setBackground(Color.black);
+        bodytemperature.setBackground(Color.black);
+        respiratoryrate.setBackground(Color.black);
+        heartrateaverage.setBackground(Color.black);
+        bloodpressureaverage.setBackground(Color.black);
+        bodytemperatureaverage.setBackground(Color.black);
+        respiratoryrateaverage.setBackground(Color.black);
+        time.setBackground(Color.black);
+
         //Fill info Jlabel
         info.setLayout(new GridLayout(3, 1));
-        JLabel name = new JLabel(patient.getFamilyname() + " " + patient.getGivenname());
-        JLabel id = new JLabel("Patient id: " + patient.getId());
-        JLabel age = new JLabel("Age: 27 years old");
+        JLabel name = new JLabel("<html> <font color=white>"+patient.getFamilyname() + " " + patient.getGivenname()+ "</font> </html>");
+        JLabel id = new JLabel("<html><font color=white>Patient id: " + patient.getId()+"</font> </html>");
+        JLabel age = new JLabel("<html><font color=white>Age: 27 years old </font> </html>");
+
         info.add(name);
         info.add(id);
         info.add(age);
         info.setSize(new Dimension(160, 50));
+
 
         recordedvalues.setLayout((new GridLayout(1, 5)));
 
@@ -65,9 +82,9 @@ public class RecordsPanel extends JPanel {
 
         time.setLayout(new GridLayout(11, 1));
         time.setPreferredSize(new Dimension(50, 150));
-        time.add(new JLabel("<html> <h4> Time:  </h4>"));
+        time.add(new JLabel("<html><h4> <font color=white>  Time:   </font></h4>"));
         for (int timevalue : timevalues) {
-            time.add(new JLabel(String.valueOf(timevalue)+" h"));
+            time.add(new JLabel("<html> <font color=white>"+String.valueOf(timevalue)+" h </font> </html>"));
         }
         recordedvalues.add(time);
 
@@ -75,9 +92,9 @@ public class RecordsPanel extends JPanel {
         data_HR = getdata_HR();
         double heartratevalues [] = {data_HR[1],data_HR[100], data_HR[220], data_HR[300], data_HR[520], data_HR[600], data_HR[800], data_HR[1000], data_HR[1250], data_HR[1500] };
         heartrate.setLayout(new GridLayout(11, 1));
-        heartrate.add(new JLabel("<html> <h4> HR:  </h4>"));
+        heartrate.add(new JLabel("<html> <h4><font color=white> HR:  </font> </h4>"));
         for (double heartratevalue : heartratevalues) {
-            heartrate.add(new JLabel(String.valueOf(heartratevalue)));
+            heartrate.add(new JLabel("<html><font color=white>"+String.valueOf(heartratevalue)+"</font></html>"));
         }
         recordedvalues.add(heartrate);
 
@@ -85,34 +102,34 @@ public class RecordsPanel extends JPanel {
         data_BP = getdata_BP();
         double bloodpressurevalues [] = {data_BP[1],data_BP[100], data_BP[220], data_BP[300], data_BP[520], data_BP[600], data_BP[800], data_BP[1000], data_BP[1250], data_BP[1500] };
         bloodpressure.setLayout(new GridLayout(11, 1));
-        bloodpressure.add(new JLabel("<html> <h4> BP:  </h4>"));
+        bloodpressure.add(new JLabel("<html><h4><font color=white>  BP:  </font> </h4>"));
         for (double bloodpressurevalue : bloodpressurevalues) {
-            bloodpressure.add(new JLabel(String.valueOf(bloodpressurevalue)));
+            bloodpressure.add(new JLabel("<html><font color=white>"+ String.valueOf(bloodpressurevalue)+"</font></html>"));
         }
         recordedvalues.add(bloodpressure);
 
         data_BT = getdata_BT();
         double bodytemperaturevalues [] = {data_BT[1],data_BT[100], data_BT[220], data_BT[300], data_BT[520], data_BT[600], data_BT[800], data_BT[1000], data_BT[1250], data_BT[1500] };
         bodytemperature.setLayout(new GridLayout(11, 1));
-        bodytemperature.add(new JLabel("<html> <h4> BT:  </h4>"));
+        bodytemperature.add(new JLabel("<html> <h4><font color=white>  BT:  </font></h4>"));
         for (double bodytemperaturevalue : bodytemperaturevalues) {
-            bodytemperature.add(new JLabel(String.valueOf(bodytemperaturevalue)));
+            bodytemperature.add(new JLabel("<html><font color=white>"+String.valueOf(bodytemperaturevalue)+"</font> </html>"));
         }
         recordedvalues.add(bodytemperature);
 
         data_RR = getdata_RR();
         double respiratoryratevalues [] = {data_RR[1],data_RR[100], data_RR[220], data_RR[300], data_RR[520], data_RR[600], data_RR[800], data_RR[1000], data_RR[1250], data_RR[1500] };
         respiratoryrate.setLayout(new GridLayout(11, 1));
-        respiratoryrate.add(new JLabel("<html> <h4> RR:  </h4>"));
+        respiratoryrate.add(new JLabel("<html><h4><font color=white>  RR:  <font color=white></h4>"));
         for (double respiratoryratevalue : respiratoryratevalues) {
-            respiratoryrate.add(new JLabel(String.valueOf(respiratoryratevalue)));
+            respiratoryrate.add(new JLabel("<html><h4><font color=white>"+String.valueOf(respiratoryratevalue)+"</font> </h4></html>"));
         }
         recordedvalues.add(respiratoryrate);
 
 
         //calculate and fill in average values -------------------------------------------------------------------------
         averagevalues.setLayout(new GridLayout(5, 1));
-        averagevalues.add(new JLabel("<html> <h4> Average Values:  </h4>"));
+        averagevalues.add(new JLabel("<html><h4><font color=white>  Average Values:  </font></h4> "));
 
         double avgheartrate;
         double sum = 0;
@@ -120,8 +137,8 @@ public class RecordsPanel extends JPanel {
             sum = sum + val;
         }
         avgheartrate = sum/heartratevalues.length;
-        heartrateaverage.add(new JLabel("Heart Rate average value:"));
-        heartrateaverage.add(new JLabel(String.valueOf(avgheartrate)));
+        heartrateaverage.add(new JLabel("<html><font color=white> Heart Rate average value: </font>"));
+        heartrateaverage.add(new JLabel("<html><font color=white>"+String.valueOf(avgheartrate)+"</font> </html>"));
         averagevalues.add(heartrateaverage);
 
         double avgbloodpressure;
@@ -130,8 +147,8 @@ public class RecordsPanel extends JPanel {
             sum = sum + val;
         }
         avgbloodpressure = sum/bloodpressurevalues.length;
-        bloodpressureaverage.add(new JLabel("Blood Pressure average value:"));
-        bloodpressureaverage.add(new JLabel(String.valueOf(avgbloodpressure)));
+        bloodpressureaverage.add(new JLabel("<html><font color=white>Blood Pressure average value: </font>"));
+        bloodpressureaverage.add(new JLabel("<html><font color=white>"+String.valueOf(avgbloodpressure)+"</font> </html>"));
         averagevalues.add(bloodpressureaverage);
 
         double avgbodytemperature;
@@ -140,8 +157,8 @@ public class RecordsPanel extends JPanel {
             sum = sum + val;
         }
         avgbodytemperature = sum/bodytemperaturevalues.length;
-        bodytemperatureaverage.add(new JLabel("Body Temperature average value:"));
-        bodytemperatureaverage.add(new JLabel(String.valueOf(avgbodytemperature)));
+        bodytemperatureaverage.add(new JLabel("<html><font color=white>Body Temperature average value:</font>"));
+        bodytemperatureaverage.add(new JLabel("<html><font color=white>"+String.valueOf(avgbodytemperature)+"</font> </html>"));
         averagevalues.add(bodytemperatureaverage);
 
         double avgrespiratoryrate;
@@ -150,8 +167,8 @@ public class RecordsPanel extends JPanel {
             sum = sum + val;
         }
         avgrespiratoryrate = sum/respiratoryratevalues.length;
-        respiratoryrateaverage.add(new JLabel("Respiratory Rate average value:"));
-        respiratoryrateaverage.add(new JLabel(String.valueOf(avgrespiratoryrate)));
+        respiratoryrateaverage.add(new JLabel("<html><font color=white>Respiratory Rate average value:</font>"));
+        respiratoryrateaverage.add(new JLabel("<html><font color=white>"+String.valueOf(avgrespiratoryrate)+"</font> </html>"));
         averagevalues.add(respiratoryrateaverage);
 
 
@@ -173,6 +190,7 @@ public class RecordsPanel extends JPanel {
         patientProfile.add(averagevalues);
 
         patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
+        patientProfile.setBackground(Color.black);
 
     }
 
