@@ -1,6 +1,8 @@
 package Alarm;
 
 
+import Model.Patient;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,14 +14,16 @@ public class Alarm {
     private int warning_bound_high;
     private int danger_bound_low;
     private int danger_bound_high;
+    Patient patient;
 
-    private int[] values;
+    private double[] values;
     private JLabel alarm;
     private JPanel alarmcontainer;
     private Timer timer;
     private int count;
 
-    public Alarm(int warning_bound_low,int warning_bound_high,int danger_bound_low, int danger_bound_high, int[]values) {
+    public Alarm(Patient p, int warning_bound_low, int warning_bound_high, int danger_bound_low, int danger_bound_high, double[]values) {
+        this.patient=p;
         this.warning_bound_low = warning_bound_low;
         this.warning_bound_high = warning_bound_high;
         this.danger_bound_low = danger_bound_low;
@@ -40,8 +44,6 @@ public class Alarm {
 
             }
         });
-
-
     }
 
     public JPanel getAlarm(int value){
@@ -58,9 +60,6 @@ public class Alarm {
         }
         alarm.setVisible(true);
         alarmcontainer.setOpaque(true);
-
-        //}
-
         alarmcontainer.updateUI();
         return alarmcontainer;
     }
