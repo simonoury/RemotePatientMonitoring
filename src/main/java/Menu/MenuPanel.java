@@ -17,6 +17,7 @@ public class MenuPanel extends JPanel {
         menuPanel =new JPanel();
 
         menuPanel.setLayout(grid);
+        menuPanel.setBackground(Color.black);
         menuPanel.add(tabs.getTabbedPanel());
 
     }
