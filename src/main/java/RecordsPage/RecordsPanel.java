@@ -66,7 +66,7 @@ public class RecordsPanel extends JPanel {
 
         //Fill info Jlabel
         info.setLayout(new GridLayout(3, 1));
-        JLabel name = new JLabel("<html> <font color=white>"+patient.getFamilyname() + " " + patient.getGivenname()+ "</font> </html>");
+        JLabel name = new JLabel("<html> <h2> <font color=white>"+patient.getFamilyname() + " " + patient.getGivenname()+ "</font> </html>");
         JLabel id = new JLabel("<html><font color=white>Patient id: " + patient.getId()+"</font> </html>");
         JLabel age = new JLabel("<html><font color=white>Age: 27 years old </font> </html>");
 

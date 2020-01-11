@@ -44,7 +44,7 @@ public class ProfilePanel extends JPanel  {
         patientProfile.setBackground(Color.black);
 
 
-        JLabel name= new JLabel("<html> <font color=white>"+familyname + " " + surname+"</font> </html>");
+        JLabel name= new JLabel("<html> <h2> <font color=white>"+familyname + " " + surname+"</font> </html>");
         JLabel id=new JLabel("<html> <font color=white> Patient id: " + patient.getId()+"</font> </html>");
 
         //Vital Signs Panels and Layouts
