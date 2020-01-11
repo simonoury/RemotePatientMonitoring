@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
 
 
 public class Alarmpanel {
-    private double heartratevalues[] = {69, 74, 56, 84, 95, 115, 78, 68, 70, 71, 95, 115, 78, 68, 70, 120, 119, 119, 118, 118, 119, 118, 119, 171, 95, 115, 78, 68, 70, 71, 95, 115, 78, 68, 70, 71, 95, 115, 78, 68, 70, 71, 78, 68, 70, 71, 95, 115, 78, 68, 70, 71, 95, 115, 78, 68, 70, 71, 95, 115, 78, 68, 70, 71, 69, 74, 56, 84, 95, 115, 78, 68, 70, 71, 95, 115, 78, 68, 70, 69, 74, 56, 84, 95, 115, 78, 68, 70, 71, 95, 115, 78, 68, 70, 69, 74, 56, 84, 95, 115, 78, 68, 70, 71, 95, 115, 78, 68, 70, 69, 74, 56, 84, 95, 115, 78, 68, 70, 71, 95, 115, 78, 68, 70};
+    private double heartratevalues[], data_HR[],data_RR[],data_BP[],data_BT[];
     private double bloodpressurevalues[] = {118, 119, 118, 119, 120, 121, 120, 119, 119, 118, 118, 119, 118, 119, 120, 121, 120, 119, 119, 118, 118, 119, 118, 119, 120, 121, 120, 119, 119, 118, 118, 119, 118, 119, 120, 121, 120, 119, 119, 118, 118, 119, 118, 119, 120, 121, 120, 119, 119, 118};
     private Alarm heartrate, bloodpressure, bodytemperature, respiratoryrate;
     private JPanel ecg, valuesPanel;
@@ -25,12 +25,53 @@ public class Alarmpanel {
         patient = p;
 
         //Array of values to be replaced with database values
-        heartrate = new Alarm(patient, 3, 69, 50, 95, heartratevalues);
-        bloodpressure = new Alarm(patient, 3, 50, 5, 120, heartratevalues);
-        bodytemperature = new Alarm(patient, 3, 44, 5, 100, heartratevalues);
-        respiratoryrate = new Alarm(patient, 3, 44, 5, 100, heartratevalues);
+
+        data_HR = getdata_HR();
+        data_BP=getdata_BP();
+        data_BT=getdata_BT();
+        data_RR=getdata_RR();
+
+
+        //double heartratevalues [] = {data_HR[1],data_HR[100], data_HR[220], data_HR[300], data_HR[520], data_HR[600], data_HR[800], data_HR[1000], data_HR[1250], data_HR[1500] };
+
+        //calling the alarm
+        for(int i=0;i<data_HR.length;i++) {
+            heartrate = new Alarm(patient, 3, 69, 50, 43, data_HR[i]);
+            bloodpressure = new Alarm(patient, 3, 50, 5, 120, data_BP[i]);
+            bodytemperature = new Alarm(patient, 3, 44, 5, 100, data_BT[i]);
+            respiratoryrate = new Alarm(patient, 3, 44, 5, 100, data_RR[i]);
+        }
 
         valuesPanel.setLayout(new GridLayout(5, 1));
+        valuesPanel.add(ecg);
+        valuesPanel.add(heartrate.getAlarm(data_HR));
+        valuesPanel.add(bodytemperature.getAlarm(data_BT));
+        valuesPanel.add(bloodpressure.getAlarm(data_BP));
+        valuesPanel.add(respiratoryrate.getAlarm(data_RR));
+        valuesPanel.setPreferredSize(new Dimension(100,640));
+        valuesPanel.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
+
+        }
+
+
+
+    protected double[] getdata_HR() {
+        return patient.getHRdata();
+    }
+    protected double[] getdata_BP() {
+        return patient.getBPdata();
+    }
+    protected double[] getdata_BT() {
+        return patient.getBTdata();
+    }
+    protected double[] getdata_RR() {
+        return patient.getRRdata();
+    }
+    protected double[] getdata_time(){
+        return patient.getTimedata();
+    }
+    public JPanel getValuesPanel () {
+        return valuesPanel;
     }
 }
 /*
@@ -59,8 +100,7 @@ public class Alarmpanel {
                 valuesPanel.add(bodytemperature.getAlarm(heartratevalues[CurrentTime()]));
                 valuesPanel.add(bloodpressure.getAlarm(heartratevalues[CurrentTime()]));
                 valuesPanel.add(respiratoryrate.getAlarm(heartratevalues[CurrentTime()]));
-                valuesPanel.setPreferredSize(new Dimension(100,640));
-                valuesPanel.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
+
             }
         };
         Timer t = new Timer(1000, taskPerformer);
@@ -77,8 +117,6 @@ public class Alarmpanel {
     }
 
 
-    public JPanel getValuesPanel () {
-        return valuesPanel;
-    }
+
 }
 */

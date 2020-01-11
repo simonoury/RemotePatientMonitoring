@@ -22,7 +22,7 @@ public class Alarm {
     private Timer timer;
     private int count;
 
-    public Alarm(Patient p, int warning_bound_low, int warning_bound_high, int danger_bound_low, int danger_bound_high, double[]values) {
+    public Alarm(Patient p, int warning_bound_low, int warning_bound_high, int danger_bound_low, int danger_bound_high, double value) {
         this.patient=p;
         this.warning_bound_low = warning_bound_low;
         this.warning_bound_high = warning_bound_high;
@@ -44,28 +44,42 @@ public class Alarm {
 
             }
         });
+
+
+
+
     }
 
-    public JPanel getAlarm(int value){
+    public JPanel getAlarm(double[] values){
 
-        if (value > danger_bound_high || value < danger_bound_low) {
-            alarmcontainer.setBackground(Color.red);
-        }
-        if ((value > warning_bound_high && value < danger_bound_high) || (value < warning_bound_low && value > danger_bound_low)) {
+        /*for(int i=0;i<values.length;i++){
 
-            alarmcontainer.setBackground(Color.yellow);
-        } else {
+            if (values[i] > danger_bound_high || values[i] < danger_bound_low) {
+                alarmcontainer.setBackground(Color.red);
+                alarm.setVisible(true);
+            }
+            if ((values[i] > warning_bound_high && values[i] < danger_bound_high) || (values[i] < warning_bound_low && values[i] > danger_bound_low)) {
 
-            alarmcontainer.setBackground(Color.green);
-        }
-        alarm.setVisible(true);
-        alarmcontainer.setOpaque(true);
+                alarmcontainer.setBackground(Color.yellow);
+                alarm.setVisible(true);
+            } else {
+
+                alarmcontainer.setBackground(Color.green);
+                alarm.setVisible(true);
+            }
+            alarmcontainer.removeAll();
+            alarmcontainer.add(new JLabel(String.valueOf(values[i])));
+
+            alarmcontainer.setOpaque(true);
+
+
+        }*/
         alarmcontainer.updateUI();
         return alarmcontainer;
     }
-    public JPanel addText(String text){
+    public JPanel addText(double value){
         alarmcontainer.updateUI();
-        alarmcontainer.add(new JLabel(text));
+        alarmcontainer.add(new JLabel(String.valueOf(value)));
         return alarmcontainer;
     }
 
