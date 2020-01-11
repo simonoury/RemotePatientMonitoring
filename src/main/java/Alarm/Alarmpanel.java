@@ -35,19 +35,20 @@ public class Alarmpanel {
         //double heartratevalues [] = {data_HR[1],data_HR[100], data_HR[220], data_HR[300], data_HR[520], data_HR[600], data_HR[800], data_HR[1000], data_HR[1250], data_HR[1500] };
 
         //calling the alarm
-        for(int i=0;i<data_HR.length;i++) {
-            heartrate = new Alarm(patient, 3, 69, 50, 43, data_HR[i]);
-            System.out.println(data_HR[i] + "\n");
-            bloodpressure = new Alarm(patient, 3, 50, 5, 120, data_BP[i]);
-            bodytemperature = new Alarm(patient, 3, 44, 5, 100, data_BT[i]);
-            respiratoryrate = new Alarm(patient, 3, 44, 5, 100, data_RR[i]);
-            valuesPanel.add(ecg);
-            valuesPanel.add(heartrate.getAlarm(data_HR));
-            valuesPanel.add(bodytemperature.getAlarm(data_BT));
-            valuesPanel.add(bloodpressure.getAlarm(data_BP));
-            valuesPanel.add(respiratoryrate.getAlarm(data_RR));
+        for (int i=0; i>data_HR.length;i++) {
+            heartrate = new Alarm(patient, 3, 69, 50, 43, data_HR, data_HR[i]);
+            //System.out.println(data_HR[i] + "\n");
+            bloodpressure = new Alarm(patient, 3, 50, 5, 120, data_BP,data_BP[i]);
+            bodytemperature = new Alarm(patient, 3, 44, 5, 100, data_BT,data_BT[i]);
+            respiratoryrate = new Alarm(patient, 3, 44, 5, 100, data_RR,data_RR[i]);
         }
 
+
+        valuesPanel.add(ecg);
+        valuesPanel.add(heartrate.getAlarm(data_HR));
+        valuesPanel.add(bodytemperature.getAlarm(data_BT));
+        valuesPanel.add(bloodpressure.getAlarm(data_BP));
+        valuesPanel.add(respiratoryrate.getAlarm(data_RR));
 
             valuesPanel.setLayout(new GridLayout(5, 1));
             valuesPanel.setPreferredSize(new Dimension(100, 640));
