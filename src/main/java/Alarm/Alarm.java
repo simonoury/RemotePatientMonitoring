@@ -32,6 +32,7 @@ public class Alarm {
 
         alarm = new JLabel();
         alarmcontainer = new JPanel();
+        alarmcontainer.setOpaque(true);
 
         timer=new Timer(1, new ActionListener() {
             @Override
@@ -70,7 +71,7 @@ public class Alarm {
             alarmcontainer.removeAll();
             alarmcontainer.add(new JLabel(String.valueOf(values[i])));
 
-            alarmcontainer.setOpaque(true);
+
 
 
         }*/
