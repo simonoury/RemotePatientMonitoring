@@ -177,7 +177,7 @@ public class RecordsPanel extends JPanel {
         info.setVisible(true);
         recordedvalues.setPreferredSize(new Dimension(525, 400));
         recordedvalues.setVisible(true);
-        recordedvalues.setBorder(new MatteBorder(2, 0, 2, 0, Color.BLACK) );
+        recordedvalues.setBorder(new MatteBorder(2, 0, 2, 0, Color.WHITE) );
         averagevalues.setPreferredSize(new Dimension(540, 150));
         averagevalues.setVisible(true);
 
@@ -189,7 +189,7 @@ public class RecordsPanel extends JPanel {
         patientProfile.add(recordedvalues);
         patientProfile.add(averagevalues);
 
-        patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
+        patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.WHITE) );
         patientProfile.setBackground(Color.black);
 
     }
