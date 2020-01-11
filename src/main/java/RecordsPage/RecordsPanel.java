@@ -18,7 +18,7 @@ public class RecordsPanel extends JPanel {
     int locator = 0;
     private Patient patient;
 
-    private int timevalues[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    //private int timevalues[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     //private double heartratevalues[] = {118, 119, 118, 119, 120, 121, 120, 119, 119, 118};
     //private int bloodpressurevalues [] = {118, 119, 118, 119, 120, 121, 120, 119, 119, 118};
     //private double bodytemperaturevalues [] = {37.1, 37.2, 37.2, 37.3, 38.5, 38.0, 37.9, 37.6, 37.3, 37.1};
@@ -66,7 +66,7 @@ public class RecordsPanel extends JPanel {
 
         //Fill info Jlabel
         info.setLayout(new GridLayout(3, 1));
-        JLabel name = new JLabel("<html> <font color=white>"+patient.getFamilyname() + " " + patient.getGivenname()+ "</font> </html>");
+        JLabel name = new JLabel("<html> <h2> <font color=white>"+patient.getFamilyname() + " " + patient.getGivenname()+ "</font> </html>");
         JLabel id = new JLabel("<html><font color=white>Patient id: " + patient.getId()+"</font> </html>");
         JLabel age = new JLabel("<html><font color=white>Age: 27 years old </font> </html>");
 
@@ -80,17 +80,18 @@ public class RecordsPanel extends JPanel {
 
         //fill in table with values from array -------------------------------------------------------------------------
 
+
+        double timevalues [] = {data_time[1],data_time[150], data_time[300], data_time[503], data_time[650], data_time[800], data_time[953], data_time[1100], data_time[1450], data_time[1800] };
         time.setLayout(new GridLayout(11, 1));
-        time.setPreferredSize(new Dimension(50, 150));
         time.add(new JLabel("<html><h4> <font color=white>  Time:   </font></h4>"));
-        for (int timevalue : timevalues) {
-            time.add(new JLabel("<html> <font color=white>"+String.valueOf(timevalue)+" h </font> </html>"));
+        for (double timevalue : timevalues) {
+            time.add(new JLabel("<html> <font color=white>"+String.valueOf(timevalue)+" ms </font> </html>"));
         }
         recordedvalues.add(time);
 
 
         data_HR = getdata_HR();
-        double heartratevalues [] = {data_HR[1],data_HR[100], data_HR[220], data_HR[300], data_HR[520], data_HR[600], data_HR[800], data_HR[1000], data_HR[1250], data_HR[1500] };
+        double heartratevalues [] = {data_HR[1],data_HR[150], data_HR[300], data_HR[503], data_HR[650], data_HR[800], data_HR[953], data_HR[1100], data_HR[1450], data_HR[1800] };
         heartrate.setLayout(new GridLayout(11, 1));
         heartrate.add(new JLabel("<html> <h4><font color=white> HR:  </font> </h4>"));
         for (double heartratevalue : heartratevalues) {
@@ -99,8 +100,8 @@ public class RecordsPanel extends JPanel {
         recordedvalues.add(heartrate);
 
 
-        data_BP = getdata_BP();
-        double bloodpressurevalues [] = {data_BP[1],data_BP[100], data_BP[220], data_BP[300], data_BP[520], data_BP[600], data_BP[800], data_BP[1000], data_BP[1250], data_BP[1500] };
+
+        double bloodpressurevalues [] = {data_BP[1],data_BP[150], data_BP[300], data_BP[503], data_BP[650], data_BP[800], data_BP[953], data_BP[1100], data_BP[1450], data_BP[1800] };
         bloodpressure.setLayout(new GridLayout(11, 1));
         bloodpressure.add(new JLabel("<html><h4><font color=white>  BP:  </font> </h4>"));
         for (double bloodpressurevalue : bloodpressurevalues) {
@@ -109,7 +110,7 @@ public class RecordsPanel extends JPanel {
         recordedvalues.add(bloodpressure);
 
         data_BT = getdata_BT();
-        double bodytemperaturevalues [] = {data_BT[1],data_BT[100], data_BT[220], data_BT[300], data_BT[520], data_BT[600], data_BT[800], data_BT[1000], data_BT[1250], data_BT[1500] };
+        double bodytemperaturevalues [] = {data_BT[1],data_BT[150], data_BT[300], data_BT[503], data_BT[650], data_BT[800], data_BT[953], data_BT[1100], data_BT[1503], data_BT[1800] };
         bodytemperature.setLayout(new GridLayout(11, 1));
         bodytemperature.add(new JLabel("<html> <h4><font color=white>  BT:  </font></h4>"));
         for (double bodytemperaturevalue : bodytemperaturevalues) {
@@ -118,7 +119,7 @@ public class RecordsPanel extends JPanel {
         recordedvalues.add(bodytemperature);
 
         data_RR = getdata_RR();
-        double respiratoryratevalues [] = {data_RR[1],data_RR[100], data_RR[220], data_RR[300], data_RR[520], data_RR[600], data_RR[800], data_RR[1000], data_RR[1250], data_RR[1500] };
+        double respiratoryratevalues [] = {data_RR[1],data_RR[150], data_RR[300], data_RR[503], data_RR[650], data_RR[800], data_RR[953], data_RR[1100], data_RR[1503], data_RR[1800] };
         respiratoryrate.setLayout(new GridLayout(11, 1));
         respiratoryrate.add(new JLabel("<html><h4><font color=white>  RR:  <font color=white></h4>"));
         for (double respiratoryratevalue : respiratoryratevalues) {
