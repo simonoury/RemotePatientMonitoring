@@ -41,17 +41,21 @@ public class Alarmpanel {
             bloodpressure = new Alarm(patient, 3, 50, 5, 120, data_BP[i]);
             bodytemperature = new Alarm(patient, 3, 44, 5, 100, data_BT[i]);
             respiratoryrate = new Alarm(patient, 3, 44, 5, 100, data_RR[i]);
-        }
-
-
-            valuesPanel.setLayout(new GridLayout(5, 1));
             valuesPanel.add(ecg);
             valuesPanel.add(heartrate.getAlarm(data_HR));
             valuesPanel.add(bodytemperature.getAlarm(data_BT));
             valuesPanel.add(bloodpressure.getAlarm(data_BP));
             valuesPanel.add(respiratoryrate.getAlarm(data_RR));
+        }
+
+
+            valuesPanel.setLayout(new GridLayout(5, 1));
             valuesPanel.setPreferredSize(new Dimension(100, 640));
             valuesPanel.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK));
+
+
+
+
 
 
         }
@@ -76,6 +80,9 @@ public class Alarmpanel {
     public JPanel getValuesPanel () {
         return valuesPanel;
     }
+
+
+
 }
 /*
         ActionListener taskPerformer = new ActionListener() {
@@ -121,5 +128,4 @@ public class Alarmpanel {
 
 
 
-}
-*/
+}*/

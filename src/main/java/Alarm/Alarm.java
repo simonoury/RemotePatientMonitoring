@@ -53,7 +53,7 @@ public class Alarm {
 
     public JPanel getAlarm(double[] values){
 
-        /*for(int i=0;i<values.length;i++){
+        for(int i=0;i<values.length;i++){
 
             if (values[i] > danger_bound_high || values[i] < danger_bound_low) {
                 alarmcontainer.setBackground(Color.red);
@@ -74,7 +74,7 @@ public class Alarm {
 
 
 
-        }*/
+        }
         alarmcontainer.updateUI();
         return alarmcontainer;
     }
