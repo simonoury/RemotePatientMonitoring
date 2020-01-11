@@ -64,7 +64,7 @@ case "`uname`" in
     ;;
 esac
 
-CLASSPATH=$APP_HOME/lib/RemotePatientMonitoring-Project-1.0-SNAPSHOT.jar:$APP_HOME/lib/jfreechart-1.0.19.jar:$APP_HOME/lib/xchart-3.6.0.jar
+CLASSPATH=$APP_HOME/lib/RemotePatientMonitoring-Project-1.0-SNAPSHOT.jar:$APP_HOME/lib/jfreechart-1.0.19.jar:$APP_HOME/lib/xchart-3.6.0.jar:$APP_HOME/lib/postgresql-42.2.8.jar
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then

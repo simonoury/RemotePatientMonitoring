@@ -18,6 +18,8 @@ public class Patient {
     private String givenname;
     private String familyname;
     private String id;
+    private String age;
+    private String admdate;
     private ECG ecg;
     private Heartbeat heartbeat;
     private Bodytemperature bodytemperature;
@@ -43,11 +45,11 @@ public class Patient {
             //Requests & Execution (SQL)
             String request = "select * from graphofpatient inner join patients on(patients.id=graphofpatient.patientid)\n" +
                     "                             inner join graphs on(graphs.id=graphofpatient.graphid)\n" +
-                      "                             inner join heartbeatgraphs on(heartbeatgraphs.id=graphofpatient.graphid)\n "+
+                    "                             inner join heartbeatgraphs on(heartbeatgraphs.id=graphofpatient.graphid)\n "+
                     "inner join bodytemperaturegraphs on (bodytemperaturegraphs.id = graphofpatient.graphid)\n"+
                     "inner join bloodpressuregraph on (bloodpressuregraph.id = graphofpatient.graphid)\n"+
                     "inner join respiratoryrategraphs on (respiratoryrategraphs.id = graphofpatient.graphid)\n"+
-                                                 "where patientid="+i+";"; //could have any SQL command
+                    "where patientid="+i+";"; //could have any SQL command
             Statement stmt = database.getconnection().createStatement(); //what executes command
             ResultSet res = stmt.executeQuery(request);  //what executes command
             //reads through column of table
@@ -65,6 +67,8 @@ public class Patient {
                 String givenname_temp = res.getString("givenname");
                 String familyanme_temp = res.getString("familyname");
                 String id_temp = res.getString("id");
+                String age_temp = res.getString("age");
+                String admdate_temp = res.getString("admissiondate");
 
 
                 for (String strTemp : (String[]) ECGxdata_temp.getArray()) {
@@ -100,6 +104,8 @@ public class Patient {
                 givenname = givenname_temp;
                 familyname = familyanme_temp;
                 id = id_temp;
+                age = age_temp;
+                admdate = admdate_temp;
 
                 System.out.println(givenname);
 
@@ -185,7 +191,11 @@ public class Patient {
         return familyname;
     }
 
-    public String getId() {return  id;};
+    public String getId() {return  id;}
+
+    public String getAge() { return age;}
+
+    public String getDate() { return admdate;}
 
     public double[] minmaxECG(){
         double min=0;
@@ -267,3 +277,4 @@ public class Patient {
         return new double[]{min, max};
     }
 }
+

@@ -24,6 +24,8 @@ public class ProfilePanel extends JPanel  {
     private String request;
     String familyname;
     String surname;
+    String admdate;
+    String idno;
     private Connection conn;
 
     public ProfilePanel(Patient p) {
@@ -32,6 +34,8 @@ public class ProfilePanel extends JPanel  {
 
         familyname = patient.getFamilyname();
         surname = patient.getGivenname();
+        admdate = patient.getDate();
+        idno = patient.getId();
 
         //Instantiation of panels
         patientProfile =new JPanel();
@@ -42,8 +46,12 @@ public class ProfilePanel extends JPanel  {
         patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
 
 
-        JLabel name= new JLabel(familyname + " " + surname);
-        JLabel id=new JLabel("Patient id: " + patient.getId());
+        JLabel namelabel= new JLabel("Name ");
+        JLabel idlabel=new JLabel("ID ");
+        JLabel datelabel=new JLabel("Admission Date ");
+        JLabel name= new JLabel(familyname + ", " + surname);
+        JLabel id=new JLabel(idno);
+        JLabel date=new JLabel(admdate);
 
         //Vital Signs Panels and Layouts
         heartrate=new JPanel();
@@ -56,14 +64,18 @@ public class ProfilePanel extends JPanel  {
         bloodpress.setLayout(new GridLayout(1,2));
 
         //Add values to info + 5 Vital Signs Panel *to be replaced with database fetched values*
-        info.setLayout(new GridLayout(2, 1));
+        info.setLayout(new GridLayout(3, 2));
+        info.add(namelabel);
         info.add(name);
+        info.add(idlabel);
         info.add(id);
+        info.add(datelabel);
+        info.add(date);
 
-        heartrate.add(new JLabel("<html> <h4> Heart Rate:  </h4>"));
+        heartrate.add(new JLabel("<html> <h4> Heart Rate  </h4>"));
         heartrate.add(new JLabel(String.valueOf(normalvalues[1])+" bpm", SwingConstants.LEFT));
 
-        bodytemp.add(new JLabel("<html> <h4> Body Temperature:  </h4>", SwingConstants.LEFT));
+        bodytemp.add(new JLabel("<html> <h4> Body Temperature  </h4>", SwingConstants.LEFT));
         bodytemp.add(new JLabel(normalvalues[1]+ " °C"));
 
 
