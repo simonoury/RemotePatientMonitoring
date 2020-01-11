@@ -2,7 +2,6 @@ package LiveMonitoringPage;
 
 import Database.DBConnect;
 import Model.Patient;
-import sun.font.CharToGlyphMapper;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
@@ -25,6 +24,8 @@ public class ProfilePanel extends JPanel  {
     private String request;
     String familyname;
     String surname;
+    String admdate;
+    String idno;
     private Connection conn;
 
     public ProfilePanel(Patient p) {
@@ -33,6 +34,8 @@ public class ProfilePanel extends JPanel  {
 
         familyname = patient.getFamilyname();
         surname = patient.getGivenname();
+        admdate = patient.getDate();
+        idno = patient.getId();
 
         //Instantiation of panels
         patientProfile =new JPanel();
@@ -40,12 +43,15 @@ public class ProfilePanel extends JPanel  {
 
         //Layout of PatientProfile
         patientProfile.setLayout(new GridLayout(10,1));
-        patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.white) );
-        patientProfile.setBackground(Color.black);
+        patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
 
 
-        JLabel name= new JLabel("<html> <h2> <font color=white>"+familyname + " " + surname+"</font> </html>");
-        JLabel id=new JLabel("<html> <font color=white> Patient id: " + patient.getId()+"</font> </html>");
+        JLabel namelabel= new JLabel("Name ");
+        JLabel idlabel=new JLabel("ID ");
+        JLabel datelabel=new JLabel("Admission Date ");
+        JLabel name= new JLabel(familyname + ", " + surname);
+        JLabel id=new JLabel(idno);
+        JLabel date=new JLabel(admdate);
 
         //Vital Signs Panels and Layouts
         heartrate=new JPanel();
@@ -57,31 +63,27 @@ public class ProfilePanel extends JPanel  {
         bloodpress=new JPanel();
         bloodpress.setLayout(new GridLayout(1,2));
 
-        //Panel backgrounds
-        info.setBackground(Color.black);
-        heartrate.setBackground(Color.black);
-        bodytemp.setBackground(Color.black);
-        resprate.setBackground(Color.black);
-        bloodpress.setBackground(Color.black);
-
-
         //Add values to info + 5 Vital Signs Panel *to be replaced with database fetched values*
-        info.setLayout(new GridLayout(2, 1));
+        info.setLayout(new GridLayout(3, 2));
+        info.add(namelabel);
         info.add(name);
+        info.add(idlabel);
         info.add(id);
+        info.add(datelabel);
+        info.add(date);
 
-        heartrate.add(new JLabel("<html> <h4> <font color=white>Heart Rate:  </font></h4>"));
-        heartrate.add(new JLabel("<html> <h4> <font color=white>"+ String.valueOf(normalvalues[1])+" bpm </font></h4>", SwingConstants.LEFT));
+        heartrate.add(new JLabel("<html> <h4> Heart Rate  </h4>"));
+        heartrate.add(new JLabel(String.valueOf(normalvalues[1])+" bpm", SwingConstants.LEFT));
 
-        bodytemp.add(new JLabel("<html> <h4><font color=white> Body Temperature:  </font></h4>", SwingConstants.LEFT));
-        bodytemp.add(new JLabel("<html> <h4> <font color=white>"+normalvalues[1]+ " °C</font></h4>"));
+        bodytemp.add(new JLabel("<html> <h4> Body Temperature  </h4>", SwingConstants.LEFT));
+        bodytemp.add(new JLabel(normalvalues[1]+ " °C"));
 
 
-        resprate.add(new JLabel("<html> <h4><font color=white>Respiratory Rate: </font></h4>"));
-        resprate.add(new JLabel(("<html> <h4> <font color=white>"+normalvalues[2])+ " breaths/min</font></h4>"));
+        resprate.add(new JLabel("<html> <h4>Respiratory Rate: </h4>"));
+        resprate.add(new JLabel((normalvalues[2])+ " breaths/min"));
 
-        bloodpress.add(new JLabel("<html> <h4><font color=white>Blood Pressure:   </font></h4>"));
-        bloodpress.add(new JLabel("<html> <h4> <font color=white>"+normalvalues[3]+" mmHg (systolic pressure)  "+normalvalues[4]+ " mmHg (diastolic pressure)</font></h4>"));
+        bloodpress.add(new JLabel("<html> <h4>Blood Pressure:   </h4>"));
+        bloodpress.add(new JLabel((normalvalues[3])+" mmHg (systolic pressure)  "+normalvalues[4]+ " mmHg (diastolic pressure)"));
 
         //Add all information to patientProfile Panel
         patientProfile.add(info);
