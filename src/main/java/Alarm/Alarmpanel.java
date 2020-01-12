@@ -41,40 +41,23 @@ public class Alarmpanel {
         respiratoryrate = new Alarm(patient, 13, 18, 12, 25, data_RR);
 
         final int[] j = {0};
+        valuesPanel.add(ecg);
         ActionListener taskPerformer = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                valuesPanel.add(ecg);
-                if (data_HR[j[0] + 1] == data_HR[j[0]]) {
+
                     heartrate.addText(data_HR[j[0]]);
-                    valuesPanel.add(heartrate.getAlarm(data_HR[j[0]]));
-                }
-                if (data_BP[j[0] + 1] == data_BP[j[0]]) {
                     bloodpressure.addText(data_BP[j[0]]);
-                    valuesPanel.add(bloodpressure.getAlarm(data_BP[j[0]]));
-                }
-                if (data_BT[j[0] + 1] == data_BT[j[0]]) {
                     bodytemperature.addText(data_BT[j[0]]);
-                    valuesPanel.add(bodytemperature.getAlarm(data_BT[j[0]]));
-                }
-                if (data_RR[j[0] + 1] == data_RR[j[0]]) {
                     respiratoryrate.addText(data_RR[j[0]]);
+
+                    valuesPanel.add(heartrate.getAlarm(data_HR[j[0]]));
+                    valuesPanel.add(bodytemperature.getAlarm(data_BT[j[0]]));
+                    valuesPanel.add(bloodpressure.getAlarm(data_BP[j[0] ]));
                     valuesPanel.add(respiratoryrate.getAlarm(data_RR[j[0]]));
                     ;
-                } else {
-                    heartrate.addText(data_HR[j[0] + 1]);
-                    bloodpressure.addText(data_BP[j[0] + 1]);
-                    bodytemperature.addText(data_BT[j[0] + 1]);
-                    respiratoryrate.addText(data_RR[j[0] + 1]);
 
-                    valuesPanel.add(heartrate.getAlarm(data_HR[j[0] + 1]));
-                    valuesPanel.add(bodytemperature.getAlarm(data_BT[j[0] + 1]));
-                    valuesPanel.add(bloodpressure.getAlarm(data_BP[j[0] + 1]));
-                    valuesPanel.add(respiratoryrate.getAlarm(data_RR[j[0] + 1]));
-                    ;
-
-                }
-                j[0] = j[0] + 20;
+                j[0] = j[0] + 10;
             }
         };
         Timer t = new Timer(1000, taskPerformer);
