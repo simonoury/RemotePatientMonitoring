@@ -187,6 +187,8 @@ public class VitalSignsPanel extends JPanel {
         mainPanel.add(tempPanel);
         mainPanel.add(bpPanel);
         mainPanel.add(rrPanel);
+
+        locator = locator+1;
     }
 
     public void Update()
