@@ -6,8 +6,6 @@ import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 import static array.dou_ListtoArray.dou_ListtoArray;
@@ -26,6 +24,10 @@ public class Patient {
     private Bloodpressure bloodpressure;
     private Respiratoryrate respiratoryrate;
     private int locator=0;
+    private double bodytemperatureCurrent;
+    private double heartbeatCurrent;
+    private double bloodpressureCurrent;
+    private double respiratoryrateCurrent;
 
     public Patient(int i)
     {
@@ -137,6 +139,9 @@ public class Patient {
         ydata = dou_ListtoArray(Respiratoryrateydata_list);
         respiratoryrate = new Respiratoryrate(new double[][]{xdata, ydata});
     }
+    public double[] getECGdata(){
+        return(heartbeat.get_ydata());
+    }
     public double[] getHRdata(){
         return(heartbeat.get_ydata());
     }
@@ -156,27 +161,29 @@ public class Patient {
     //Accessors
     public double[][] ECGgetsnippet(int locator)
     {
-        //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
         return(new double[][]{subArray(ecg.get_xdata(), locator, locator+99), subArray(ecg.get_ydata(), locator, (locator++)+99)});
     }
     public double[][] Heartbeatgetsnippet(int locator)
     {
-
+        heartbeatCurrent = heartbeat.get_xdata()[locator+99];
         return(new double[][]{subArray(heartbeat.get_xdata(), locator, locator+99), subArray(heartbeat.get_ydata(), locator, (locator++)+99)});
     }
 
     public double[][] Bodytemperaturegetsnippet (int locator)
     {
+        bodytemperatureCurrent = bodytemperature.get_ydata()[locator+99];
         return(new double[][]{subArray(bodytemperature.get_xdata(), locator, locator+99), subArray(bodytemperature.get_ydata(), locator, (locator++)+99)});
     }
 
     public double[][] Bloodpressuregetsnippet (int locator)
     {
+        bloodpressureCurrent = bloodpressure.get_ydata()[locator+99];
         return(new double[][]{subArray(bloodpressure.get_xdata(), locator, locator+99), subArray(bloodpressure.get_ydata(), locator, (locator++)+99)});
     }
 
     public double[][] Respiratoryrategetsnippet (int locator)
     {
+        respiratoryrateCurrent = respiratoryrate.get_ydata()[locator+99];
         return(new double[][]{subArray(respiratoryrate.get_xdata(), locator, locator+99), subArray(respiratoryrate.get_ydata(), locator, (locator++)+99)});
     }
 
@@ -276,5 +283,13 @@ public class Patient {
         }
         return new double[]{min, max};
     }
+
+    public double getBodytemperatureCurrent(){return bodytemperatureCurrent;}
+
+    public double getHeartbeatCurrent(){return heartbeatCurrent;}
+
+    public double getBloodpressureCurrent(){return bloodpressureCurrent;}
+
+    public double getRespiratoryrateCurrent(){return respiratoryrateCurrent;}
 }
 
