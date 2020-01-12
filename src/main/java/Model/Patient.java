@@ -6,6 +6,8 @@ import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 import static array.dou_ListtoArray.dou_ListtoArray;
@@ -24,10 +26,10 @@ public class Patient {
     private Bloodpressure bloodpressure;
     private Respiratoryrate respiratoryrate;
     private int locator=0;
-    private double bodytemperatureCurrent;
-    private double heartbeatCurrent;
-    private double bloodpressureCurrent;
-    private double respiratoryrateCurrent;
+    private double hrcurrent;
+    private double btcurrent;
+    private double bpcurrent;
+    private double rrcurrent;
 
     public Patient(int i)
     {
@@ -109,6 +111,7 @@ public class Patient {
                 age = age_temp;
                 admdate = admdate_temp;
 
+                System.out.println(givenname);
 
 
             }
@@ -125,21 +128,24 @@ public class Patient {
         xdata = dou_ListtoArray(Heartbeatxdata_list);
         ydata = dou_ListtoArray(Heartbeatydata_list);
         heartbeat = new Heartbeat(new double[][]{xdata, ydata});
+        hrcurrent = ydata[99];
 
         xdata = dou_ListtoArray(Bodytemperaturexdata_list);
         ydata = dou_ListtoArray(Bodytemperatureydata_list);
         bodytemperature = new Bodytemperature(new double[][]{xdata, ydata});
+        btcurrent = ydata[99];
 
         xdata = dou_ListtoArray(Bloodpressurexdata_list);
         ydata = dou_ListtoArray(Bloodpressureydata_list);
         bloodpressure = new Bloodpressure(new double[][]{xdata, ydata});
+        bpcurrent = ydata[99];
 
         xdata = dou_ListtoArray(Respiratoryratexdata_list);
         ydata = dou_ListtoArray(Respiratoryrateydata_list);
         respiratoryrate = new Respiratoryrate(new double[][]{xdata, ydata});
-    }
-    public double[] getECGdata(){
-        return(heartbeat.get_ydata());
+        rrcurrent = ydata[99];
+
+
     }
     public double[] getHRdata(){
         return(heartbeat.get_ydata());
@@ -160,29 +166,31 @@ public class Patient {
     //Accessors
     public double[][] ECGgetsnippet(int locator)
     {
+        //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
         return(new double[][]{subArray(ecg.get_xdata(), locator, locator+99), subArray(ecg.get_ydata(), locator, (locator++)+99)});
     }
     public double[][] Heartbeatgetsnippet(int locator)
     {
-        heartbeatCurrent = heartbeat.get_xdata()[locator+99];
+        hrcurrent = heartbeat.get_ydata()[locator+99];
+        System.out.println(locator+" "+heartbeat.get_ydata()[locator+99]);
         return(new double[][]{subArray(heartbeat.get_xdata(), locator, locator+99), subArray(heartbeat.get_ydata(), locator, (locator++)+99)});
     }
 
     public double[][] Bodytemperaturegetsnippet (int locator)
     {
-        bodytemperatureCurrent = bodytemperature.get_ydata()[locator+99];
+        btcurrent = bodytemperature.get_ydata()[locator+99];
         return(new double[][]{subArray(bodytemperature.get_xdata(), locator, locator+99), subArray(bodytemperature.get_ydata(), locator, (locator++)+99)});
     }
 
     public double[][] Bloodpressuregetsnippet (int locator)
     {
-        bloodpressureCurrent = bloodpressure.get_ydata()[locator+99];
+        bpcurrent = bloodpressure.get_ydata()[locator+99];
         return(new double[][]{subArray(bloodpressure.get_xdata(), locator, locator+99), subArray(bloodpressure.get_ydata(), locator, (locator++)+99)});
     }
 
     public double[][] Respiratoryrategetsnippet (int locator)
     {
-        respiratoryrateCurrent = respiratoryrate.get_ydata()[locator+99];
+        rrcurrent = respiratoryrate.get_ydata()[locator+99];
         return(new double[][]{subArray(respiratoryrate.get_xdata(), locator, locator+99), subArray(respiratoryrate.get_ydata(), locator, (locator++)+99)});
     }
 
@@ -283,12 +291,18 @@ public class Patient {
         return new double[]{min, max};
     }
 
-    public double getBodytemperatureCurrent(){return bodytemperatureCurrent;}
+    public double getHrcurrent() {return hrcurrent;}
 
-    public double getHeartbeatCurrent(){return heartbeatCurrent;}
+    public double getBpcurrent() {
+        return bpcurrent;
+    }
 
-    public double getBloodpressureCurrent(){return bloodpressureCurrent;}
+    public double getBtcurrent() {
+        return btcurrent;
+    }
 
-    public double getRespiratoryrateCurrent(){return respiratoryrateCurrent;}
+    public double getRrcurrent() {
+        return rrcurrent;
+    }
 }
 

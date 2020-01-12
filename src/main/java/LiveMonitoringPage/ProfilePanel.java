@@ -110,6 +110,8 @@ public class ProfilePanel extends JPanel  {
         return patientProfile;
     }
 
+
+    //updates and repaints the panel
     public void Update() {
         heartrate.removeAll();
         heartrate.add(new JLabel("<html> <h4> <font color=white> Heart Rate  </h4>"));
