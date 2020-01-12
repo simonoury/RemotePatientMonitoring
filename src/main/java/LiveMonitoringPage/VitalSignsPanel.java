@@ -87,7 +87,7 @@ public class VitalSignsPanel extends JPanel {
         this.mainPanel.add(tempPanel);
         this.mainPanel.add(bpPanel);
         this.mainPanel.add(rrPanel);
-        mainPanel.setPreferredSize(new Dimension (900,640));
+        mainPanel.setPreferredSize(new Dimension (800,640));
         mainPanel.validate();
         mainPanel.setVisible(true);
     }
