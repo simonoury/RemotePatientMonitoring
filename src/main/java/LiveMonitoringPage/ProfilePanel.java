@@ -30,7 +30,6 @@ public class ProfilePanel extends JPanel  {
 
     public ProfilePanel(Patient p) {
         patient = p;
-        database=new DBConnect();
 
         familyname = patient.getFamilyname();
         surname = patient.getGivenname();
