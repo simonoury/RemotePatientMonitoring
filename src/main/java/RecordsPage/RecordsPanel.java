@@ -13,8 +13,8 @@ public class RecordsPanel extends JPanel {
     private JPanel recordedvalues;
     private JPanel averagevalues;
     private JPanel info;
-    private JPanel time, heartrate, bloodpressure, bodytemperature, respiratoryrate;
-    private JPanel heartrateaverage, bloodpressureaverage, bodytemperatureaverage, respiratoryrateaverage;
+    private JPanel time, heartrate, bloodpressure, bodytemperature, respiratoryrate, systolicbloodpressure;
+    private JPanel heartrateaverage, bloodpressureaverage, bodytemperatureaverage, respiratoryrateaverage, systolicbloodpressureaverage;
     int locator = 0;
     private Patient patient;
 
@@ -36,17 +36,20 @@ public class RecordsPanel extends JPanel {
         bloodpressure = new JPanel();
         bodytemperature = new JPanel();
         respiratoryrate = new JPanel();
+        systolicbloodpressure = new JPanel();
         info = new JPanel();
         heartrateaverage = new JPanel();
         bloodpressureaverage= new JPanel();
         bodytemperatureaverage= new JPanel();
         respiratoryrateaverage= new JPanel();
+        systolicbloodpressureaverage= new JPanel();
 
         double phase = 0;
         double data_HR [] = getdata_HR();
         double data_BP [] = getdata_BP();
         double data_BT [] = getdata_BT();
         double data_RR [] = getdata_RR();
+        double data_SBP [] = getdata_SBP();
         double data_time [] = getdata_time();
 
 
@@ -56,12 +59,14 @@ public class RecordsPanel extends JPanel {
         averagevalues.setBackground(Color.black);
         heartrate.setBackground(Color.black);
         bloodpressure.setBackground(Color.black);
+        systolicbloodpressure.setBackground(Color.black);
         bodytemperature.setBackground(Color.black);
         respiratoryrate.setBackground(Color.black);
         heartrateaverage.setBackground(Color.black);
         bloodpressureaverage.setBackground(Color.black);
         bodytemperatureaverage.setBackground(Color.black);
         respiratoryrateaverage.setBackground(Color.black);
+        systolicbloodpressureaverage.setBackground(Color.black);
         time.setBackground(Color.black);
 
         //Fill info Jlabel
@@ -76,7 +81,7 @@ public class RecordsPanel extends JPanel {
         info.setSize(new Dimension(160, 50));
 
 
-        recordedvalues.setLayout((new GridLayout(1, 5)));
+        recordedvalues.setLayout((new GridLayout(1, 6)));
 
         //fill in table with values from array -------------------------------------------------------------------------
 
@@ -103,7 +108,7 @@ public class RecordsPanel extends JPanel {
 
         double bloodpressurevalues [] = {data_BP[1],data_BP[150], data_BP[300], data_BP[503], data_BP[650], data_BP[800], data_BP[953], data_BP[1100], data_BP[1450], data_BP[1800] };
         bloodpressure.setLayout(new GridLayout(11, 1));
-        bloodpressure.add(new JLabel("<html><h4><font color=white>  BP:  </font> </h4>"));
+        bloodpressure.add(new JLabel("<html><h4><font color=white>  DBP:  </font> </h4>"));
         for (double bloodpressurevalue : bloodpressurevalues) {
             bloodpressure.add(new JLabel("<html><font color=white>"+ String.valueOf(bloodpressurevalue)+"</font></html>"));
         }
@@ -127,9 +132,18 @@ public class RecordsPanel extends JPanel {
         }
         recordedvalues.add(respiratoryrate);
 
+        data_SBP = getdata_SBP();
+        double  [] systolicpressyrevalues = {data_SBP[1],data_SBP[150], data_SBP[300], data_SBP[503], data_SBP[650], data_SBP[800], data_SBP[953], data_SBP[1100], data_SBP[1503], data_SBP[1800] };
+        systolicbloodpressure.setLayout(new GridLayout(11, 1));
+        systolicbloodpressure.add(new JLabel("<html><h4><font color=white>  SPB:  <font color=white></h4>"));
+        for (double systolicpressyrevalue : systolicpressyrevalues) {
+            systolicbloodpressure.add(new JLabel("<html><h4><font color=white>"+String.valueOf(systolicpressyrevalue)+"</font> </h4></html>"));
+        }
+        recordedvalues.add(systolicbloodpressure);
+
 
         //calculate and fill in average values -------------------------------------------------------------------------
-        averagevalues.setLayout(new GridLayout(5, 1));
+        averagevalues.setLayout(new GridLayout(6, 1));
         averagevalues.add(new JLabel("<html><h4><font color=white>  Average Values:  </font></h4> "));
 
         double avgheartrate;
@@ -172,6 +186,16 @@ public class RecordsPanel extends JPanel {
         respiratoryrateaverage.add(new JLabel("<html><font color=white>"+String.valueOf(avgrespiratoryrate)+"</font> </html>"));
         averagevalues.add(respiratoryrateaverage);
 
+        double avgsystolicpressure;
+        sum = 0;
+        for (double val : systolicpressyrevalues){
+            sum = sum + val;
+        }
+        avgsystolicpressure = sum/systolicpressyrevalues.length;
+        systolicbloodpressureaverage.add(new JLabel("<html><font color=white>Respiratory Rate average value:</font>"));
+        systolicbloodpressureaverage.add(new JLabel("<html><font color=white>"+String.valueOf(avgsystolicpressure)+"</font> </html>"));
+        averagevalues.add(systolicbloodpressureaverage);
+
 
         //set dimensions of jpanels
         info.setPreferredSize(new Dimension(500, 75));
@@ -206,6 +230,9 @@ public class RecordsPanel extends JPanel {
     }
     protected double[] getdata_RR() {
         return patient.getRRdata();
+    }
+    protected double[] getdata_SBP() {
+        return patient.getSBPdata();
     }
     protected double[] getdata_time(){
         return patient.getTimedata();

@@ -25,11 +25,13 @@ public class Patient {
     private Bodytemperature bodytemperature;
     private Bloodpressure bloodpressure;
     private Respiratoryrate respiratoryrate;
+    private Systolicpressure systolicpressure;
     private int locator=0;
     private double hrcurrent;
     private double btcurrent;
     private double bpcurrent;
     private double rrcurrent;
+    private double sbpcurrent;
 
     public Patient(int i)
     {
@@ -43,6 +45,9 @@ public class Patient {
         ArrayList<Double> Bloodpressureydata_list = new ArrayList<Double>();
         ArrayList<Double> Respiratoryratexdata_list = new ArrayList<Double>();
         ArrayList<Double> Respiratoryrateydata_list = new ArrayList<Double>();
+        ArrayList<Double> Systolicpressurexdata_list = new ArrayList<Double>();
+        ArrayList<Double> Systolicpressureydata_list = new ArrayList<Double>();
+
 
         DBConnect database = new DBConnect();
         try {
@@ -53,6 +58,7 @@ public class Patient {
                     "inner join bodytemperaturegraphs on (bodytemperaturegraphs.id = graphofpatient.graphid)\n"+
                     "inner join bloodpressuregraph on (bloodpressuregraph.id = graphofpatient.graphid)\n"+
                     "inner join respiratoryrategraphs on (respiratoryrategraphs.id = graphofpatient.graphid)\n"+
+                    "inner join systolicpressuregraphs on (systolicpressuregraphs.id = graphofpatient.graphid)\n"+
                     "where patientid="+i+";"; //could have any SQL command
             Statement stmt = database.getconnection().createStatement(); //what executes command
             ResultSet res = stmt.executeQuery(request);  //what executes command
@@ -68,6 +74,9 @@ public class Patient {
                 Array Bloodpressureydata_temp = res.getArray("bloodpressureydata");
                 Array Respiratoryratexdata_temp = res.getArray("respiratoryratexdata");
                 Array Respiratoryrateydata_temp = res.getArray("respiratoryrateydata");
+                Array Systolicpressurexdata_temp = res.getArray("systolic_xdata");
+                Array Systolicpressureydata_temp = res.getArray("systolic_ydata");
+
                 String givenname_temp = res.getString("givenname");
                 String familyanme_temp = res.getString("familyname");
                 String id_temp = res.getString("id");
@@ -104,6 +113,12 @@ public class Patient {
                 }
                 for (Double douTemp : (Double[]) Respiratoryrateydata_temp.getArray()) {
                     Respiratoryrateydata_list.add(douTemp);
+                }
+                for (Double douTemp : (Double[]) Systolicpressurexdata_temp.getArray()) {
+                    Systolicpressurexdata_list.add(douTemp);
+                }
+                for (Double douTemp : (Double[]) Systolicpressureydata_temp.getArray()) {
+                    Systolicpressureydata_list.add(douTemp);
                 }
                 givenname = givenname_temp;
                 familyname = familyanme_temp;
@@ -145,6 +160,11 @@ public class Patient {
         respiratoryrate = new Respiratoryrate(new double[][]{xdata, ydata});
         rrcurrent = ydata[99];
 
+        xdata = dou_ListtoArray(Systolicpressurexdata_list);
+        ydata = dou_ListtoArray(Systolicpressureydata_list);
+        systolicpressure = new Systolicpressure(new double[][]{xdata, ydata});
+        sbpcurrent = ydata[99];
+
 
     }
     public double[] getHRdata(){
@@ -159,6 +179,7 @@ public class Patient {
     public double[] getRRdata(){
         return(respiratoryrate.get_ydata());
     }
+    public double[] getSBPdata() {return(systolicpressure.get_ydata()); }
     public double[] getTimedata(){
         return(heartbeat.get_xdata());
     }
