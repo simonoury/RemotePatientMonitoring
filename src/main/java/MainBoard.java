@@ -19,6 +19,7 @@ public class MainBoard extends JPanel {
         //Grid Layout
         grid=new GridLayout(1,1);
         mainPanel.setLayout(grid);
+        mainPanel.setBackground(Color.black);
 
         //Adding panels to mainpanel
         mainPanel.add(menuPanel.getMenuPanel());

@@ -1,12 +1,6 @@
-
-
 import javax.swing.*;
 
-
-
 public class Main {
-
-
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -20,16 +14,11 @@ public class Main {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         while (true) {
-            Thread.sleep(1);
+            Thread.sleep(5);
             board.Update();
             frame.add(board.getMainPanel());
             frame.repaint();
         }
-
-
-
-
-
     }
 
 }

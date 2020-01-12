@@ -18,12 +18,18 @@ public class Patient {
     private String givenname;
     private String familyname;
     private String id;
+    private String age;
+    private String admdate;
     private ECG ecg;
     private Heartbeat heartbeat;
     private Bodytemperature bodytemperature;
     private Bloodpressure bloodpressure;
     private Respiratoryrate respiratoryrate;
     private int locator=0;
+    private double hrcurrent;
+    private double btcurrent;
+    private double bpcurrent;
+    private double rrcurrent;
 
     public Patient(int i)
     {
@@ -43,11 +49,11 @@ public class Patient {
             //Requests & Execution (SQL)
             String request = "select * from graphofpatient inner join patients on(patients.id=graphofpatient.patientid)\n" +
                     "                             inner join graphs on(graphs.id=graphofpatient.graphid)\n" +
-                      "                             inner join heartbeatgraphs on(heartbeatgraphs.id=graphofpatient.graphid)\n "+
+                    "                             inner join heartbeatgraphs on(heartbeatgraphs.id=graphofpatient.graphid)\n "+
                     "inner join bodytemperaturegraphs on (bodytemperaturegraphs.id = graphofpatient.graphid)\n"+
                     "inner join bloodpressuregraph on (bloodpressuregraph.id = graphofpatient.graphid)\n"+
                     "inner join respiratoryrategraphs on (respiratoryrategraphs.id = graphofpatient.graphid)\n"+
-                                                 "where patientid="+i+";"; //could have any SQL command
+                    "where patientid="+i+";"; //could have any SQL command
             Statement stmt = database.getconnection().createStatement(); //what executes command
             ResultSet res = stmt.executeQuery(request);  //what executes command
             //reads through column of table
@@ -65,6 +71,8 @@ public class Patient {
                 String givenname_temp = res.getString("givenname");
                 String familyanme_temp = res.getString("familyname");
                 String id_temp = res.getString("id");
+                String age_temp = res.getString("age");
+                String admdate_temp = res.getString("admissiondate");
 
 
                 for (String strTemp : (String[]) ECGxdata_temp.getArray()) {
@@ -100,6 +108,8 @@ public class Patient {
                 givenname = givenname_temp;
                 familyname = familyanme_temp;
                 id = id_temp;
+                age = age_temp;
+                admdate = admdate_temp;
 
                 System.out.println(givenname);
 
@@ -118,18 +128,24 @@ public class Patient {
         xdata = dou_ListtoArray(Heartbeatxdata_list);
         ydata = dou_ListtoArray(Heartbeatydata_list);
         heartbeat = new Heartbeat(new double[][]{xdata, ydata});
+        hrcurrent = ydata[99];
 
         xdata = dou_ListtoArray(Bodytemperaturexdata_list);
         ydata = dou_ListtoArray(Bodytemperatureydata_list);
         bodytemperature = new Bodytemperature(new double[][]{xdata, ydata});
+        btcurrent = ydata[99];
 
         xdata = dou_ListtoArray(Bloodpressurexdata_list);
         ydata = dou_ListtoArray(Bloodpressureydata_list);
         bloodpressure = new Bloodpressure(new double[][]{xdata, ydata});
+        bpcurrent = ydata[99];
 
         xdata = dou_ListtoArray(Respiratoryratexdata_list);
         ydata = dou_ListtoArray(Respiratoryrateydata_list);
         respiratoryrate = new Respiratoryrate(new double[][]{xdata, ydata});
+        rrcurrent = ydata[99];
+
+
     }
     public double[] getHRdata(){
         return(heartbeat.get_ydata());
@@ -155,22 +171,26 @@ public class Patient {
     }
     public double[][] Heartbeatgetsnippet(int locator)
     {
-        //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
+        hrcurrent = heartbeat.get_ydata()[locator+99];
+        System.out.println(locator+" "+heartbeat.get_ydata()[locator+99]);
         return(new double[][]{subArray(heartbeat.get_xdata(), locator, locator+99), subArray(heartbeat.get_ydata(), locator, (locator++)+99)});
     }
 
     public double[][] Bodytemperaturegetsnippet (int locator)
     {
+        btcurrent = bodytemperature.get_ydata()[locator+99];
         return(new double[][]{subArray(bodytemperature.get_xdata(), locator, locator+99), subArray(bodytemperature.get_ydata(), locator, (locator++)+99)});
     }
 
     public double[][] Bloodpressuregetsnippet (int locator)
     {
+        bpcurrent = bloodpressure.get_ydata()[locator+99];
         return(new double[][]{subArray(bloodpressure.get_xdata(), locator, locator+99), subArray(bloodpressure.get_ydata(), locator, (locator++)+99)});
     }
 
     public double[][] Respiratoryrategetsnippet (int locator)
     {
+        rrcurrent = respiratoryrate.get_ydata()[locator+99];
         return(new double[][]{subArray(respiratoryrate.get_xdata(), locator, locator+99), subArray(respiratoryrate.get_ydata(), locator, (locator++)+99)});
     }
 
@@ -185,17 +205,21 @@ public class Patient {
         return familyname;
     }
 
-    public String getId() {return  id;};
+    public String getId() {return  id;}
+
+    public String getAge() { return age;}
+
+    public String getDate() { return admdate;}
 
     public double[] minmaxECG(){
         double min=0;
         double max=0;
         for (double douTemp : ecg.get_ydata()) {
-            if (douTemp<min)
+            if (douTemp<min || min==0)
             {
                 min = douTemp;
             }
-            else if (douTemp>max)
+            else if (douTemp>max || max==0)
             {
                 max = douTemp;
             }
@@ -207,11 +231,11 @@ public class Patient {
         double min=0;
         double max=0;
         for (double douTemp : heartbeat.get_ydata()) {
-            if (douTemp<min)
+            if (douTemp<min || min==0)
             {
                 min = douTemp;
             }
-            else if (douTemp>max)
+            else if (douTemp>max || max==0)
             {
                 max = douTemp;
             }
@@ -223,11 +247,11 @@ public class Patient {
         double min=0;
         double max=0;
         for (double douTemp : bodytemperature.get_ydata()) {
-            if (douTemp<min)
+            if (douTemp<min || min==0)
             {
                 min = douTemp;
             }
-            else if (douTemp>max)
+            else if (douTemp>max || max==0)
             {
                 max = douTemp;
             }
@@ -239,11 +263,11 @@ public class Patient {
         double min=0;
         double max=0;
         for (double douTemp : bloodpressure.get_ydata()) {
-            if (douTemp<min)
+            if (douTemp<min || min==0)
             {
                 min = douTemp;
             }
-            else if (douTemp>max)
+            else if (douTemp>max || max==0)
             {
                 max = douTemp;
             }
@@ -255,15 +279,30 @@ public class Patient {
         double min=0;
         double max=0;
         for (double douTemp : respiratoryrate.get_ydata()) {
-            if (douTemp<min)
+            if (douTemp<min || min==0)
             {
                 min = douTemp;
             }
-            else if (douTemp>max)
+            else if (douTemp>max || max==0)
             {
                 max = douTemp;
             }
         }
         return new double[]{min, max};
     }
+
+    public double getHrcurrent() {return hrcurrent;}
+
+    public double getBpcurrent() {
+        return bpcurrent;
+    }
+
+    public double getBtcurrent() {
+        return btcurrent;
+    }
+
+    public double getRrcurrent() {
+        return rrcurrent;
+    }
 }
+

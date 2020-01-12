@@ -1,6 +1,7 @@
 package Menu;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import LiveMonitoringPage.*;
@@ -47,9 +48,9 @@ public class DropDownMenu extends JComboBox implements ActionListener {
                     //Refresh page
                     selectedPanel.removeAll();
                     selectedPanel.updateUI();
-
                     //add page on panel
                     selectedPanel.add(liveMonitoringPageView.getPage());
+                    selectedPanel.setBackground(Color.black);
                 }
                 else if (selectedoption.equals("Records")) {
                     //Refresh page
@@ -57,6 +58,7 @@ public class DropDownMenu extends JComboBox implements ActionListener {
                     selectedPanel.updateUI();
                     //add page on panel
                     selectedPanel.add(recordsPageView.getRecordspage());
+                    selectedPanel.setBackground(Color.black);
 
                 }
             }

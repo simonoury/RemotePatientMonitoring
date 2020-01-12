@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Arrays;
+
 public class ECG {
     private double[] xdata;
     private double[] ydata;

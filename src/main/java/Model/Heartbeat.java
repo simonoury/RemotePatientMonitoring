@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Arrays;
+
 public class Heartbeat {
     private double[] xdata;
     private double[] ydata;
@@ -9,6 +11,7 @@ public class Heartbeat {
     {
         xdata = data[0];
         ydata = data[1];
+
     }
     public double[] get_xdata()
     {

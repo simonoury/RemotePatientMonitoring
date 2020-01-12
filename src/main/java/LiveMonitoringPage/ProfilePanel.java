@@ -24,14 +24,17 @@ public class ProfilePanel extends JPanel  {
     private String request;
     String familyname;
     String surname;
+    String admdate;
+    String idno;
     private Connection conn;
 
     public ProfilePanel(Patient p) {
         patient = p;
-        database=new DBConnect();
 
         familyname = patient.getFamilyname();
         surname = patient.getGivenname();
+        admdate = patient.getDate();
+        idno = patient.getId();
 
         //Instantiation of panels
         patientProfile =new JPanel();
@@ -39,11 +42,15 @@ public class ProfilePanel extends JPanel  {
 
         //Layout of PatientProfile
         patientProfile.setLayout(new GridLayout(10,1));
-        patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
+        patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.WHITE) );
 
 
-        JLabel name= new JLabel(familyname + " " + surname);
-        JLabel id=new JLabel("Patient id: " + patient.getId());
+        JLabel namelabel= new JLabel("<html> <font color=white> Name: ");
+        JLabel idlabel=new JLabel("<html> <font color=white>ID ");
+        JLabel datelabel=new JLabel("<html> <font color=white>Admission Date ");
+        JLabel name= new JLabel("<html> <font color=white>" +familyname+ " " + "<html> <font color=white>"+surname);
+        JLabel id=new JLabel("<html> <font color=white>" + idno);
+        JLabel date=new JLabel("<html> <font color=white>" + admdate);
 
         //Vital Signs Panels and Layouts
         heartrate=new JPanel();
@@ -56,22 +63,32 @@ public class ProfilePanel extends JPanel  {
         bloodpress.setLayout(new GridLayout(1,2));
 
         //Add values to info + 5 Vital Signs Panel *to be replaced with database fetched values*
-        info.setLayout(new GridLayout(2, 1));
+        info.setLayout(new GridLayout(3, 2));
+        info.add(namelabel);
         info.add(name);
+        info.add(idlabel);
         info.add(id);
+        info.add(datelabel);
+        info.add(date);
 
-        heartrate.add(new JLabel("<html> <h4> Heart Rate:  </h4>"));
-        heartrate.add(new JLabel(String.valueOf(normalvalues[1])+" bpm", SwingConstants.LEFT));
+        heartrate.add(new JLabel("<html> <h4> <font color=white> Heart Rate  </h4>"));
+        heartrate.add(new JLabel("<html> <font color=white>" + String.valueOf(patient.getHrcurrent())+" bpm", SwingConstants.LEFT));
 
-        bodytemp.add(new JLabel("<html> <h4> Body Temperature:  </h4>", SwingConstants.LEFT));
-        bodytemp.add(new JLabel(normalvalues[1]+ " °C"));
+        bodytemp.add(new JLabel("<html> <h4> <font color=white> Body Temperature  </h4>", SwingConstants.LEFT));
+        bodytemp.add(new JLabel("<html> <font color=white>" + patient.getBtcurrent()+ " °C"));
 
 
-        resprate.add(new JLabel("<html> <h4>Respiratory Rate: </h4>"));
-        resprate.add(new JLabel((normalvalues[2])+ " breaths/min"));
+        resprate.add(new JLabel("<html> <h4>  <font color=white> Respiratory Rate: </h4>"));
+        resprate.add(new JLabel(("<html> <font color=white>" + patient.getRrcurrent())+ " breaths/min"));
 
-        bloodpress.add(new JLabel("<html> <h4>Blood Pressure:   </h4>"));
-        bloodpress.add(new JLabel((normalvalues[3])+" mmHg (systolic pressure)  "+normalvalues[4]+ " mmHg (diastolic pressure)"));
+        bloodpress.add(new JLabel("<html> <h4> <font color=white> Blood Pressure:   </h4>"));
+        bloodpress.add(new JLabel(("<html> <font color=white>" + patient.getBpcurrent())+ "/"+normalvalues[4]+ " mmHg (systolic/diastolic)"));
+
+        info.setBackground(Color.black);
+        heartrate.setBackground(Color.black);
+        bodytemp.setBackground(Color.black);
+        resprate.setBackground(Color.black);
+        bloodpress.setBackground(Color.black);
 
         //Add all information to patientProfile Panel
         patientProfile.add(info);
@@ -79,6 +96,7 @@ public class ProfilePanel extends JPanel  {
         patientProfile.add(bodytemp);
         patientProfile.add(resprate);
         patientProfile.add(bloodpress);
+        patientProfile.setBackground(Color.black);
 
 
         patientProfile.setPreferredSize(new Dimension(300,640));
@@ -90,6 +108,30 @@ public class ProfilePanel extends JPanel  {
 
     public JPanel getPatientProfile() {
         return patientProfile;
+    }
+
+
+    //updates and repaints the panel
+    public void Update() {
+        heartrate.removeAll();
+        heartrate.add(new JLabel("<html> <h4> <font color=white> Heart Rate  </h4>"));
+        heartrate.add(new JLabel("<html> <font color=white>" + String.valueOf(patient.getHrcurrent())+" bpm", SwingConstants.LEFT));
+        bodytemp.removeAll();
+        bodytemp.add(new JLabel("<html> <h4> <font color=white> Body Temperature  </h4>", SwingConstants.LEFT));
+        bodytemp.add(new JLabel("<html> <font color=white>" + patient.getBtcurrent()+ " °C"));
+        resprate.removeAll();
+        resprate.add(new JLabel("<html> <h4>  <font color=white> Respiratory Rate: </h4>"));
+        resprate.add(new JLabel(("<html> <font color=white>" + patient.getRrcurrent())+ " breaths/min"));
+        bloodpress.removeAll();
+        bloodpress.add(new JLabel("<html> <h4> <font color=white> Blood Pressure:   </h4>"));
+        bloodpress.add(new JLabel(("<html> <font color=white>" + patient.getBpcurrent())+ "/"+normalvalues[4]+ " mmHg (systolic/diastolic)"));
+        patientProfile.removeAll();
+        patientProfile.add(info);
+        patientProfile.add(heartrate);
+        patientProfile.add(bodytemp);
+        patientProfile.add(resprate);
+        patientProfile.add(bloodpress);
+        patientProfile.repaint();
     }
 
 }

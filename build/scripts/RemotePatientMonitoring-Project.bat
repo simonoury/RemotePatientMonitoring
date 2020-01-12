@@ -63,7 +63,7 @@ set CMD_LINE_ARGS=%*
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\RemotePatientMonitoring-Project-1.0-SNAPSHOT.jar;%APP_HOME%\lib\jfreechart-1.0.19.jar;%APP_HOME%\lib\xchart-3.6.0.jar
+set CLASSPATH=%APP_HOME%\lib\RemotePatientMonitoring-Project-1.0-SNAPSHOT.jar;%APP_HOME%\lib\jfreechart-1.0.19.jar;%APP_HOME%\lib\xchart-3.6.0.jar;%APP_HOME%\lib\postgresql-42.2.8.jar
 
 @rem Execute RemotePatientMonitoring-Project
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %REMOTE_PATIENT_MONITORING_PROJECT_OPTS%  -classpath "%CLASSPATH%" Main %CMD_LINE_ARGS%
