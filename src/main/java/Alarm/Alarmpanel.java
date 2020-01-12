@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
 
 
 public class Alarmpanel {
-    private double  data_HR[],data_RR[],data_BP[],data_BT[];
+    private double data_HR[], data_RR[], data_BP[], data_BT[];
     private Alarm heartrate, bloodpressure, bodytemperature, respiratoryrate;
     private JPanel ecg, valuesPanel;
     Patient patient;
@@ -39,22 +39,82 @@ public class Alarmpanel {
         //d_bloodpressure = new Alarm(patient, 78, 80, 75, 89, data_DBP);
         bodytemperature = new Alarm(patient, 36.5, 37.5, 35.5, 39, data_BT);
         respiratoryrate = new Alarm(patient, 13, 18, 12, 25, data_RR);
-        final int[] j = {0};
 
+        final int[] j = {0};
         ActionListener taskPerformer = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 valuesPanel.add(ecg);
-                valuesPanel.add(heartrate.getAlarm(data_HR[j[0]]));
-                valuesPanel.add(bodytemperature.getAlarm(data_BT[j[0]]));
-                valuesPanel.add(bloodpressure.getAlarm(data_BP[j[0]]));
-                valuesPanel.add(respiratoryrate.getAlarm(data_RR[j[0]]));
-                heartrate.addText(data_HR[j[0]]);
-                bloodpressure.addText(data_BP[j[0]]);
-                respiratoryrate.addText(data_RR[j[0]]);
-                bodytemperature.addText(data_BT[j[0]]);
+                if (data_HR[j[0] + 1] == data_HR[j[0]]) {
+                    heartrate.addText(data_HR[j[0]]);
+                    valuesPanel.add(heartrate.getAlarm(data_HR[j[0]]));
+                }
+                if (data_BP[j[0] + 1] == data_BP[j[0]]) {
+                    bloodpressure.addText(data_BP[j[0]]);
+                    valuesPanel.add(bloodpressure.getAlarm(data_BP[j[0]]));
+                }
+                if (data_BT[j[0] + 1] == data_BT[j[0]]) {
+                    bodytemperature.addText(data_BT[j[0]]);
+                    valuesPanel.add(bodytemperature.getAlarm(data_BT[j[0]]));
+                }
+                if (data_RR[j[0] + 1] == data_RR[j[0]]) {
+                    respiratoryrate.addText(data_RR[j[0]]);
+                    valuesPanel.add(respiratoryrate.getAlarm(data_RR[j[0]]));
+                    ;
+                } else {
+                    heartrate.addText(data_HR[j[0] + 1]);
+                    bloodpressure.addText(data_BP[j[0] + 1]);
+                    bodytemperature.addText(data_BT[j[0] + 1]);
+                    respiratoryrate.addText(data_RR[j[0] + 1]);
 
-                j[0] = j[0] +40;
+                    valuesPanel.add(heartrate.getAlarm(data_HR[j[0] + 1]));
+                    valuesPanel.add(bodytemperature.getAlarm(data_BT[j[0] + 1]));
+                    valuesPanel.add(bloodpressure.getAlarm(data_BP[j[0] + 1]));
+                    valuesPanel.add(respiratoryrate.getAlarm(data_RR[j[0] + 1]));
+                    ;
+
+                }
+                j[0] = j[0] + 20;
+            }
+        };
+        Timer t = new Timer(1000, taskPerformer);
+        t.start();
+
+
+        valuesPanel.setLayout(new GridLayout(5, 1));
+        valuesPanel.setPreferredSize(new Dimension(200, 640));
+        valuesPanel.setBackground(Color.black);
+        valuesPanel.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK));
+
+    }
+
+
+    protected double[] getdata_HR() {
+        return patient.getHRdata();
+    }
+
+    protected double[] getdata_BP() {
+        return patient.getBPdata();
+    }
+
+    protected double[] getdata_BT() {
+        return patient.getBTdata();
+    }
+
+    protected double[] getdata_RR() {
+        return patient.getRRdata();
+    }
+
+    protected double[] getdata_time() {
+        return patient.getTimedata();
+    }
+
+    public JPanel getValuesPanel() {
+        return valuesPanel;
+    }
+
+    public void Update(){
+
 
                /* for(int i=0;i<data_HR.length;i++) {
                     valuesPanel.add(ecg);
@@ -65,41 +125,11 @@ public class Alarmpanel {
                 }*/
 
 
-                valuesPanel.setLayout(new GridLayout(5, 1));
-                valuesPanel.setPreferredSize(new Dimension(200, 640));
-                valuesPanel.setBackground(Color.black);
-                valuesPanel.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK));
-            }
-        };
-        Timer t = new Timer(1000, taskPerformer);
-        t.start();
-
 
     }
-
-
-    protected double[] getdata_HR() {
-        return patient.getHRdata();
-    }
-    protected double[] getdata_BP() {
-        return patient.getBPdata();
-    }
-    protected double[] getdata_BT() {
-        return patient.getBTdata();
-    }
-    protected double[] getdata_RR() {
-        return patient.getRRdata();
-    }
-    protected double[] getdata_time(){
-        return patient.getTimedata();
-    }
-    public JPanel getValuesPanel () {
-        return valuesPanel;
-    }
-
-
-
 }
+
+
 /*
         ActionListener taskPerformer = new ActionListener() {
             @Override

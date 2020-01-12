@@ -68,8 +68,6 @@ public class Alarm {
     }
 
     public void update(double value){
-
-
         message.removeAll();
         if (value > danger_bound_high || value < danger_bound_low) {
             message.add(new JLabel("<html><h2><font color=red>Danger</font></h2>"));

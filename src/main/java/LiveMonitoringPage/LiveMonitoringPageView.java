@@ -14,7 +14,7 @@ public class LiveMonitoringPageView {
     public LiveMonitoringPageView(Patient patient)  {
         profilePanel=new ProfilePanel(patient);
         profileGraph = new VitalSignsPanel(patient);
-        alarmPanel=new Alarmpanel(patient);
+
         page=new JPanel();
         page_sub=new JPanel();
 
@@ -22,7 +22,6 @@ public class LiveMonitoringPageView {
         page.setBackground(Color.black);
         page.add(profilePanel.getPatientProfile());
         page.add(profileGraph.getMainPanel());
-        page.add(alarmPanel.getValuesPanel());
 
 
     }

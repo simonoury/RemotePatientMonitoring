@@ -1,29 +1,28 @@
 package LiveMonitoringPage;
 
+import Alarm.*;
 import Model.Patient;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
-import org.knowm.xchart.style.*;
-import org.knowm.xchart.style.colors.XChartSeriesColors;
 
 import javax.swing.*;
 import java.awt.*;
 
-import java.util.Arrays;
-
 
 public class VitalSignsPanel extends JPanel {
 
-    // FIELDS
+    // FIELD
 
 
     int locator = 0;
+    Alarmpanel alarmpanel;
     Patient patient;
     // Model
 
 
     // panels
+    JPanel graphPanel;
     JPanel mainPanel;
     JPanel ecgPanel;
     JPanel hrPanel;
@@ -51,6 +50,7 @@ public class VitalSignsPanel extends JPanel {
         //create patient
         patient = p;
 
+
         // data for sine wave
         double phase = 0;
         double[][] data_ECG = getECGData(locator);
@@ -71,25 +71,35 @@ public class VitalSignsPanel extends JPanel {
         //bpdChart = QuickChart.getChart("Systolic Blood Pressure", "Time /s", "Pressure /mmHg", "sine", data_BPD[0], data_BPD[1]);
         rrChart = QuickChart.getChart("Respiratory Rate", "Time /s", "Rate /BrPM", "sine", data[0], data[1]);
         ecgChart.getStyler().setPlotBackgroundColor(Color.black);
+        alarmpanel=new Alarmpanel(p);
 
         // create panels
-        mainPanel = new JPanel();
+        graphPanel = new JPanel();
         ecgPanel = new XChartPanel(ecgChart);
         hrPanel = new XChartPanel(hrChart);
         tempPanel = new XChartPanel(tempChart);
         bpPanel = new XChartPanel(bpsChart);
         rrPanel = new XChartPanel(rrChart);
+        mainPanel=new JPanel();
 
         // add chart panels to main panel
-        mainPanel.setLayout(new GridLayout(5, 2));
-        this.mainPanel.add(ecgPanel);
-        this.mainPanel.add(hrPanel);
-        this.mainPanel.add(tempPanel);
-        this.mainPanel.add(bpPanel);
-        this.mainPanel.add(rrPanel);
-        mainPanel.setPreferredSize(new Dimension (800,640));
+        graphPanel.setLayout(new GridLayout(5, 2));
+        this.graphPanel.add(ecgPanel);
+        this.graphPanel.add(hrPanel);
+        this.graphPanel.add(tempPanel);
+        this.graphPanel.add(bpPanel);
+        this.graphPanel.add(rrPanel);
+        graphPanel.setPreferredSize(new Dimension (800,640));
+        graphPanel.validate();
+        graphPanel.setVisible(true);
+
+        //mainPanel.setLayout(new GridLayout(1,1));
+        this.mainPanel.add(graphPanel);
+        this.mainPanel.add(alarmpanel.getValuesPanel());
+        //mainPanel.setPreferredSize(new Dimension (1000,640));
         mainPanel.validate();
         mainPanel.setVisible(true);
+
     }
 
     // get main panel method
@@ -181,19 +191,21 @@ public class VitalSignsPanel extends JPanel {
         rrChart.getStyler().setSeriesColors(new Color[]{Color.green,Color.black});
         rrPanel = new XChartPanel(rrChart);
 
-        mainPanel.removeAll();
-        mainPanel.add(ecgPanel);
-        mainPanel.add(hrPanel);
-        mainPanel.add(tempPanel);
-        mainPanel.add(bpPanel);
-        mainPanel.add(rrPanel);
+        graphPanel.removeAll();
+        graphPanel.add(ecgPanel);
+        graphPanel.add(hrPanel);
+        graphPanel.add(tempPanel);
+        graphPanel.add(bpPanel);
+        graphPanel.add(rrPanel);
 
         //locator = locator+1;
     }
 
     public void Update()
     {
+        alarmpanel.Update();
         updatePanel();
+
     }
 
 
