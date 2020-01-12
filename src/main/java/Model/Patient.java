@@ -161,7 +161,7 @@ public class Patient {
     }
     public double[][] Heartbeatgetsnippet(int locator)
     {
-        //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
+
         return(new double[][]{subArray(heartbeat.get_xdata(), locator, locator+99), subArray(heartbeat.get_ydata(), locator, (locator++)+99)});
     }
 
