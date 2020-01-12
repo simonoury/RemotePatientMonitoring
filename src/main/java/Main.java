@@ -1,12 +1,6 @@
-
-
 import javax.swing.*;
 
-
-
 public class Main {
-
-
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -25,11 +19,6 @@ public class Main {
             frame.add(board.getMainPanel());
             frame.repaint();
         }
-
-
-
-
-
     }
 
 }
