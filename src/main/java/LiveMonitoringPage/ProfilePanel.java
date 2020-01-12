@@ -28,6 +28,11 @@ public class ProfilePanel extends JPanel  {
     String idno;
     private Connection conn;
 
+    Double hrcurrent;
+    Double btcurrent;
+    Double rrcurrent;
+    Double bpcurrent;
+
     public ProfilePanel(Patient p) {
         patient = p;
 
@@ -101,6 +106,11 @@ public class ProfilePanel extends JPanel  {
 
         patientProfile.setPreferredSize(new Dimension(300,640));
 
+        hrcurrent = patient.getHrcurrent();
+        btcurrent = patient.getBtcurrent();
+        rrcurrent = patient.getRrcurrent();
+        bpcurrent = patient.getBpcurrent();
+
 
 
     }
@@ -113,24 +123,36 @@ public class ProfilePanel extends JPanel  {
 
     //updates and repaints the panel
     public void Update() {
-        heartrate.removeAll();
-        heartrate.add(new JLabel("<html> <h4> <font color=white> Heart Rate  </h4>"));
-        heartrate.add(new JLabel("<html> <font color=white>" + String.valueOf(patient.getHrcurrent())+" bpm", SwingConstants.LEFT));
-        bodytemp.removeAll();
-        bodytemp.add(new JLabel("<html> <h4> <font color=white> Body Temperature  </h4>", SwingConstants.LEFT));
-        bodytemp.add(new JLabel("<html> <font color=white>" + patient.getBtcurrent()+ " °C"));
-        resprate.removeAll();
-        resprate.add(new JLabel("<html> <h4>  <font color=white> Respiratory Rate: </h4>"));
-        resprate.add(new JLabel(("<html> <font color=white>" + patient.getRrcurrent())+ " breaths/min"));
-        bloodpress.removeAll();
-        bloodpress.add(new JLabel("<html> <h4> <font color=white> Blood Pressure:   </h4>"));
-        bloodpress.add(new JLabel(("<html> <font color=white>" + patient.getBpcurrent())+ "/"+normalvalues[4]+ " mmHg (systolic/diastolic)"));
-        patientProfile.removeAll();
-        patientProfile.add(info);
-        patientProfile.add(heartrate);
-        patientProfile.add(bodytemp);
-        patientProfile.add(resprate);
-        patientProfile.add(bloodpress);
+
+        double hrnext = patient.getHrcurrent();
+        double btnext = patient.getBtcurrent();
+        double rrnext = patient.getRrcurrent();
+        double bpnext = patient.getBpcurrent();
+        if(hrnext != hrcurrent){
+            heartrate.removeAll();
+            heartrate.add(new JLabel("<html> <h4> <font color=white> Heart Rate  </h4>"));
+            heartrate.add(new JLabel("<html> <font color=white>" + hrnext + " bpm", SwingConstants.LEFT));
+            hrcurrent = hrnext;
+        }
+        if(btnext != btcurrent) {
+            bodytemp.removeAll();
+            bodytemp.add(new JLabel("<html> <h4> <font color=white> Body Temperature  </h4>", SwingConstants.LEFT));
+            bodytemp.add(new JLabel("<html> <font color=white>" + btnext + " °C"));
+            btcurrent = btnext;
+        }
+        if(rrnext!=rrcurrent){
+            resprate.removeAll();
+            resprate.add(new JLabel("<html> <h4>  <font color=white> Respiratory Rate: </h4>"));
+            resprate.add(new JLabel(("<html> <font color=white>" + rrnext + " breaths/min")));
+            rrcurrent = rrnext;
+        }
+        if(bpnext!=bpcurrent) {
+            bloodpress.removeAll();
+            bloodpress.add(new JLabel("<html> <h4> <font color=white> Blood Pressure:   </h4>"));
+            bloodpress.add(new JLabel(("<html> <font color=white>" + bpnext + "/" + normalvalues[4] + " mmHg (systolic/diastolic)")));
+            bpcurrent = bpnext;
+        }
+
         patientProfile.repaint();
     }
 

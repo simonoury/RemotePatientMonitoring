@@ -14,7 +14,7 @@ public class Main {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         while (true) {
-            Thread.sleep(5);
+            Thread.sleep(2);
             board.Update();
             frame.add(board.getMainPanel());
             frame.repaint();
