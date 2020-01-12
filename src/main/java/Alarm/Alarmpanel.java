@@ -55,7 +55,6 @@ public class Alarmpanel {
                     valuesPanel.add(bodytemperature.getAlarm(data_BT[j[0]]));
                     valuesPanel.add(bloodpressure.getAlarm(data_BP[j[0] ]));
                     valuesPanel.add(respiratoryrate.getAlarm(data_RR[j[0]]));
-                    ;
 
                 j[0] = j[0] + 10;
             }
@@ -63,14 +62,12 @@ public class Alarmpanel {
         Timer t = new Timer(1000, taskPerformer);
         t.start();
 
-
         valuesPanel.setLayout(new GridLayout(5, 1));
         valuesPanel.setPreferredSize(new Dimension(200, 640));
         valuesPanel.setBackground(Color.black);
         valuesPanel.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK));
 
     }
-
 
     protected double[] getdata_HR() {
         return patient.getHRdata();
