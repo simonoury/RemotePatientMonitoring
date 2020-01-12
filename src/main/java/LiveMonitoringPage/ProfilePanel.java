@@ -43,7 +43,7 @@ public class ProfilePanel extends JPanel  {
 
         //Layout of PatientProfile
         patientProfile.setLayout(new GridLayout(10,1));
-        patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK) );
+        patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.WHITE) );
 
 
         JLabel namelabel= new JLabel("<html> <font color=white> Name: ");
