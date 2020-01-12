@@ -162,7 +162,7 @@ public class RecordsPanel extends JPanel {
             sum = sum + val;
         }
         avgbloodpressure = sum/bloodpressurevalues.length;
-        bloodpressureaverage.add(new JLabel("<html><font color=white>Blood Pressure average value: </font>"));
+        bloodpressureaverage.add(new JLabel("<html><font color=white>Diastolic Blood Pressure average value: </font>"));
         bloodpressureaverage.add(new JLabel("<html><font color=white>"+String.valueOf(avgbloodpressure)+"</font> </html>"));
         averagevalues.add(bloodpressureaverage);
 
@@ -192,7 +192,7 @@ public class RecordsPanel extends JPanel {
             sum = sum + val;
         }
         avgsystolicpressure = sum/systolicpressyrevalues.length;
-        systolicbloodpressureaverage.add(new JLabel("<html><font color=white>Respiratory Rate average value:</font>"));
+        systolicbloodpressureaverage.add(new JLabel("<html><font color=white>Systolic Blood Pressure average value:</font>"));
         systolicbloodpressureaverage.add(new JLabel("<html><font color=white>"+String.valueOf(avgsystolicpressure)+"</font> </html>"));
         averagevalues.add(systolicbloodpressureaverage);
 
