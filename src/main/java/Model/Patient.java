@@ -109,7 +109,6 @@ public class Patient {
                 age = age_temp;
                 admdate = admdate_temp;
 
-                System.out.println(givenname);
 
 
             }
