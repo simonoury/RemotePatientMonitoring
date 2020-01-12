@@ -201,11 +201,11 @@ public class Patient {
         double min=0;
         double max=0;
         for (double douTemp : ecg.get_ydata()) {
-            if (douTemp<min)
+            if (douTemp<min || min==0)
             {
                 min = douTemp;
             }
-            else if (douTemp>max)
+            else if (douTemp>max || max==0)
             {
                 max = douTemp;
             }
@@ -217,11 +217,11 @@ public class Patient {
         double min=0;
         double max=0;
         for (double douTemp : heartbeat.get_ydata()) {
-            if (douTemp<min)
+            if (douTemp<min || min==0)
             {
                 min = douTemp;
             }
-            else if (douTemp>max)
+            else if (douTemp>max || max==0)
             {
                 max = douTemp;
             }
@@ -233,11 +233,11 @@ public class Patient {
         double min=0;
         double max=0;
         for (double douTemp : bodytemperature.get_ydata()) {
-            if (douTemp<min)
+            if (douTemp<min || min==0)
             {
                 min = douTemp;
             }
-            else if (douTemp>max)
+            else if (douTemp>max || max==0)
             {
                 max = douTemp;
             }
@@ -249,11 +249,11 @@ public class Patient {
         double min=0;
         double max=0;
         for (double douTemp : bloodpressure.get_ydata()) {
-            if (douTemp<min)
+            if (douTemp<min || min==0)
             {
                 min = douTemp;
             }
-            else if (douTemp>max)
+            else if (douTemp>max || max==0)
             {
                 max = douTemp;
             }
@@ -265,11 +265,11 @@ public class Patient {
         double min=0;
         double max=0;
         for (double douTemp : respiratoryrate.get_ydata()) {
-            if (douTemp<min)
+            if (douTemp<min || min==0)
             {
                 min = douTemp;
             }
-            else if (douTemp>max)
+            else if (douTemp>max || max==0)
             {
                 max = douTemp;
             }
