@@ -30,6 +30,7 @@ public class LiveMonitoringPageView {
     public void Update()
     {
         profileGraph.Update();
+        profilePanel.Update();
     }
 
 }

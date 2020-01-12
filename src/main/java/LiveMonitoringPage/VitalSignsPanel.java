@@ -12,8 +12,6 @@ import java.awt.*;
 
 import java.util.Arrays;
 
-//delete 3
-
 
 public class VitalSignsPanel extends JPanel {
 
@@ -66,7 +64,6 @@ public class VitalSignsPanel extends JPanel {
         double[] minmaxECG = patient.minmaxECG();
 
         // create charts
-
         ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
         hrChart = QuickChart.getChart("Heart Rate", "Time /s", "Rate /BPM", "sine", data_HR[0], data_HR[1]);
         tempChart = QuickChart.getChart("Surface Body Temperature", "Time /s", "Temperature /C", "sine", data_temp[0], data_temp[1]);
@@ -100,25 +97,19 @@ public class VitalSignsPanel extends JPanel {
         return mainPanel;
     }
 
-    // get sine data method
-
+    //gets data from patient class
     protected  double[][] getRespiratoryData(double phase) {
         return patient.Respiratoryrategetsnippet(locator);
     }
-
     protected  double[][] getTempData(double phase) {
         return patient.Bodytemperaturegetsnippet(locator);
     }
-
     protected double[][] getBPSData(double phase) {
         return patient.Bloodpressuregetsnippet(locator);
     }
-
-
     protected double[][] getECGData(int locator) {
         return patient.ECGgetsnippet(locator);
     }
-
     protected double[][] getHRData(double phase) {
         return patient.Heartbeatgetsnippet(locator);
     }
@@ -196,15 +187,6 @@ public class VitalSignsPanel extends JPanel {
         mainPanel.add(tempPanel);
         mainPanel.add(bpPanel);
         mainPanel.add(rrPanel);
-
-
-        //JPanel mainPanel_test = new JPanel();
-        //JFrame f = new JFrame();
-        //f = new JFrame("panel");
-        //f.add(ecgPanel);
-        //f.setSize(300, 300);
-
-        //f.show();
     }
 
     public void Update()
