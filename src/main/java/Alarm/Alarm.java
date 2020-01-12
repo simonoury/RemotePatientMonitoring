@@ -2,7 +2,6 @@ package Alarm;
 
 
 import Model.Patient;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,92 +9,57 @@ import java.awt.event.ActionListener;
 
 
 public class Alarm {
-    private int warning_bound_low;
-    private int warning_bound_high;
-    private int danger_bound_low;
-    private int danger_bound_high;
+    private double warning_bound_low;
+    private double warning_bound_high;
+    private double danger_bound_low;
+    private double danger_bound_high;
     Patient patient;
 
     private double[] values;
     private double value;
-    private JLabel alarm;
+    private JLabel dangerlabel;
     private JPanel alarmcontainer;
+    private JPanel message;
+    private JPanel mainalarmpanel;
     private Timer timer;
     private int count;
 
-    public Alarm(Patient p, int warning_bound_low, int warning_bound_high, int danger_bound_low, int danger_bound_high, double[] values, double value) {
+    public Alarm(Patient p, double warning_bound_low, double warning_bound_high, double danger_bound_low, double danger_bound_high, double[] values) {
         this.patient=p;
         this.values=values;
-        this.value=value;
         this.warning_bound_low = warning_bound_low;
         this.warning_bound_high = warning_bound_high;
         this.danger_bound_low = danger_bound_low;
         this.danger_bound_high = danger_bound_high;
         this.values = values;
 
-        alarm = new JLabel();
+        dangerlabel = new JLabel();
+        message=new JPanel();
         alarmcontainer = new JPanel();
+        mainalarmpanel=new JPanel();
         alarmcontainer.setOpaque(true);
+        mainalarmpanel.setLayout(new GridLayout(1,2));
 
-        timer=new Timer(1, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(count%2==0)
-                    alarmcontainer.setBackground(Color.red);
-                else
-                    alarmcontainer.setBackground(Color.white);
-                count++;
+        alarmcontainer.setBackground(Color.black);
+        message.setBackground(Color.black);
 
-            }
-        });
-
-        for(int i=0;i<values.length;i++){
-
-            if (values[i] > danger_bound_high || values[i] < danger_bound_low) {
-                alarmcontainer.setBackground(Color.red);
-                alarm.setVisible(true);
-            }
-            if ((values[i] > warning_bound_high && values[i] < danger_bound_high) || (values[i] < warning_bound_low && values[i] > danger_bound_low)) {
-
-                alarmcontainer.setBackground(Color.yellow);
-                alarm.setVisible(true);
-            } else {
-
-                alarmcontainer.setBackground(Color.green);
-                alarm.setVisible(true);
-            }
-            alarmcontainer.add(new JLabel(String.valueOf(getValue(i))));
-            alarmcontainer.updateUI();
-        }
     }
 
-    public JPanel getAlarm(double[] values){
+    public JPanel getAlarm(double value){
+            //alarmcontainer.removeAll();
+        update(value);
 
-        for(int i=0;i<values.length;i++){
-
-            if (values[i] > danger_bound_high || values[i] < danger_bound_low) {
-                alarmcontainer.setBackground(Color.red);
-                alarm.setVisible(true);
-            }
-            if ((values[i] > warning_bound_high && values[i] < danger_bound_high) || (values[i] < warning_bound_low && values[i] > danger_bound_low)) {
-
-                alarmcontainer.setBackground(Color.yellow);
-                alarm.setVisible(true);
-            } else {
-
-                alarmcontainer.setBackground(Color.green);
-                alarm.setVisible(true);
-            }
-            alarmcontainer.add(new JLabel(String.valueOf(values[i])));
-            alarmcontainer.updateUI();
-        }
-        return alarmcontainer;
+        return mainalarmpanel;
     }
 
 
     public JPanel addText(double value){
         alarmcontainer.updateUI();
-        alarmcontainer.add(new JLabel(String.valueOf(value)));
+        alarmcontainer.removeAll();
+        JLabel label=new JLabel();
+        label.setVerticalAlignment(JLabel.CENTER);
+        label.setText("<html><h2><font color=white>"+(String.valueOf(value))+"</font></h2>");
+        alarmcontainer.add(label);
         return alarmcontainer;
     }
 
@@ -103,9 +67,28 @@ public class Alarm {
        return values[i];
     }
 
-    public void update(){
-        alarmcontainer.removeAll();
-        getAlarm(values);
+    public void update(double value){
+
+
+        message.removeAll();
+        if (value > danger_bound_high || value < danger_bound_low) {
+            message.add(new JLabel("<html><h2><font color=red>Danger</font></h2>"));
+            //alarmcontainer.setBackground(Color.red);
+            message.setVisible(true);
+        }
+        else if ((value > warning_bound_high && value < danger_bound_high) || (value < warning_bound_low && value > danger_bound_low)) {
+            //alarmcontainer.setBackground(Color.yellow);
+            message.add(new JLabel("<html><h2><font color=orange>Warning</font></h2>"));
+            message.setVisible(true);
+        } else {
+            message.add(new JLabel("<html><h2><font color=green>Normal</font></h2>"));
+
+            //alarmcontainer.setBackground(Color.green);
+            message.setVisible(true);
+        }
+        message.updateUI();
+        mainalarmpanel.add(alarmcontainer);
+        mainalarmpanel.add(message);
     }
 
 }
