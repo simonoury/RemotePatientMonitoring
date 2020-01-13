@@ -88,7 +88,7 @@ public class ProfilePanel extends JPanel  {
         resprate.add(new JLabel(("<html> <font color=white>" + patient.getRrcurrent())+ " breaths/min"));
 
         bloodpress.add(new JLabel("<html> <h4> <font color=white> Blood Pressure:   </h4>"));
-        bloodpress.add(new JLabel(("<html> <font color=white>" + patient.getBpcurrent())+ "/"+patient.getDpbcurrent()+ " mmHg (systolic/diastolic)"));
+        bloodpress.add(new JLabel(("<html> <font color=white>" + patient.getDBpcurrent())+ "/"+patient.getDpbcurrent()+ " mmHg (systolic/diastolic)"));
 
         //change background to black
         info.setBackground(Color.black);
@@ -111,7 +111,7 @@ public class ProfilePanel extends JPanel  {
         hrcurrent = patient.getHrcurrent();
         btcurrent = patient.getBtcurrent();
         rrcurrent = patient.getRrcurrent();
-        bpcurrent = patient.getBpcurrent();
+        bpcurrent = patient.getDBpcurrent();
     }
 
     //functions return the patient profile so it can be called in LiveMonitoringPageView
@@ -126,7 +126,7 @@ public class ProfilePanel extends JPanel  {
         double hrnext = patient.getHrcurrent();
         double btnext = patient.getBtcurrent();
         double rrnext = patient.getRrcurrent();
-        double bpnext = patient.getBpcurrent();
+        double bpnext = patient.getDBpcurrent();
         double dpbnext = patient.getDpbcurrent();
         if(hrnext != hrcurrent){ //repaints each time the values changes
             heartrate.removeAll();

@@ -19,4 +19,19 @@ public class Diastolicpressure {
     {
         return ydata;
     }
+
+    public void Augment(int locator)
+    {
+        for(int i=locator; i<ydata.length; i++)
+        {
+            ydata[i]++;
+        }
+    }
+    public void Decrement(int locator)
+    {
+        for(int i=locator; i<ydata.length; i++)
+        {
+            ydata[i]--;
+        }
+    }
 }

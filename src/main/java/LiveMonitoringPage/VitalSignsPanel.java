@@ -202,6 +202,12 @@ public class VitalSignsPanel extends JPanel {
         updatePanel();
 
     }
+    public void Augment(){
+        patient.Augment(locator+99);
+    }
+    public void Decrement(){
+        patient.Decrement(locator+99);
+    }
 
 
 

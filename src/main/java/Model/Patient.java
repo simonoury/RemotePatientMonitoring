@@ -33,6 +33,42 @@ public class Patient {
     private double dpbcurrent;
     private double rrcurrent;
 
+    public  Patient ()
+    {
+        double[] xtemp = new double[3600];
+        double[] ytemp = new double[3600];
+        for(int i=0; i<xtemp.length; i++)
+        {
+            xtemp[i] = i;
+            ytemp[i] = 1;
+        }
+        ecg = new ECG(new double[][]{xtemp, ytemp});
+        for(int i=0; i<xtemp.length; i++)
+        {
+            ytemp[i] = 75;
+        }
+        heartbeat = new Heartbeat(new double[][]{xtemp, ytemp});
+        for(int i=0; i<xtemp.length; i++)
+        {
+            ytemp[i] = 117.5;
+        }
+        bloodpressure = new Bloodpressure(new double[][]{xtemp, ytemp});
+        for(int i=0; i<xtemp.length; i++)
+        {
+            ytemp[i] = 37;
+        }
+        diastolicpressure = new Diastolicpressure(new double[][]{xtemp, ytemp});
+        for(int i=0; i<xtemp.length; i++)
+        {
+            ytemp[i] = 80;
+        }
+        bodytemperature = new Bodytemperature(new double[][]{xtemp, ytemp});
+        for (int i=0; i<xtemp.length; i++)
+        {
+            ytemp[i] = 12.5;
+        }
+        respiratoryrate = new Respiratoryrate(new double[][]{xtemp, ytemp});
+    }
     public Patient(int i)
     {
         ArrayList<String> ECGxdata_list = new ArrayList<String>();
@@ -314,7 +350,7 @@ public class Patient {
     }
 
     public double getHrcurrent() {return hrcurrent;}
-    public double getBpcurrent() {
+    public double getDBpcurrent() {
         return bpcurrent;
     }
     public double getBtcurrent() {
@@ -324,5 +360,22 @@ public class Patient {
         return rrcurrent;
     }
     public double getDpbcurrent() {return  dpbcurrent;}
+
+    public void Augment(int locator){
+        ecg.Augment(locator);
+        bloodpressure.Augment(locator);
+        bodytemperature.Augment(locator);
+        diastolicpressure.Augment(locator);
+        heartbeat.Augment(locator);
+        respiratoryrate.Augment(locator);
+    }
+    public void Decrement(int locator){
+        ecg.Decrement(locator);
+        bloodpressure.Decrement(locator);
+        bodytemperature.Decrement(locator);
+        diastolicpressure.Decrement(locator);
+        heartbeat.Decrement(locator);
+        respiratoryrate.Decrement(locator);
+    }
 }
 

@@ -19,4 +19,21 @@ public class Bodytemperature {
     {
         return ydata;
     }
+
+    public void Augment(int locator)
+    {
+
+        for(int i=locator; i<ydata.length-10; i++)
+        {
+            ydata[i]++;
+        }
+
+    }
+    public void Decrement(int locator)
+    {
+        for(int i=locator; i<ydata.length-10; i++)
+        {
+            ydata[i]--;
+        }
+    }
 }

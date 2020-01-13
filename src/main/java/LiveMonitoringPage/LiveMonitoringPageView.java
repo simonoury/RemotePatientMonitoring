@@ -5,6 +5,8 @@ import Model.Patient;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LiveMonitoringPageView {
     //Instantiate the  panels that will be used
@@ -22,7 +24,29 @@ public class LiveMonitoringPageView {
 
         page.setPreferredSize(new Dimension(1400,650));
         page.setBackground(Color.black);
+        JButton augment, decrement;
+        augment = new JButton("+1");
+        augment.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                Augment();
+            }
+        });
+        decrement = new JButton("-1");
+        decrement.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                Decrement();
+            }
+        });
+        GridLayout grid;
+        grid=new GridLayout(2, 1);
+        JPanel buttons = new JPanel(grid);
+
+
+        buttons.add(augment);
+        buttons.add(decrement);
+        page.add(buttons);
         page.add(profilePanel.getPatientProfile()); //add both panes to the main panel page
+
         page.add(profileGraph.getMainPanel());
 
 
@@ -37,6 +61,14 @@ public class LiveMonitoringPageView {
     {
         profileGraph.Update();
         profilePanel.Update();
+    }
+
+    public void Augment(){
+        profileGraph.Augment();
+    }
+
+    public  void Decrement() {
+        profileGraph.Decrement();
     }
 
 }
