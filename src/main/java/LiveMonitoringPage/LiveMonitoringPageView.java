@@ -26,30 +26,44 @@ public class LiveMonitoringPageView {
 
         page.setPreferredSize(new Dimension(1450,650));
         page.setBackground(black);
-        JButton augment, decrement;
-        augment = new JButton("+1");
-        augment.addActionListener(new ActionListener(){
+        JButton yaugment, ydecrement, xaugment, xdecrement;
+        yaugment = new JButton("y+1");
+        yaugment.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 Augment();
             }
         });
-        decrement = new JButton("-1");
-        decrement.addActionListener(new ActionListener(){
+        ydecrement = new JButton("y-1");
+        ydecrement.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 Decrement();
             }
         });
+        xaugment = new JButton("n+1");
+        xaugment.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                ZoomOut();
+            }
+        });
+        xdecrement = new JButton("n-1");
+        xdecrement.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                ZoomIn();
+            }
+        });
+
         GridLayout grid;
-        grid=new GridLayout(2, 1);
+        grid=new GridLayout(4, 1);
         JPanel buttons = new JPanel(grid);
         buttons.setBackground(black);
 
 
-        buttons.add(augment);
-        buttons.add(decrement);
+        buttons.add(yaugment);
+        buttons.add(ydecrement);
+        buttons.add(xaugment);
+    buttons.add(xdecrement);
         page.add(buttons);
         page.add(profilePanel.getPatientProfile()); //add both panes to the main panel page
-
         page.add(profileGraph.getMainPanel());
 
 
@@ -73,5 +87,9 @@ public class LiveMonitoringPageView {
     public  void Decrement() {
         profileGraph.Decrement();
     }
+
+    public void ZoomOut() {profileGraph.Zoomout();}
+
+    public void ZoomIn(){profileGraph.ZoomIn();}
 
 }

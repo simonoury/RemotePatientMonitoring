@@ -11,10 +11,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
 
+import static java.lang.StrictMath.round;
+
 
 public class VitalSignsPanel extends JPanel {
 
     int locator = 0;
+    int zoom = 99;
     Alarmpanel alarmpanel;
     Patient patient;
 
@@ -163,27 +166,49 @@ public class VitalSignsPanel extends JPanel {
     protected  double[][] getRespiratoryData(int locator) {
         return patient.Respiratoryrategetsnippet(locator);
     }
+    protected  double[][] getRespiratoryData(int locator, int zoom) {
+        return patient.Respiratoryrategetsnippet(locator, zoom);
+    }
     protected  double[][] getTempData(int locator) {
         return patient.Bodytemperaturegetsnippet(locator);
     }
+    protected  double[][] getTempData(int locator, int zoom) {
+        return patient.Bodytemperaturegetsnippet(locator, zoom);
+    }
+
     protected double[][] getBPSData(int locator) {
         return patient.Bloodpressuregetsnippet(locator);
     }
+    protected double[][] getBPSData(int locator, int zoom) {
+        return patient.Bloodpressuregetsnippet(locator, zoom);
+    }
+
     protected double[][] getECGData(int locator) {
-        System.out.println(Arrays.toString(patient.ECGgetsnippet(0)));
         return patient.ECGgetsnippet(locator);
     }
+    protected double[][] getECGData(int locator, int zoom) {
+        return patient.ECGgetsnippet(locator, zoom);
+    }
+
     protected double[][] getHRData(double phase) {
         return patient.Heartbeatgetsnippet(locator);
     }
+    protected double[][] getHRData(int locator, int zoom) {
+        return patient.Heartbeatgetsnippet(locator, zoom);
+    }
+
     protected  double[][] getDiaData()
     {
         return patient.Diastolidgetsnippet(locator);
     }
+    protected  double[][] getDiaData(int locator, int zoom)
+    {
+        return patient.Diastolidgetsnippet(locator, zoom);
+    }
 
     public void updatePanel(){
         //System.out.println("updated " + patient.getGivenname());
-        double[][] data_ECG = getECGData(++locator);
+        double[][] data_ECG = getECGData(++locator, zoom);
         double[] minmaxECG = patient.minmaxECG();
         ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
         ecgPanel = new XChartPanel(ecgChart);
@@ -197,7 +222,7 @@ public class VitalSignsPanel extends JPanel {
         ecgChart.getStyler().setSeriesColors(new Color[]{Color.blue, Color.black});
         JPanel ecgPanel2 = new XChartPanel(ecgChart);
 
-        double[][] data_Heartbeat = getHRData(locator);
+        double[][] data_Heartbeat = getHRData(locator, zoom);
         double[] minmaxHR = patient.minmaxHR();
         hrChart = QuickChart.getChart("Heart Rate", "Time /s", "Rate /BPM", "sine", data_Heartbeat[0], data_Heartbeat[1]);
         hrPanel = new XChartPanel(hrChart);
@@ -212,7 +237,7 @@ public class VitalSignsPanel extends JPanel {
         JPanel hrPanel2 = new XChartPanel(hrChart);
 
 
-        double[][] data_Bloodpressure = getBPSData(locator);
+        double[][] data_Bloodpressure = getBPSData(locator, zoom);
         double[][] data_diastolid = getDiaData();
         double[] minmaxBP = patient.minmaxBP();
         bpsChart = QuickChart.getChart("Blood Pressure", "Time/s", "Pressure /mmHg", "sine", data_Bloodpressure[0], data_Bloodpressure[1]);
@@ -227,7 +252,7 @@ public class VitalSignsPanel extends JPanel {
         bpsChart.getStyler().setSeriesColors(new Color[]{Color.orange,Color.black});
         bpPanel = new XChartPanel(bpsChart);
 
-        double[][] data_Bodytemperature = getTempData(locator);
+        double[][] data_Bodytemperature = getTempData(locator, zoom);
         double [] minmaxBT = patient.minmaxBT();
         tempChart = QuickChart.getChart("Body Temperature", "Time/s", "Temperature Celsius", "sine", data_Bodytemperature[0], data_Bodytemperature[1]);
         tempChart.addSeries("minmax", new double[]{data_Bodytemperature[0][0]-2,data_Bodytemperature[0][0]-2}, minmaxBT);
@@ -240,7 +265,7 @@ public class VitalSignsPanel extends JPanel {
         tempChart.getStyler().setSeriesColors(new Color[]{Color.red,Color.black});
         tempPanel = new XChartPanel(tempChart);
 
-        double[][] data_RespiratoryRate = getRespiratoryData(locator);
+        double[][] data_RespiratoryRate = getRespiratoryData(locator, zoom);
         double [] minmaxRR = patient.minmaxRR();
         rrChart = QuickChart.getChart("Respiratory Rate", "Time/s", "Breaths /min", "sine", data_RespiratoryRate[0], data_RespiratoryRate[1]);
         rrChart.addSeries("minmax", new double[]{data_RespiratoryRate[0][0]-2,data_RespiratoryRate[0][0]-2}, minmaxRR);
@@ -276,7 +301,14 @@ public class VitalSignsPanel extends JPanel {
     public void Decrement(){
         patient.Decrement(locator+99);
     }
-
+    public void Zoomout(){zoom=zoom+100;}
+    public void ZoomIn(){
+        if(zoom>100)
+        {
+            zoom=zoom-100;
+        }
+        else if (zoom>20){zoom=round(zoom/2);}
+    }
 
 
 

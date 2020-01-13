@@ -233,11 +233,21 @@ public class Patient {
         //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
         return(new double[][]{subArray(ecg.get_xdata(), locator, locator+99), subArray(ecg.get_ydata(), locator, (locator++)+99)});
     }
+    public double[][] ECGgetsnippet(int locator, int zoom)
+    {
+        //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
+        return(new double[][]{subArray(ecg.get_xdata(), locator, locator+zoom), subArray(ecg.get_ydata(), locator, (locator++)+zoom)});
+    }
+
     public double[][] Heartbeatgetsnippet(int locator)
     {
         hrcurrent = heartbeat.get_ydata()[locator+99];
-        System.out.println(locator+" "+heartbeat.get_ydata()[locator+99]);
         return(new double[][]{subArray(heartbeat.get_xdata(), locator, locator+99), subArray(heartbeat.get_ydata(), locator, (locator++)+99)});
+    }
+    public double[][] Heartbeatgetsnippet(int locator, int zoom)
+    {
+        hrcurrent = heartbeat.get_ydata()[locator+zoom];
+        return(new double[][]{subArray(heartbeat.get_xdata(), locator, locator+zoom), subArray(heartbeat.get_ydata(), locator, (locator++)+zoom)});
     }
 
     public double[][] Bodytemperaturegetsnippet (int locator)
@@ -245,11 +255,21 @@ public class Patient {
         btcurrent = bodytemperature.get_ydata()[locator+99];
         return(new double[][]{subArray(bodytemperature.get_xdata(), locator, locator+99), subArray(bodytemperature.get_ydata(), locator, (locator++)+99)});
     }
+    public double[][] Bodytemperaturegetsnippet (int locator, int zoom)
+    {
+        btcurrent = bodytemperature.get_ydata()[locator+zoom];
+        return(new double[][]{subArray(bodytemperature.get_xdata(), locator, locator+zoom), subArray(bodytemperature.get_ydata(), locator, (locator++)+zoom)});
+    }
 
     public double[][] Bloodpressuregetsnippet (int locator)
     {
         bpcurrent = bloodpressure.get_ydata()[locator+99];
         return(new double[][]{subArray(bloodpressure.get_xdata(), locator, locator+99), subArray(bloodpressure.get_ydata(), locator, (locator++)+99)});
+    }
+    public double[][] Bloodpressuregetsnippet (int locator, int zoom)
+    {
+        bpcurrent = bloodpressure.get_ydata()[locator+zoom];
+        return(new double[][]{subArray(bloodpressure.get_xdata(), locator, locator+zoom), subArray(bloodpressure.get_ydata(), locator, (locator++)+zoom)});
     }
 
     public double[][] Respiratoryrategetsnippet (int locator)
@@ -257,10 +277,20 @@ public class Patient {
         rrcurrent = respiratoryrate.get_ydata()[locator+99];
         return(new double[][]{subArray(respiratoryrate.get_xdata(), locator, locator+99), subArray(respiratoryrate.get_ydata(), locator, (locator++)+99)});
     }
+    public double[][] Respiratoryrategetsnippet (int locator, int zoom)
+    {
+        rrcurrent = respiratoryrate.get_ydata()[locator+zoom];
+        return(new double[][]{subArray(respiratoryrate.get_xdata(), locator, locator+zoom), subArray(respiratoryrate.get_ydata(), locator, (locator++)+zoom)});
+    }
     public double[][] Diastolidgetsnippet (int locator)
     {
         rrcurrent = respiratoryrate.get_ydata()[locator+99];
         return(new double[][]{subArray(diastolicpressure.get_xdata(), locator, locator+99), subArray(diastolicpressure.get_ydata(), locator, (locator++)+99)});
+    }
+    public double[][] Diastolidgetsnippet (int locator, int zoom)
+    {
+        rrcurrent = respiratoryrate.get_ydata()[locator+zoom];
+        return(new double[][]{subArray(diastolicpressure.get_xdata(), locator, locator+zoom), subArray(diastolicpressure.get_ydata(), locator, (locator++)+zoom)});
     }
 
 
