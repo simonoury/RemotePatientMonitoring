@@ -8,9 +8,7 @@ import java.awt.*;
 public class TabsMenu{
     //Declaration of variables
     private JTabbedPane tabbedPanel;
-    private JPanel patient1,patient2;
     private JPanel patients[] = new JPanel[11];
-    private DropDownMenu dropdown,dropdown2;
     private DropDownMenu[] dropDownMenu = new DropDownMenu[11];
 
     public TabsMenu() {

@@ -56,11 +56,12 @@ public class Alarm {
         return alarmcontainer;
     }
 
+    //Message warning system instead of colored backgrounds
     public double getValue(int i){
        return values[i];
     }
 
-    public void update(double value){
+    public JPanel update(double value){
         message.removeAll();
         if (value > danger_bound_high || value < danger_bound_low) {
             message.add(new JLabel("<html><h2><font color=red>Danger</font></h2>"));
@@ -75,8 +76,9 @@ public class Alarm {
             message.setVisible(true);
         }
         message.updateUI();
-        mainalarmpanel.add(alarmcontainer);
-        mainalarmpanel.add(message);
+        return alarmcontainer;
+        //mainalarmpanel.add(alarmcontainer);
+        //mainalarmpanel.add(message);
     }
 
 }

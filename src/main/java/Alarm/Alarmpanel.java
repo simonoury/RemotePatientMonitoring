@@ -22,9 +22,10 @@ public class Alarmpanel {
     public Alarmpanel(Patient p) {
         ecg = new JPanel();
         valuesPanel = new JPanel();
-        valuesPanel.setBackground(Color.BLACK);
         patient = p;
 
+
+        valuesPanel.setBackground(Color.BLACK);
         ecg.setBackground(Color.black);
 
         //fetch data from Patient class
@@ -127,7 +128,7 @@ public class Alarmpanel {
         if(data_BT<35.5 || data_BT>39) {alarms[3].setBackground(Color.RED);}
         else if ((data_BT<37 && data_BT>35.5)||(data_BT>37.6 && data_BT<39)) {alarms[3].setBackground(Color.ORANGE);}
         else {alarms[3].setBackground(Color.BLACK);};
-        if(data_RR>25 || data_RR<13) {alarms[4].setBackground(Color.RED);}
+        if(data_RR>25 || data_RR<12) {alarms[4].setBackground(Color.RED);}
         else if ((data_RR<12 && data_RR>10)||(data_RR>18 &&data_RR<25)) {alarms[4].setBackground(Color.ORANGE);}
         else {alarms[4].setBackground(Color.BLACK);};
         ecg.setBackground(Color.BLACK);

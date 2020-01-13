@@ -90,10 +90,8 @@ public class VitalSignsPanel extends JPanel {
         graphPanel.validate();
         graphPanel.setVisible(true);
 
-        //mainPanel.setLayout(new GridLayout(1,1));
         this.mainPanel.add(graphPanel);
         this.mainPanel.add(alarmpanel.getValuesPanel());
-        //mainPanel.setPreferredSize(new Dimension (1000,640));
         mainPanel.validate();
         mainPanel.setVisible(true);
 
