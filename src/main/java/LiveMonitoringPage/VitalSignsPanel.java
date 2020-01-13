@@ -1,6 +1,7 @@
 package LiveMonitoringPage;
 
 import Alarm.*;
+import Model.ECG;
 import Model.Patient;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.XChartPanel;
@@ -8,6 +9,7 @@ import org.knowm.xchart.XYChart;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 
 public class VitalSignsPanel extends JPanel {
@@ -40,20 +42,17 @@ public class VitalSignsPanel extends JPanel {
     // METHODS
 
     // constructor method
-    public VitalSignsPanel(Patient p) {
 
-        //create patient
-        patient = p;
-
-
-        // data for sine wave
+    public VitalSignsPanel() {
+        locator=0;
+        patient = new Patient();
         double phase = 0;
         double[][] data_ECG = getECGData(locator);
-        double[][] data_HR = getHRData(phase);
-        double[][] data_temp = getTempData(phase);
-        double[][] data_BPS =  getBPSData(phase);
+        double[][] data_HR = getHRData(locator);
+        double[][] data_temp = getTempData(locator);
+        double[][] data_BPS =  getBPSData(locator);
         //double[][] data_BPD =  getBPDData();
-        double[][] data = getRespiratoryData(phase);
+        double[][] data = getRespiratoryData(locator);
 
         // min max info
         double[] minmaxECG = patient.minmaxECG();
@@ -65,6 +64,64 @@ public class VitalSignsPanel extends JPanel {
         bpsChart = QuickChart.getChart("Systolic Blood Pressure", "Time /s", "Pressure /mmHg", "sine", data_BPS[0], data_BPS[1]);
         //bpdChart = QuickChart.getChart("Systolic Blood Pressure", "Time /s", "Pressure /mmHg", "sine", data_BPD[0], data_BPD[1]);
         rrChart = QuickChart.getChart("Respiratory Rate", "Time /s", "Rate /BrPM", "sine", data[0], data[1]);
+        ecgChart.getStyler().setPlotBackgroundColor(Color.black);
+        alarmpanel=new Alarmpanel(patient);
+
+        // create panels
+        graphPanel = new JPanel();
+        ecgPanel = new XChartPanel(ecgChart);
+        hrPanel = new XChartPanel(hrChart);
+        tempPanel = new XChartPanel(tempChart);
+        bpPanel = new XChartPanel(bpsChart);
+        rrPanel = new XChartPanel(rrChart);
+        mainPanel=new JPanel();
+
+        // add chart panels to main panel
+        graphPanel.setLayout(new GridLayout(5, 2));
+        this.graphPanel.add(ecgPanel);
+        this.graphPanel.add(hrPanel);
+        this.graphPanel.add(tempPanel);
+        this.graphPanel.add(bpPanel);
+        this.graphPanel.add(rrPanel);
+        graphPanel.setPreferredSize(new Dimension (800,640));
+        graphPanel.validate();
+        graphPanel.setVisible(true);
+
+        //mainPanel.setLayout(new GridLayout(1,1));
+        this.mainPanel.add(graphPanel);
+        this.mainPanel.add(alarmpanel.getValuesPanel());
+        //mainPanel.setPreferredSize(new Dimension (1000,640));
+        mainPanel.validate();
+        mainPanel.setVisible(true);
+
+    }
+    public VitalSignsPanel(Patient p) {
+
+        //create patient
+        patient = p;
+
+
+        // data for sine wave
+        double phase = 0;
+        double[][] data_ECG = getECGData(locator);
+        double[][] data_HR = getHRData(locator);
+        double[][] data_temp = getTempData(locator);
+        double[][] data_BPS =  getBPSData(locator);
+        //double[][] data_BPD =  getBPDData();
+        double[][] data = getRespiratoryData(locator);
+
+        // min max info
+        double[] minmaxECG = patient.minmaxECG();
+
+        // create charts
+        ecgChart = QuickChart.getChart("ECG", "Time /s", "Voltage /mV", "sine", data_ECG[0], data_ECG[1]);
+        hrChart = QuickChart.getChart("Heart Rate", "Time /s", "Rate /BPM", "sine", data_HR[0], data_HR[1]);
+        tempChart = QuickChart.getChart("Surface Body Temperature", "Time /s", "Temperature /C", "sine", data_temp[0], data_temp[1]);
+        bpsChart = QuickChart.getChart("Systolic Blood Pressure", "Time /s", "Pressure /mmHg", "sine", data_BPS[0], data_BPS[1]);
+        //bpdChart = QuickChart.getChart("Systolic Blood Pressure", "Time /s", "Pressure /mmHg", "sine", data_BPD[0], data_BPD[1]);
+        rrChart = QuickChart.getChart("Respiratory Rate", "Time /s", "Rate /BrPM", "sine", data[0], data[1]);
+
+
         ecgChart.getStyler().setPlotBackgroundColor(Color.black);
         alarmpanel=new Alarmpanel(p);
 
@@ -103,16 +160,17 @@ public class VitalSignsPanel extends JPanel {
     }
 
     //gets data from patient class
-    protected  double[][] getRespiratoryData(double phase) {
+    protected  double[][] getRespiratoryData(int locator) {
         return patient.Respiratoryrategetsnippet(locator);
     }
-    protected  double[][] getTempData(double phase) {
+    protected  double[][] getTempData(int locator) {
         return patient.Bodytemperaturegetsnippet(locator);
     }
-    protected double[][] getBPSData(double phase) {
+    protected double[][] getBPSData(int locator) {
         return patient.Bloodpressuregetsnippet(locator);
     }
     protected double[][] getECGData(int locator) {
+        System.out.println(Arrays.toString(patient.ECGgetsnippet(0)));
         return patient.ECGgetsnippet(locator);
     }
     protected double[][] getHRData(double phase) {
@@ -201,12 +259,14 @@ public class VitalSignsPanel extends JPanel {
         graphPanel.add(bpPanel);
         graphPanel.add(rrPanel);
 
+
         //locator = locator+1;
     }
 
     public void Update()
     {
         alarmpanel.Update();
+
         updatePanel();
 
     }
@@ -215,6 +275,16 @@ public class VitalSignsPanel extends JPanel {
     }
     public void Decrement(){
         patient.Decrement(locator+99);
+    }
+
+    public void Augment()
+    {
+        patient.Augment(locator);
+    }
+
+    public void Decrement()
+    {
+        patient.Decrement(locator);
     }
 
 
