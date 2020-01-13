@@ -93,7 +93,7 @@ public class RecordsPanel extends JPanel {
         }
         recordedvalues.add(time);
 
-
+        //HR
         data_HR = getdata_HR();
         heartrate.setLayout(new GridLayout(11, 1));
         heartrate.add(new JLabel("<html> <h4><font color=white> HR:  </font> </h4>"));
@@ -111,7 +111,7 @@ public class RecordsPanel extends JPanel {
         recordedvalues.add(heartrate);
 
 
-
+        //SBP
         bloodpressure.setLayout(new GridLayout(11, 1));
         bloodpressure.add(new JLabel("<html><h4><font color=white>  BP (systolic):  </font> </h4>"));
         for (double bloodpressurevalue : bloodpressurevalues) {
@@ -127,6 +127,7 @@ public class RecordsPanel extends JPanel {
         }
         recordedvalues.add(bloodpressure);
 
+        //DBP
         /*dbloodpressure.setLayout(new GridLayout(11, 1));
         dbloodpressure.add(new JLabel("<html><h4><font color=white>  BP (diastolic):  </font> </h4>"));
         for (double dbloodpressurevalue : Dbloodpressurevalues) {
@@ -142,6 +143,7 @@ public class RecordsPanel extends JPanel {
         }
         recordedvalues.add(bloodpressure);*/
 
+        //BT
         data_BT = getdata_BT();
         bodytemperature.setLayout(new GridLayout(11, 1));
         bodytemperature.add(new JLabel("<html> <h4><font color=white>  BT:  </font></h4>"));
@@ -158,6 +160,7 @@ public class RecordsPanel extends JPanel {
         }
         recordedvalues.add(bodytemperature);
 
+        //RR
         data_RR = getdata_RR();
         respiratoryrate.setLayout(new GridLayout(11, 1));
         respiratoryrate.add(new JLabel("<html><h4><font color=white>  RR:  <font color=white></h4>"));
