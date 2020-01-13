@@ -13,8 +13,8 @@ public class RecordsPanel extends JPanel {
     private JPanel recordedvalues;
     private JPanel averagevalues;
     private JPanel info;
-    private JPanel time, heartrate, bloodpressure, bodytemperature, respiratoryrate;
-    private JPanel heartrateaverage, bloodpressureaverage, bodytemperatureaverage, respiratoryrateaverage;
+    private JPanel time, heartrate, bloodpressure, bodytemperature, respiratoryrate, diastolicpressure;
+    private JPanel heartrateaverage, bloodpressureaverage, bodytemperatureaverage, respiratoryrateaverage, diastolicpressureaverage;
     int locator = 0;
     private Patient patient;
 
@@ -44,6 +44,7 @@ public class RecordsPanel extends JPanel {
         //creates am array with the data in PostegreSQL
         double data_HR [] = getdata_HR();
         double data_BP [] = getdata_BP();
+        double data_DBP [] = getdata_DBP();
         double data_BT [] = getdata_BT();
         double data_RR [] = getdata_RR();
         double data_time [] = getdata_time();
@@ -87,7 +88,6 @@ public class RecordsPanel extends JPanel {
         recordedvalues.add(time);
 
 
-        data_HR = getdata_HR();
         double heartratevalues [] = {data_HR[1],data_HR[150], data_HR[300], data_HR[503], data_HR[650], data_HR[800], data_HR[953], data_HR[1100], data_HR[1450], data_HR[1800] };
         heartrate.setLayout(new GridLayout(11, 1));
         heartrate.add(new JLabel("<html> <h4><font color=white> HR:  </font> </h4>"));
@@ -99,14 +99,14 @@ public class RecordsPanel extends JPanel {
 
 
         double bloodpressurevalues [] = {data_BP[1],data_BP[150], data_BP[300], data_BP[503], data_BP[650], data_BP[800], data_BP[953], data_BP[1100], data_BP[1450], data_BP[1800] };
+        double diastolicpressurevalues [] = {data_DBP[1],data_DBP[150], data_DBP[300], data_DBP[503], data_DBP[650], data_DBP[800], data_DBP[953], data_DBP[1100], data_DBP[1450], data_DBP[1800] };
         bloodpressure.setLayout(new GridLayout(11, 1));
-        bloodpressure.add(new JLabel("<html><h4><font color=white>  BP:  </font> </h4>"));
-        for (double bloodpressurevalue : bloodpressurevalues) {
-            bloodpressure.add(new JLabel("<html><font color=white>"+ String.valueOf(bloodpressurevalue)+"</font></html>"));
+        bloodpressure.add(new JLabel("<html><h4><font color=white>  SBP/DBP:  </font> </h4>"));
+        for (int i = 0; i < bloodpressurevalues.length; i++) {
+            bloodpressure.add(new JLabel("<html><font color=white>"+ String.valueOf(bloodpressurevalues[i])+"/" +String.valueOf(diastolicpressurevalues[i]) +"</font></html>"));
         }
         recordedvalues.add(bloodpressure);
 
-        data_BT = getdata_BT();
         double bodytemperaturevalues [] = {data_BT[1],data_BT[150], data_BT[300], data_BT[503], data_BT[650], data_BT[800], data_BT[953], data_BT[1100], data_BT[1503], data_BT[1800] };
         bodytemperature.setLayout(new GridLayout(11, 1));
         bodytemperature.add(new JLabel("<html> <h4><font color=white>  BT:  </font></h4>"));
@@ -115,7 +115,6 @@ public class RecordsPanel extends JPanel {
         }
         recordedvalues.add(bodytemperature);
 
-        data_RR = getdata_RR();
         double respiratoryratevalues [] = {data_RR[1],data_RR[150], data_RR[300], data_RR[503], data_RR[650], data_RR[800], data_RR[953], data_RR[1100], data_RR[1503], data_RR[1800] };
         respiratoryrate.setLayout(new GridLayout(11, 1));
         respiratoryrate.add(new JLabel("<html><h4><font color=white>  RR:  <font color=white></h4>"));
@@ -145,8 +144,14 @@ public class RecordsPanel extends JPanel {
             sum = sum + val;
         }
         avgbloodpressure = sum/bloodpressurevalues.length;
+        double avgdiastolicpressure;
+        sum = 0;
+        for (double val : diastolicpressurevalues){
+            sum = sum + val;
+        }
+        avgdiastolicpressure = sum/diastolicpressurevalues.length;
         bloodpressureaverage.add(new JLabel("<html><font color=white>Blood Pressure average value: </font>"));
-        bloodpressureaverage.add(new JLabel("<html><font color=white>"+String.valueOf(avgbloodpressure)+"</font> </html>"));
+        bloodpressureaverage.add(new JLabel("<html><font color=white>"+String.valueOf(avgbloodpressure)+"/"+String.valueOf(avgdiastolicpressure)+"</font> </html>"));
         averagevalues.add(bloodpressureaverage);
 
         double avgbodytemperature;
@@ -198,6 +203,9 @@ public class RecordsPanel extends JPanel {
     }
     protected double[] getdata_BP() {
         return patient.getBPdata();
+    }
+    protected double[] getdata_DBP() {
+        return patient.getDBPdata();
     }
     protected double[] getdata_BT() {
         return patient.getBTdata();
