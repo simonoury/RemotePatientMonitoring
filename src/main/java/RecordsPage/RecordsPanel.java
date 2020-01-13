@@ -187,7 +187,7 @@ public class RecordsPanel extends JPanel {
         patientProfile.setPreferredSize(new Dimension(550, 645));
         patientProfile.setVisible(true);
 
-        //add JPanels to main Panel patientProgfile
+        //add JPanels to main Panel patientProfile
         patientProfile.add(info);
         patientProfile.add(recordedvalues);
         patientProfile.add(averagevalues);
