@@ -323,5 +323,6 @@ public class Patient {
     public double getRrcurrent() {
         return rrcurrent;
     }
+    public double getDpbcurrent() {return  dpbcurrent;}
 }
 
