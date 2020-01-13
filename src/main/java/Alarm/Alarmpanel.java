@@ -118,7 +118,7 @@ public class Alarmpanel {
         alarms[4].setText("<html><h2><font color=white>"+data_RR+"</font></h2>");
 
         System.out.println("dataHR" +data_HR);
-        if(data_HR<50 || data_HR>120) {alarms[1].setBackground(Color.RED);}
+        if(data_HR<45 || data_HR>120) {alarms[1].setBackground(Color.RED);}
         else if ((data_HR<50&&data_HR>45) || (data_HR<120&data_HR>100)) {alarms[1].setBackground(Color.ORANGE);}
         else {alarms[1].setBackground(Color.BLACK);
         System.out.println("no");}
@@ -126,7 +126,7 @@ public class Alarmpanel {
         else if ((data_BP<115 && data_BP>108)||(data_BP>120 &&data_BP<139)) {alarms[2].setBackground(Color.ORANGE);}
         else {alarms[2].setBackground(Color.BLACK);};
         if(data_BT<35.5 || data_BT>39) {alarms[3].setBackground(Color.RED);}
-        else if ((data_BT<37 && data_BT>35.5)||(data_BT>37.6 && data_BT<39)) {alarms[3].setBackground(Color.ORANGE);}
+        else if ((data_BT<37 && data_BT>35.5)||(data_BT>38 && data_BT<40)) {alarms[3].setBackground(Color.ORANGE);}
         else {alarms[3].setBackground(Color.BLACK);};
         if(data_RR>25 || data_RR<12) {alarms[4].setBackground(Color.RED);}
         else if ((data_RR<12 && data_RR>10)||(data_RR>18 &&data_RR<25)) {alarms[4].setBackground(Color.ORANGE);}
