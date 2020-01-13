@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static java.awt.Color.black;
+
 public class LiveMonitoringPageView {
     //Instantiate the  panels that will be used
     private ProfilePanel profilePanel;
@@ -22,8 +24,8 @@ public class LiveMonitoringPageView {
 
         page=new JPanel();
 
-        page.setPreferredSize(new Dimension(1400,650));
-        page.setBackground(Color.black);
+        page.setPreferredSize(new Dimension(1450,650));
+        page.setBackground(black);
         JButton augment, decrement;
         augment = new JButton("+1");
         augment.addActionListener(new ActionListener(){
@@ -40,6 +42,7 @@ public class LiveMonitoringPageView {
         GridLayout grid;
         grid=new GridLayout(2, 1);
         JPanel buttons = new JPanel(grid);
+        buttons.setBackground(black);
 
 
         buttons.add(augment);

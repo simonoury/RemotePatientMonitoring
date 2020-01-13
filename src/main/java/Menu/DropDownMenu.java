@@ -46,7 +46,6 @@ public class DropDownMenu extends JComboBox implements ActionListener {
                 JComboBox<String> combo = (JComboBox<String>) e.getSource();
                 String selectedoption = (String) combo.getSelectedItem();
 
-
                 if (selectedoption.equals("Live Monitoring")) {
                     //Refresh page
                     selectedPanel.removeAll();

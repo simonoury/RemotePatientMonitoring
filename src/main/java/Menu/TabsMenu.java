@@ -35,6 +35,7 @@ public class TabsMenu{
             patients[i].setLayout(new FlowLayout());
             patients[i].add(dropDownMenu[i].getOptions());
             patients[i].add(dropDownMenu[i].getSelectedPanel());
+            patients[i].setBackground(Color.black);
         }
 
         //Tabs Menu
