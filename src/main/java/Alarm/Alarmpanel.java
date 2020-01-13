@@ -95,6 +95,22 @@ public class Alarmpanel {
         return valuesPanel;
     }
 
+    public Alarm getHeartrate() {
+        return heartrate;
+    }
+
+    public Alarm getBloodpressure() {
+        return bloodpressure;
+    }
+
+    public Alarm getRespiratoryrate() {
+        return respiratoryrate;
+    }
+
+    public Alarm getBodytemperature() {
+        return bodytemperature;
+    }
+
     public void Update(){
 
 
@@ -110,47 +126,3 @@ public class Alarmpanel {
 
     }
 }
-
-
-/*
-        ActionListener taskPerformer = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-
-                //Index of array is current time:
-                heartrate.getAlarm(heartratevalues[CurrentTime()]).removeAll();
-                bloodpressure.getAlarm(heartratevalues[CurrentTime()]).removeAll();
-                respiratoryrate.getAlarm(heartratevalues[CurrentTime()]).removeAll();
-                bodytemperature.getAlarm(heartratevalues[CurrentTime()]).removeAll();
-
-                heartrate.getAlarm(heartratevalues[CurrentTime()]).setOpaque(false);
-                respiratoryrate.getAlarm(heartratevalues[CurrentTime()]).setOpaque(false);
-                bloodpressure.getAlarm(heartratevalues[CurrentTime()]).setOpaque(false);
-                bodytemperature.getAlarm(heartratevalues[CurrentTime()]).setOpaque(false);
-
-
-
-                valuesPanel.add(ecg);
-                valuesPanel.add(heartrate.getAlarm(heartratevalues[CurrentTime()]));
-                valuesPanel.add(bodytemperature.getAlarm(heartratevalues[CurrentTime()]));
-                valuesPanel.add(bloodpressure.getAlarm(heartratevalues[CurrentTime()]));
-                valuesPanel.add(respiratoryrate.getAlarm(heartratevalues[CurrentTime()]));
-
-            }
-        };
-        Timer t = new Timer(1000, taskPerformer);
-        t.start();
-    }
-    public int CurrentTime(){
-        Calendar cal = new GregorianCalendar();
-        int second = cal.get(Calendar.SECOND);
-        int min = cal.get(Calendar.MINUTE);
-        int hour = cal.get(Calendar.HOUR);
-        //heartrateLabel.setText(s);
-        return second;
-
-    }
-
-
-
-}*/
