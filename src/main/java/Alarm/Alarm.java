@@ -16,13 +16,10 @@ public class Alarm {
     Patient patient;
 
     private double[] values;
-    private double value;
-    private JLabel dangerlabel;
     private JPanel alarmcontainer;
     private JPanel message;
     private JPanel mainalarmpanel;
-    private Timer timer;
-    private int count;
+
 
     public Alarm(Patient p, double warning_bound_low, double warning_bound_high, double danger_bound_low, double danger_bound_high, double value) {
         //this.patient=p;
@@ -32,7 +29,6 @@ public class Alarm {
         this.danger_bound_low = danger_bound_low;
         this.danger_bound_high = danger_bound_high;
 
-        dangerlabel = new JLabel();
         message=new JPanel();
         alarmcontainer = new JPanel();
         mainalarmpanel=new JPanel();
@@ -45,9 +41,7 @@ public class Alarm {
     }
 
     public JPanel getAlarm(double value){
-            //alarmcontainer.removeAll();
         update(value);
-
         return mainalarmpanel;
     }
 
@@ -70,17 +64,14 @@ public class Alarm {
         message.removeAll();
         if (value > danger_bound_high || value < danger_bound_low) {
             message.add(new JLabel("<html><h2><font color=red>Danger</font></h2>"));
-            //alarmcontainer.setBackground(Color.red);
             message.setVisible(true);
         }
         else if ((value > warning_bound_high && value < danger_bound_high) || (value < warning_bound_low && value > danger_bound_low)) {
-            //alarmcontainer.setBackground(Color.yellow);
             message.add(new JLabel("<html><h2><font color=orange>Warning</font></h2>"));
             message.setVisible(true);
+
         } else {
             message.add(new JLabel("<html><h2><font color=green>Normal</font></h2>"));
-
-            //alarmcontainer.setBackground(Color.green);
             message.setVisible(true);
         }
         message.updateUI();
