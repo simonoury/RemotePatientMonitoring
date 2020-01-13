@@ -118,6 +118,10 @@ public class VitalSignsPanel extends JPanel {
     protected double[][] getHRData(double phase) {
         return patient.Heartbeatgetsnippet(locator);
     }
+    protected  double[][] getDiaData()
+    {
+        return patient.Diastolidgetsnippet(locator);
+    }
 
     public void updatePanel(){
         //System.out.println("updated " + patient.getGivenname());
@@ -149,10 +153,14 @@ public class VitalSignsPanel extends JPanel {
         hrChart.getStyler().setSeriesColors(new Color[]{Color.magenta,Color.black});
         JPanel hrPanel2 = new XChartPanel(hrChart);
 
+
         double[][] data_Bloodpressure = getBPSData(locator);
+        double[][] data_diastolid = getDiaData();
         double[] minmaxBP = patient.minmaxBP();
         bpsChart = QuickChart.getChart("Blood Pressure", "Time/s", "Pressure /mmHg", "sine", data_Bloodpressure[0], data_Bloodpressure[1]);
         bpsChart.addSeries("minmax", new double[]{data_Bloodpressure[0][0]-2,data_Bloodpressure[0][0]-2}, minmaxBP);
+        bpsChart.addSeries("diastolid", data_diastolid[0], data_diastolid[1]);
+
         //Design
         bpsChart.getStyler().setPlotBackgroundColor(Color.black);
         bpsChart.getStyler().setChartBackgroundColor(Color.black);

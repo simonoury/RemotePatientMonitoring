@@ -33,6 +33,7 @@ public class Patient {
     private double dpbcurrent;
     private double rrcurrent;
 
+
     public  Patient ()
     {
         double[] xtemp = new double[3600];
@@ -203,6 +204,8 @@ public class Patient {
         diastolicpressure = new Diastolicpressure(new double[][]{xdata, ydata});
         dpbcurrent = ydata[99];
 
+        System.out.println(Arrays.toString(ecg.get_xdata()));
+
 
     }
 
@@ -254,6 +257,12 @@ public class Patient {
         rrcurrent = respiratoryrate.get_ydata()[locator+99];
         return(new double[][]{subArray(respiratoryrate.get_xdata(), locator, locator+99), subArray(respiratoryrate.get_ydata(), locator, (locator++)+99)});
     }
+    public double[][] Diastolidgetsnippet (int locator)
+    {
+        rrcurrent = respiratoryrate.get_ydata()[locator+99];
+        return(new double[][]{subArray(diastolicpressure.get_xdata(), locator, locator+99), subArray(diastolicpressure.get_ydata(), locator, (locator++)+99)});
+    }
+
 
     //Accessors: return strings so they can be printed in the profile panel and records panel
     public String getGivenname()
