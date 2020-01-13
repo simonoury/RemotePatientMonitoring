@@ -45,13 +45,13 @@ public class RecordsPanel extends JPanel {
         double data_BT [] = getdata_BT();
         double data_RR [] = getdata_RR();
         double data_time [] = getdata_time();
-        //double data_DBP []=getdata_DBP();
+        double data_DBP []= getdata_DBP();
 
         heartratevalues = new double[]{data_HR[1],data_HR[150], data_HR[300], data_HR[503], data_HR[650], data_HR[800], data_HR[953], data_HR[1100], data_HR[1450], data_HR[1800] };
         bloodpressurevalues=new double[] {data_BP[1],data_BP[150], data_BP[300], data_BP[503], data_BP[650], data_BP[800], data_BP[953], data_BP[1100], data_BP[1450], data_BP[1800] };
         bodytemperaturevalues = new double[]{data_BT[1],data_BT[150], data_BT[300], data_BT[503], data_BT[650], data_BT[800], data_BT[953], data_BT[1100], data_BT[1503], data_BT[1800] };
         respiratoryratevalues= new double[]{data_RR[1],data_RR[150], data_RR[300], data_RR[503], data_RR[650], data_RR[800], data_RR[953], data_RR[1100], data_RR[1503], data_RR[1800] };
-        //Dbloodpressurevalues=new double[]{data_DBP[1],data_DBP[150], data_DBP[300], data_DBP[503], data_DBP[650], data_DBP[800], data_DBP[953], data_DBP[1100], data_DBP[1450], data_DBP[1800] };
+        Dbloodpressurevalues=new double[]{data_DBP[1],data_DBP[150], data_DBP[300], data_DBP[503], data_DBP[650], data_DBP[800], data_DBP[953], data_DBP[1100], data_DBP[1450], data_DBP[1800] };
 
 
         //Colors
@@ -66,6 +66,8 @@ public class RecordsPanel extends JPanel {
         bloodpressureaverage.setBackground(Color.black);
         bodytemperatureaverage.setBackground(Color.black);
         respiratoryrateaverage.setBackground(Color.black);
+        dbloodpressure.setBackground(Color.black);
+        Dbloodpressureaverage.setBackground(Color.black);
         time.setBackground(Color.black);
 
         //Fill info Jlabel
@@ -84,7 +86,6 @@ public class RecordsPanel extends JPanel {
 
         //fill in table with values from array -------------------------------------------------------------------------
 
-
         double timevalues [] = {data_time[1],data_time[150], data_time[300], data_time[503], data_time[650], data_time[800], data_time[953], data_time[1100], data_time[1450], data_time[1800] };
         time.setLayout(new GridLayout(11, 1));
         time.add(new JLabel("<html><h4> <font color=white>  Time:   </font></h4>"));
@@ -94,7 +95,6 @@ public class RecordsPanel extends JPanel {
         recordedvalues.add(time);
 
         //HR
-        data_HR = getdata_HR();
         heartrate.setLayout(new GridLayout(11, 1));
         heartrate.add(new JLabel("<html> <h4><font color=white> HR:  </font> </h4>"));
         for (double heartratevalue : heartratevalues) {
@@ -113,7 +113,7 @@ public class RecordsPanel extends JPanel {
 
         //SBP
         bloodpressure.setLayout(new GridLayout(11, 1));
-        bloodpressure.add(new JLabel("<html><h4><font color=white>  BP (systolic):  </font> </h4>"));
+        bloodpressure.add(new JLabel("<html><h4><font color=white>  BP (s):  </font> </h4>"));
         for (double bloodpressurevalue : bloodpressurevalues) {
             if(bloodpressurevalue > 139 || bloodpressurevalue < 108){
                 bloodpressure.add(new JLabel("<html><font color=red>"+String.valueOf(bloodpressurevalue)+"</font></html>"));
@@ -128,20 +128,21 @@ public class RecordsPanel extends JPanel {
         recordedvalues.add(bloodpressure);
 
         //DBP
-        /*dbloodpressure.setLayout(new GridLayout(11, 1));
-        dbloodpressure.add(new JLabel("<html><h4><font color=white>  BP (diastolic):  </font> </h4>"));
+        dbloodpressure.setLayout(new GridLayout(11, 1));
+        dbloodpressure.add(new JLabel("<html><h4><font color=white>  BP (d):  </font> </h4>"));
         for (double dbloodpressurevalue : Dbloodpressurevalues) {
-            if(dbloodpressurevalue > 139 || dbloodpressurevalue < 108){
-                bloodpressure.add(new JLabel("<html><font color=red>"+String.valueOf(dbloodpressurevalue)+"</font></html>"));
+            if(dbloodpressurevalue > 90 || dbloodpressurevalue < 75){
+                dbloodpressure.add(new JLabel("<html><font color=red>"+String.valueOf(dbloodpressurevalue)+"</font></html>"));
             }
-            else if((dbloodpressurevalue> 120 && dbloodpressurevalue < 139) || (dbloodpressurevalue < 115 && dbloodpressurevalue > 108)){
-                bloodpressure.add(new JLabel("<html><font color=orange>" + String.valueOf(dbloodpressurevalue) + "</font></html>"));
+            else if((dbloodpressurevalue> 84 && dbloodpressurevalue < 88) || (dbloodpressurevalue < 78 && dbloodpressurevalue > 75)){
+                dbloodpressure.add(new JLabel("<html><font color=orange>" + String.valueOf(dbloodpressurevalue) + "</font></html>"));
             }
             else{
-                bloodpressure.add(new JLabel("<html><font color=green>" + String.valueOf(dbloodpressurevalue) + "</font></html>"));
+                dbloodpressure.add(new JLabel("<html><font color=green>" + String.valueOf(dbloodpressurevalue) + "</font></html>"));
             }
         }
-        recordedvalues.add(bloodpressure);*/
+        recordedvalues.add(dbloodpressure);
+
 
         //BT
         data_BT = getdata_BT();
@@ -202,7 +203,7 @@ public class RecordsPanel extends JPanel {
         bloodpressureaverage.add(new JLabel("<html><font color=white>"+String.valueOf(avgbloodpressure)+"</font> </html>"));
         averagevalues.add(bloodpressureaverage);
 
-        /*//Average of DBP
+        //Average of DBP
         sum = 0;
         for (double val : Dbloodpressurevalues){
             sum = sum + val;
@@ -210,7 +211,7 @@ public class RecordsPanel extends JPanel {
         avgDbloodpressure = sum/Dbloodpressurevalues.length;
         Dbloodpressureaverage.add(new JLabel("<html><font color=white> Diastolic Blood Pressure average value: </font>"));
         Dbloodpressureaverage.add(new JLabel("<html><font color=white>"+String.valueOf(avgDbloodpressure)+"</font> </html>"));
-        averagevalues.add(Dbloodpressureaverage);*/
+        averagevalues.add(Dbloodpressureaverage);
 
         //Average of BT
         sum = 0; //as IntStream.of().sum() does not work for double values
@@ -236,10 +237,10 @@ public class RecordsPanel extends JPanel {
         //set dimensions & layouts of Jpanels
         info.setPreferredSize(new Dimension(500, 75));
         info.setVisible(true);
-        recordedvalues.setPreferredSize(new Dimension(525, 400));
+        recordedvalues.setPreferredSize(new Dimension(600, 400));
         recordedvalues.setVisible(true);
         recordedvalues.setBorder(new MatteBorder(2, 0, 2, 0, Color.WHITE) );
-        averagevalues.setPreferredSize(new Dimension(540, 150));
+        averagevalues.setPreferredSize(new Dimension(610, 150));
         averagevalues.setVisible(true);
 
 
@@ -249,7 +250,7 @@ public class RecordsPanel extends JPanel {
         patientProfile.add(averagevalues);
 
         //Patient Records Panel layout
-        patientProfile.setPreferredSize(new Dimension(550, 645));
+        patientProfile.setPreferredSize(new Dimension(600, 645));
         patientProfile.setVisible(true);
         patientProfile.setBorder(new MatteBorder(2, 2, 2, 2, Color.WHITE) );
         patientProfile.setBackground(Color.black);
@@ -262,9 +263,9 @@ public class RecordsPanel extends JPanel {
     protected double[] getdata_BP() {
         return patient.getBPdata();
     }
-   // protected double[] getdata_DBP(){
-      //  return patient.getDBPdata();
-   // }
+    protected double[] getdata_DBP(){
+       return patient.getDBPdata();
+    }
     protected double[] getdata_BT() {
         return patient.getBTdata();
     }
