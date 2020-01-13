@@ -4,6 +4,8 @@ import Model.Patient;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TabsMenu{
     //Declaration of variables
@@ -36,10 +38,23 @@ public class TabsMenu{
             patients[i].add(dropDownMenu[i].getOptions());
             patients[i].add(dropDownMenu[i].getSelectedPanel());
             if(i==10){
-                JButton augmentKButton = new JButton("+5");
-                JButton decrementKButton = new JButton("-5");
+                JButton augmentKButton = new JButton("Augment");
+                augmentKButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        dropDownMenu[10].Augment();
+                    }
+                });
+                JButton decrementKButton = new JButton("Decrement");
+                decrementKButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        dropDownMenu[10].Decrement();
+                    }
+                });
                 patients[i].add(augmentKButton);
                 patients[i].add(decrementKButton);
+
             }
         }
 

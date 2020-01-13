@@ -352,12 +352,23 @@ public class Patient {
         return rrcurrent;
     }
 
-    public void Augment()
+    public void Augment(int locator)
     {
-        for (int i=(locator+100); i<ecg.get_xdata().length; i++)
-        {
-
-        }
+        locator = locator+99;
+        ecg.augment(locator);
+        bloodpressure.augment(locator);
+        bodytemperature.augment(locator);
+        heartbeat.augment(locator);
+        respiratoryrate.augment(locator);
+    }
+    public void Decrement(int locator)
+    {
+        locator = locator + 99;
+        ecg.decrement(locator);
+        bloodpressure.decrement(locator);
+        bodytemperature.decrement(locator);
+        heartbeat.decrement(locator);
+        respiratoryrate.decrement(locator);
     }
 }
 

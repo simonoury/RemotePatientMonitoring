@@ -256,14 +256,26 @@ public class VitalSignsPanel extends JPanel {
         graphPanel.add(bpPanel);
         graphPanel.add(rrPanel);
 
+
         //locator = locator+1;
     }
 
     public void Update()
     {
         alarmpanel.Update();
+
         updatePanel();
 
+    }
+
+    public void Augment()
+    {
+        patient.Augment(locator);
+    }
+
+    public void Decrement()
+    {
+        patient.Decrement(locator);
     }
 
 

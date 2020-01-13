@@ -73,4 +73,16 @@ public class DropDownMenu extends JComboBox implements ActionListener {
         liveMonitoringPageView.Update();
     }
 
+    public void Augment() {
+        liveMonitoringPageView.Augment();
+    }
+
+    public void  Decrement()
+    {
+        liveMonitoringPageView.Decrement();
+
+    }
+
+
+
 }

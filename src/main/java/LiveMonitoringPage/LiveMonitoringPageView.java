@@ -49,4 +49,14 @@ public class LiveMonitoringPageView {
         profilePanel.Update();
     }
 
+    public void Augment()
+    {
+        profileGraph.Augment();
+    }
+
+    public void Decrement()
+    {
+        profileGraph.Decrement();
+    }
+
 }

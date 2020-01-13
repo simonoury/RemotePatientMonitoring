@@ -24,21 +24,20 @@ public class Alarm {
     private Timer timer;
     private int count;
 
-    public Alarm(Patient p, double warning_bound_low, double warning_bound_high, double danger_bound_low, double danger_bound_high, double[] values) {
-        this.patient=p;
-        this.values=values;
+    public Alarm(Patient p, double warning_bound_low, double warning_bound_high, double danger_bound_low, double danger_bound_high, double value) {
+        //this.patient=p;
+        this.value=value;
         this.warning_bound_low = warning_bound_low;
         this.warning_bound_high = warning_bound_high;
         this.danger_bound_low = danger_bound_low;
         this.danger_bound_high = danger_bound_high;
-        this.values = values;
 
         dangerlabel = new JLabel();
         message=new JPanel();
         alarmcontainer = new JPanel();
         mainalarmpanel=new JPanel();
         alarmcontainer.setOpaque(true);
-        mainalarmpanel.setLayout(new GridLayout(1,2));
+        mainalarmpanel.setLayout(new GridLayout(5,1));
 
         alarmcontainer.setBackground(Color.black);
         message.setBackground(Color.black);
@@ -56,9 +55,9 @@ public class Alarm {
     public JPanel addText(double value){
         alarmcontainer.updateUI();
         alarmcontainer.removeAll();
-        JLabel label=new JLabel();
-        label.setVerticalAlignment(JLabel.CENTER);
-        label.setText("<html><h2><font color=white>"+(String.valueOf(value))+"</font></h2>");
+            JLabel label=new JLabel();
+            label.setVerticalAlignment(JLabel.CENTER);
+            label.setText("<html><h2><font color=white>"+(String.valueOf(value))+"</font></h2>");
         alarmcontainer.add(label);
         return alarmcontainer;
     }

@@ -22,4 +22,16 @@ public class Heartbeat {
     {
         return ydata;
     }
+    public void augment(int locator){
+        for (int i=locator; i<ydata.length; i++)
+        {
+            ydata[i] = ydata[i]+1;
+        }
+    }
+    public void decrement(int locator){
+        for (int i=locator; i<ydata.length; i++)
+        {
+            ydata[i] = ydata[i]-1;
+        }
+    }
 }
