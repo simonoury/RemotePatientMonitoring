@@ -2,6 +2,7 @@ package LiveMonitoringPage;
 
 import Database.DBConnect;
 import Model.Patient;
+import RecordsPage.RecordsPanel;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
@@ -16,9 +17,10 @@ public class ProfilePanel extends JPanel  {
     private JPanel info, heartrate,bodytemp,bloodpress,resprate;
     DBConnect database;
     private Patient patient;
+    RecordsPanel recordsPanel;
 
     //Sample values to be replaced with database values
-    private int normalvalues[]={60,37,14,110,70};
+    private double normalvalues[];
 
     private ResultSet res;
     private String request;
@@ -39,6 +41,10 @@ public class ProfilePanel extends JPanel  {
         surname = patient.getGivenname();
         admdate = patient.getDate();
         idno = patient.getId();
+        recordsPanel=new RecordsPanel(patient);
+
+        normalvalues= new double[]{1, 23, 23, 323, 23};
+
 
         //Instantiation of panels
         patientProfile =new JPanel();
@@ -76,17 +82,17 @@ public class ProfilePanel extends JPanel  {
         info.add(date);
 
         heartrate.add(new JLabel("<html> <h4> <font color=white> Heart Rate  </h4>"));
-        heartrate.add(new JLabel("<html> <font color=white>" + String.valueOf(patient.getHrcurrent())+" bpm", SwingConstants.LEFT));
+        heartrate.add(new JLabel("<html> <font color=white>" + String.valueOf(recordsPanel.getAvgheartrate())+" bpm", SwingConstants.LEFT));
 
         bodytemp.add(new JLabel("<html> <h4> <font color=white> Body Temperature  </h4>", SwingConstants.LEFT));
-        bodytemp.add(new JLabel("<html> <font color=white>" + patient.getBtcurrent()+ " °C"));
+        bodytemp.add(new JLabel("<html> <font color=white>" +  String.valueOf(recordsPanel.getAvgbodytemperature())+ " °C"));
 
 
         resprate.add(new JLabel("<html> <h4>  <font color=white> Respiratory Rate: </h4>"));
-        resprate.add(new JLabel(("<html> <font color=white>" + patient.getRrcurrent())+ " breaths/min"));
+        resprate.add(new JLabel("<html> <font color=white>" +  String.valueOf(recordsPanel.getAvgrespiratoryrate())+ " breaths/min"));
 
         bloodpress.add(new JLabel("<html> <h4> <font color=white> Blood Pressure:   </h4>"));
-        bloodpress.add(new JLabel(("<html> <font color=white>" + patient.getDBpcurrent())+ "/"+normalvalues[4]+ " mmHg (systolic/diastolic)"));
+        bloodpress.add(new JLabel(("<html> <font color=white>" + patient.getDBpcurrent())+ "/"+recordsPanel.getAvgbloodpressure()+ " mmHg (systolic/diastolic)"));
 
         info.setBackground(Color.black);
         heartrate.setBackground(Color.black);

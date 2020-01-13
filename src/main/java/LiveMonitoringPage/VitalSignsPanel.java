@@ -249,7 +249,7 @@ public class VitalSignsPanel extends JPanel {
         bpsChart.getStyler().setChartBackgroundColor(Color.black);
         bpsChart.getStyler().setChartFontColor(Color.white);
         bpsChart.getStyler().setAxisTickLabelsColor(Color.white);
-        bpsChart.getStyler().setSeriesColors(new Color[]{Color.orange,Color.black});
+        bpsChart.getStyler().setSeriesColors(new Color[]{Color.pink,Color.black, Color.yellow});
         bpPanel = new XChartPanel(bpsChart);
 
         double[][] data_Bodytemperature = getTempData(locator, zoom);
