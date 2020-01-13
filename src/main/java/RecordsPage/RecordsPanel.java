@@ -240,7 +240,7 @@ public class RecordsPanel extends JPanel {
         recordedvalues.setPreferredSize(new Dimension(600, 400));
         recordedvalues.setVisible(true);
         recordedvalues.setBorder(new MatteBorder(2, 0, 2, 0, Color.WHITE) );
-        averagevalues.setPreferredSize(new Dimension(610, 150));
+        averagevalues.setPreferredSize(new Dimension(600, 150));
         averagevalues.setVisible(true);
 
 
@@ -276,6 +276,19 @@ public class RecordsPanel extends JPanel {
         return patient.getTimedata();
     }
 
+    public double getAvgheartrate(){return avgheartrate;};
+
+    public double getAvgrespiratoryrate() {
+        return avgrespiratoryrate;
+    }
+
+    public double getAvgbloodpressure() {
+        return avgbloodpressure;
+    }
+
+    public double getAvgbodytemperature() {
+        return avgbodytemperature;
+    }
 
     public JPanel getPatientProfileRecords() {return patientProfile;}
 }

@@ -46,7 +46,7 @@ public class TabsMenu{
             tabbedPanel.addTab("Patient "+(i+1), null, patients[i], "Patient "+(i+1));
         }
         tabbedPanel.setSelectedIndex(0);
-        tabbedPanel.setPreferredSize(new Dimension(1450, 925));
+        tabbedPanel.setPreferredSize(new Dimension(1500, 925));
         tabbedPanel.setVisible(true);
     }
 
