@@ -25,8 +25,7 @@ public class Alarmpanel {
 
         ecg.setBackground(Color.black);
 
-        //Array of values to be replaced with database values
-
+        //fetch data from Patient class
         data_HR = getdata_HR();
         data_BP = getdata_BP();
         //data_DBP=getdata_DBP();

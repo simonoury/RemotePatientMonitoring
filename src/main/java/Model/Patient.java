@@ -56,6 +56,7 @@ public class Patient {
                     "where patientid="+i+";"; //could have any SQL command
             Statement stmt = database.getconnection().createStatement(); //what executes command
             ResultSet res = stmt.executeQuery(request);  //what executes command
+
             //reads through column of table
             while (res.next()) {
                 Array ECGxdata_temp = res.getArray("ecg_xdata"); // put result of request in a string
@@ -74,7 +75,7 @@ public class Patient {
                 String age_temp = res.getString("age");
                 String admdate_temp = res.getString("admissiondate");
 
-
+                //Adds data to temporary array _temp
                 for (String strTemp : (String[]) ECGxdata_temp.getArray()) {
                     ECGxdata_list.add(strTemp);
                 }
@@ -105,6 +106,8 @@ public class Patient {
                 for (Double douTemp : (Double[]) Respiratoryrateydata_temp.getArray()) {
                     Respiratoryrateydata_list.add(douTemp);
                 }
+
+
                 givenname = givenname_temp;
                 familyname = familyanme_temp;
                 id = id_temp;
@@ -121,6 +124,7 @@ public class Patient {
             System.err.println(e.toString());
         }
 
+        //adds xdata and ydata
         double[] xdata = str_ListtoArray(ECGxdata_list);
         double[] ydata = dou_ListtoArray(ECGydata_list);
         ecg = new ECG(new double[][]{xdata, ydata});
@@ -147,6 +151,8 @@ public class Patient {
 
 
     }
+
+    //following functions return ydata of each vital sign, so it can be read in the recordspanel
     public double[] getHRdata(){
         return(heartbeat.get_ydata());
     }
@@ -163,7 +169,7 @@ public class Patient {
         return(heartbeat.get_xdata());
     }
 
-    //Accessors
+    //Accessors: return the data so it can be plotted live in VitalSignsPanel
     public double[][] ECGgetsnippet(int locator)
     {
         //System.out.println(Arrays.toString(subArray(ecg.get_xdata(), locator, locator+99)));
@@ -194,23 +200,20 @@ public class Patient {
         return(new double[][]{subArray(respiratoryrate.get_xdata(), locator, locator+99), subArray(respiratoryrate.get_ydata(), locator, (locator++)+99)});
     }
 
-
+    //Accessors: return strings so they can be printed in the profile panel and records panel
     public String getGivenname()
     {
         return givenname;
     }
-
     public String getFamilyname()
     {
         return familyname;
     }
-
     public String getId() {return  id;}
-
     public String getAge() { return age;}
-
     public String getDate() { return admdate;}
 
+    //finds the minimum and maximum of each vital sign, to set the boundaries of the plots
     public double[] minmaxECG(){
         double min=0;
         double max=0;
@@ -292,15 +295,12 @@ public class Patient {
     }
 
     public double getHrcurrent() {return hrcurrent;}
-
     public double getBpcurrent() {
         return bpcurrent;
     }
-
     public double getBtcurrent() {
         return btcurrent;
     }
-
     public double getRrcurrent() {
         return rrcurrent;
     }

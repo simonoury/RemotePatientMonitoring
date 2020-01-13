@@ -6,10 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RecordsPageView {
+    //Instantiate JPanels
     private RecordsPanel recordsPanel;
     private JPanel recordspage;
 
     public RecordsPageView(Patient patient){
+        //add RecordsPanel
         recordsPanel = new RecordsPanel(patient);
         recordspage = new JPanel();
 

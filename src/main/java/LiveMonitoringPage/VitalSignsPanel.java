@@ -12,14 +12,9 @@ import java.awt.*;
 
 public class VitalSignsPanel extends JPanel {
 
-    // FIELD
-
-
     int locator = 0;
     Alarmpanel alarmpanel;
     Patient patient;
-    // Model
-
 
     // panels
     JPanel graphPanel;

@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.stream.IntStream;
 
 public class RecordsPanel extends JPanel {
-    //seeversion
+
     private JPanel patientProfile;
     private JPanel recordedvalues;
     private JPanel averagevalues;
@@ -18,31 +18,30 @@ public class RecordsPanel extends JPanel {
     int locator = 0;
     private Patient patient;
 
-    //private int timevalues[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    //private double heartratevalues[] = {118, 119, 118, 119, 120, 121, 120, 119, 119, 118};
-    //private int bloodpressurevalues [] = {118, 119, 118, 119, 120, 121, 120, 119, 119, 118};
-    //private double bodytemperaturevalues [] = {37.1, 37.2, 37.2, 37.3, 38.5, 38.0, 37.9, 37.6, 37.3, 37.1};
-    //private int respiratoryratevalues [] = {14, 15, 14, 16, 18, 17, 16, 15, 14, 14};
-
 
     public RecordsPanel (Patient p){
         patient = p;
+
         //instantiate JPanels
         patientProfile = new JPanel();
         recordedvalues = new JPanel();
         averagevalues = new JPanel();
         time = new JPanel();
+
+
         heartrate = new JPanel();
         bloodpressure = new JPanel();
         bodytemperature = new JPanel();
         respiratoryrate = new JPanel();
         info = new JPanel();
+
+        //Average JPanels
         heartrateaverage = new JPanel();
         bloodpressureaverage= new JPanel();
         bodytemperatureaverage= new JPanel();
         respiratoryrateaverage= new JPanel();
 
-        double phase = 0;
+        //creates am array with the data in PostegreSQL
         double data_HR [] = getdata_HR();
         double data_BP [] = getdata_BP();
         double data_BT [] = getdata_BT();
@@ -78,13 +77,11 @@ public class RecordsPanel extends JPanel {
 
         recordedvalues.setLayout((new GridLayout(1, 5)));
 
-        //fill in table with values from array -------------------------------------------------------------------------
-
-
+        //fill in table with values from array
         double timevalues [] = {data_time[1],data_time[150], data_time[300], data_time[503], data_time[650], data_time[800], data_time[953], data_time[1100], data_time[1450], data_time[1800] };
         time.setLayout(new GridLayout(11, 1));
         time.add(new JLabel("<html><h4> <font color=white>  Time:   </font></h4>"));
-        for (double timevalue : timevalues) {
+        for (double timevalue : timevalues) { //for loop feeds in the values to the JPanel
             time.add(new JLabel("<html> <font color=white>"+String.valueOf(timevalue)+" ms </font> </html>"));
         }
         recordedvalues.add(time);
@@ -128,14 +125,14 @@ public class RecordsPanel extends JPanel {
         recordedvalues.add(respiratoryrate);
 
 
-        //calculate and fill in average values -------------------------------------------------------------------------
+        //calculate and fill in average values
         averagevalues.setLayout(new GridLayout(5, 1));
         averagevalues.add(new JLabel("<html><h4><font color=white>  Average Values:  </font></h4> "));
 
         double avgheartrate;
         double sum = 0;
         for (double val : heartratevalues){
-            sum = sum + val;
+            sum = sum + val; //finds the average
         }
         avgheartrate = sum/heartratevalues.length;
         heartrateaverage.add(new JLabel("<html><font color=white> Heart Rate average value: </font>"));
@@ -195,6 +192,7 @@ public class RecordsPanel extends JPanel {
 
     }
 
+    //functions used to get data from class Patient
     protected double[] getdata_HR() {
         return patient.getHRdata();
     }
