@@ -1,6 +1,5 @@
 package Alarm;
 
-import Database.DBConnect;
 import Model.Patient;
 
 import javax.swing.*;
@@ -8,12 +7,13 @@ import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 
 public class Alarmpanel {
-    private double data_HR[], data_RR[], data_BP[], data_BT[];
+    private double[] data_HR;
+    private double[] data_RR;
+    private double[] data_BP;
+    private double[] data_BT;
     private Alarm heartrate, bloodpressure, bodytemperature, respiratoryrate;
     private JPanel ecg, valuesPanel;
     Patient patient;

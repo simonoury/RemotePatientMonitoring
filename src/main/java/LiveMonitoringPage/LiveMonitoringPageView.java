@@ -11,6 +11,19 @@ public class LiveMonitoringPageView {
     private VitalSignsPanel profileGraph;
     private JPanel page,page_sub;
     private Alarmpanel alarmPanel;
+
+    public LiveMonitoringPageView() {
+        profilePanel=new ProfilePanel();
+        profileGraph = new VitalSignsPanel();
+
+        page=new JPanel();
+        page_sub=new JPanel();
+
+        page.setPreferredSize(new Dimension(1400,650));
+        page.setBackground(Color.black);
+        page.add(profilePanel.getPatientProfile());
+        page.add(profileGraph.getMainPanel());
+    }
     public LiveMonitoringPageView(Patient patient)  {
         profilePanel=new ProfilePanel(patient);
         profileGraph = new VitalSignsPanel(patient);

@@ -9,6 +9,10 @@ public class RecordsPageView {
     private RecordsPanel recordsPanel;
     private JPanel recordspage;
 
+    public RecordsPageView(){
+        Patient p = new Patient();
+
+    }
     public RecordsPageView(Patient patient){
         recordsPanel = new RecordsPanel(patient);
         recordspage = new JPanel();

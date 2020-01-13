@@ -31,6 +31,54 @@ public class Patient {
     private double bpcurrent;
     private double rrcurrent;
 
+    public Patient() {
+        double[]xdata = new double[3600];
+        double[]ydata = new double[3600];
+        for (int i=0; i<xdata.length; i++)
+        {
+            xdata[i] = i;
+            ydata[i] = 100;
+        }
+        ecg = new ECG(new double[][]{xdata, ydata});
+        for (int i=0; i<xdata.length; i++)
+        {
+            xdata[i] = i;
+            ydata[i] = 117.5;
+        }
+        bloodpressure = new Bloodpressure(new double[][]{xdata, ydata});
+        for (int i=0; i<xdata.length; i++)
+        {
+            xdata[i] = i;
+            ydata[i] = 75;
+        }
+        heartbeat = new Heartbeat(new double[][]{xdata, ydata});
+        hrcurrent = 75;
+        for (int i=0; i<xdata.length; i++)
+        {
+            xdata[i] = i;
+            ydata[i] = 37;
+        }
+        btcurrent = 37;
+        bodytemperature = new Bodytemperature(new double[][]{xdata, ydata});
+        for (int i=0; i<xdata.length; i++)
+        {
+            xdata[i] = i;
+            ydata[i] = 15.5;
+        }
+        rrcurrent = 15.5;
+        respiratoryrate = new Respiratoryrate(new double[][]{xdata, ydata});
+
+        givenname = "tunable";
+        familyname = "simulation";
+        id = "999";
+        age = "999";
+        admdate = "test";
+
+
+
+    }
+
+
     public Patient(int i)
     {
         ArrayList<String> ECGxdata_list = new ArrayList<String>();
@@ -144,7 +192,6 @@ public class Patient {
         ydata = dou_ListtoArray(Respiratoryrateydata_list);
         respiratoryrate = new Respiratoryrate(new double[][]{xdata, ydata});
         rrcurrent = ydata[99];
-
 
     }
     public double[] getHRdata(){
@@ -303,6 +350,14 @@ public class Patient {
 
     public double getRrcurrent() {
         return rrcurrent;
+    }
+
+    public void Augment()
+    {
+        for (int i=(locator+100); i<ecg.get_xdata().length; i++)
+        {
+
+        }
     }
 }
 

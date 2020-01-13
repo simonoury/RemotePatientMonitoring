@@ -22,6 +22,22 @@ public class DropDownMenu extends JComboBox implements ActionListener {
     private LiveMonitoringPageView liveMonitoringPageView;
     private RecordsPageView recordsPageView;
 
+    public DropDownMenu() {
+        options=new JComboBox<String>();
+        patient = new Patient();
+        liveMonitoringPageView =new LiveMonitoringPageView();
+        recordsPageView = new RecordsPageView();
+        selectedPanel=new JPanel();
+
+        options.addItem("Live Monitoring");
+        options.addItem("Records");
+
+        selectedPanel.add(liveMonitoringPageView.getPage());
+
+
+
+    }
+
     public DropDownMenu(int PatientID)  {
         //Instantiation of variabless
         options=new JComboBox<String>();
@@ -38,31 +54,7 @@ public class DropDownMenu extends JComboBox implements ActionListener {
         selectedPanel.add(liveMonitoringPageView.getPage());
 
         //Action Listener to select options in menu
-        options.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JComboBox<String> combo = (JComboBox<String>) e.getSource();
-                String selectedoption = (String) combo.getSelectedItem();
 
-                if (selectedoption.equals("Live Monitoring")) {
-                    //Refresh page
-                    selectedPanel.removeAll();
-                    selectedPanel.updateUI();
-                    //add page on panel
-                    selectedPanel.add(liveMonitoringPageView.getPage());
-                    selectedPanel.setBackground(Color.black);
-                }
-                else if (selectedoption.equals("Records")) {
-                    //Refresh page
-                    selectedPanel.removeAll();
-                    selectedPanel.updateUI();
-                    //add page on panel
-                    selectedPanel.add(recordsPageView.getRecordspage());
-                    selectedPanel.setBackground(Color.black);
-
-                }
-            }
-        });
 
     }
 

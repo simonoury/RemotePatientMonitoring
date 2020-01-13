@@ -9,9 +9,9 @@ public class TabsMenu{
     //Declaration of variables
     private JTabbedPane tabbedPanel;
     private JPanel patient1,patient2;
-    private JPanel patients[] = new JPanel[10];
+    private JPanel patients[] = new JPanel[11];
     private DropDownMenu dropdown,dropdown2;
-    private DropDownMenu[] dropDownMenu = new DropDownMenu[10];
+    private DropDownMenu[] dropDownMenu = new DropDownMenu[11];
 
     public TabsMenu() {
         //Instantiate the drop-down menu
@@ -25,6 +25,8 @@ public class TabsMenu{
         dropDownMenu[7] = new DropDownMenu(8);
         dropDownMenu[8] = new DropDownMenu(9);
         dropDownMenu[9] = new DropDownMenu(10);
+        dropDownMenu[10] = new DropDownMenu();
+
 
         //Instantiation of Panels
         for (int i=0; i<patients.length; i++)
@@ -33,12 +35,18 @@ public class TabsMenu{
             patients[i].setLayout(new FlowLayout());
             patients[i].add(dropDownMenu[i].getOptions());
             patients[i].add(dropDownMenu[i].getSelectedPanel());
+            if(i==10){
+                JButton augmentKButton = new JButton("+5");
+                JButton decrementKButton = new JButton("-5");
+                patients[i].add(augmentKButton);
+                patients[i].add(decrementKButton);
+            }
         }
 
         //Tabs Menu
         tabbedPanel = new JTabbedPane();
 
-        for (int i=0; i<10; i++)
+        for (int i=0; i<11; i++)
         {
             tabbedPanel.addTab("Patient "+(i+1), null, patients[i], "Patient "+(i+1));
         }
