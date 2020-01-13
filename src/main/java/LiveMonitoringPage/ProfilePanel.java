@@ -86,7 +86,7 @@ public class ProfilePanel extends JPanel  {
         resprate.add(new JLabel(("<html> <font color=white>" + patient.getRrcurrent())+ " breaths/min"));
 
         bloodpress.add(new JLabel("<html> <h4> <font color=white> Blood Pressure:   </h4>"));
-        bloodpress.add(new JLabel(("<html> <font color=white>" + patient.getBpcurrent())+ "/"+normalvalues[4]+ " mmHg (systolic/diastolic)"));
+        bloodpress.add(new JLabel(("<html> <font color=white>" + patient.getDBpcurrent())+ "/"+normalvalues[4]+ " mmHg (systolic/diastolic)"));
 
         info.setBackground(Color.black);
         heartrate.setBackground(Color.black);
@@ -108,7 +108,7 @@ public class ProfilePanel extends JPanel  {
         hrcurrent = patient.getHrcurrent();
         btcurrent = patient.getBtcurrent();
         rrcurrent = patient.getRrcurrent();
-        bpcurrent = patient.getBpcurrent();
+        bpcurrent = patient.getDBpcurrent();
 
 
     }

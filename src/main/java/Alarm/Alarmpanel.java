@@ -22,6 +22,7 @@ public class Alarmpanel {
     public Alarmpanel(Patient p) {
         ecg = new JPanel();
         valuesPanel = new JPanel();
+        valuesPanel.setBackground(Color.BLACK);
         patient = p;
 
         ecg.setBackground(Color.black);
@@ -130,7 +131,7 @@ public class Alarmpanel {
         if(data_RR<25 || data_RR>12) {alarms[4].setBackground(Color.RED);}
         else if (data_RR<13||data_RR>18) {alarms[4].setBackground(Color.ORANGE);}
         else {alarms[4].setBackground(Color.BLACK);};
-
+        ecg.setBackground(Color.BLACK);
 
         // heartrate = new Alarm(patient, 50, 100, 45, 120, data_HR);
         // bloodpressure = new Alarm(patient, 115, 120, 108, 139, data_BP);
@@ -140,7 +141,6 @@ public class Alarmpanel {
 
 
         //valuesPanel.add(ecg);
-        ecg.setBackground(Color.BLACK);
         valuesPanel.setLayout(new GridLayout(5, 1));
         valuesPanel.setPreferredSize(new Dimension(200, 640));
         valuesPanel.setBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK));
@@ -149,6 +149,7 @@ public class Alarmpanel {
         {
             valuesPanel.add(alarm);
         }
+        alarms[0].setBackground(Color.BLACK);
         valuesPanel.repaint();
 
 

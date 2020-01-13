@@ -23,7 +23,7 @@ public class Alarm {
 
     public Alarm(Patient p, double warning_bound_low, double warning_bound_high, double danger_bound_low, double danger_bound_high, double value) {
         //this.patient=p;
-        this.value=value;
+        //this.value=value;
         this.warning_bound_low = warning_bound_low;
         this.warning_bound_high = warning_bound_high;
         this.danger_bound_low = danger_bound_low;
